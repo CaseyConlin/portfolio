@@ -1,0 +1,29 @@
+.blackboard {
+  background: linear-gradient(#274c43, #434343);
+  width: 100%;
+}
+.rocket {
+  stroke: #fff;
+  stroke-width: 18;
+  stroke-dasharray: none;
+  stroke-linecap: butt;
+  stroke-dashoffset: 0;
+  stroke-linejoin: miter;
+  stroke-miterlimit: 4;
+  fill-opacity: 0;
+  fill-rule: nonzero;
+  opacity: 0.3;
+}
+.fin {
+  stroke: rgb(247, 47, 58);
+}
+.window {
+  stroke: rgb(19, 107, 231);
+}
+
+.rocketbody {
+  stroke: rgb(120, 129, 142);
+}
+.fire {
+  stroke: rgb(233, 153, 25);
+}
