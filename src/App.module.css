@@ -1,10 +1,26 @@
 .blackboard {
-  background: linear-gradient(#274c43, #434343);
   width: 100%;
+  /* height: 300px; */
+  background: 
+  /* linear-gradient(#31a8f7 25%, #95cdf2 50%, #e9d7c7 100%); */ linear-gradient(
+    to bottom,
+    rgba(0, 145, 203, 1) 10%,
+    rgba(0, 145, 203, 0.9) 20%,
+    rgba(0, 145, 203, 0.8) 30%,
+    rgba(0, 145, 203, 0.7) 40%,
+    rgba(0, 145, 203, 0.6) 50%,
+    rgba(0, 145, 203, 0.5) 60%,
+    rgba(0, 145, 203, 0.4) 70%,
+    rgba(0, 145, 203, 0.3) 80%,
+    rgba(0, 145, 203, 0.2) 90%,
+    rgba(0, 145, 203, 0.1) 100%
+  );
 }
 .rocket {
+  position: relative;
+  bottom: 0px;
   stroke: #fff;
-  stroke-width: 18;
+  stroke-width: 1;
   stroke-dasharray: none;
   stroke-linecap: butt;
   stroke-dashoffset: 0;
@@ -12,18 +28,26 @@
   stroke-miterlimit: 4;
   fill-opacity: 0;
   fill-rule: nonzero;
-  opacity: 0.3;
 }
 .fin {
   stroke: rgb(247, 47, 58);
+  fill: rgb(247, 47, 58);
+  fill-opacity: 1;
 }
 .window {
   stroke: rgb(19, 107, 231);
+
+  fill-opacity: 1;
 }
 
 .rocketbody {
-  stroke: rgb(120, 129, 142);
+  stroke: #000;
+  fill: #fff;
+  fill-opacity: 1;
 }
 .fire {
   stroke: rgb(233, 153, 25);
+  fill: rgb(233, 153, 25);
+
+  fill-opacity: 1;
 }
