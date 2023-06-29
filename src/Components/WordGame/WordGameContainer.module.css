@@ -30,8 +30,8 @@
   fill-rule: nonzero;
 }
 .fin {
-  stroke: rgb(247, 47, 58);
-  fill: rgb(247, 47, 58);
+  /* stroke: rgb(247, 47, 58);
+  fill: rgb(247, 47, 58); */
   fill-opacity: 1;
 }
 .window {
