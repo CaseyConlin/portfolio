@@ -1,13 +1,13 @@
-import { SecretWordContainer } from "./SecretWordContainer";
-
 export const initialState = {
   errorCount: 5,
-  secretWord: "rosey",
+  secretWord: "",
+  hint: "",
   rightCount: 0,
   guessedLetter: "",
   guessedLetters: [],
-  setSecretWord: (word: string) => {
+  setSecretWord: (word: string, hint: string) => {
     word;
+    hint;
   },
   addGuessedLetter: (letter: string) => {
     [letter];
@@ -18,9 +18,10 @@ export type GameContextType = {
   errorCount: number;
   rightCount: number;
   secretWord: string;
+  hint: string;
   guessedLetter: string;
   guessedLetters: string[];
-  setSecretWord: (word: string) => void;
+  setSecretWord: (word: string, hint: string) => any;
   addGuessedLetter: (letter: string) => void;
 };
 const gameContextReducer = (state: any, action: any) => {
@@ -31,6 +32,7 @@ const gameContextReducer = (state: any, action: any) => {
       return {
         ...state,
         secretWord: payload.secretWord,
+        hint: payload.hint,
       };
 
     case "ADD_GUESSED_LETTER":

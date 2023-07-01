@@ -7,8 +7,6 @@ import { useGameContext } from "./WordGameContext";
 
 export interface Props {
   letterCharCode: number;
-  // word: string;
-  // setGuess: (e: string) => void;
 }
 
 export const KeyboardLetterButton = (props: Props) => {
@@ -34,7 +32,7 @@ export const KeyboardLetterButton = (props: Props) => {
     }
   };
   useEffect(() => {
-    if (rightCount === secretWord.length || errorCount === 0) {
+    if (secretWord && (rightCount === secretWord.length || errorCount === 0)) {
       setIsLetterClicked(true);
     }
   }, [rightCount, errorCount, secretWord]);

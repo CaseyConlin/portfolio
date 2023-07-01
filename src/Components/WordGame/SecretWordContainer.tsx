@@ -1,13 +1,21 @@
-import { useState, useMemo } from "react";
-
+import { useState, useMemo, useEffect } from "react";
 import { useGameContext } from "./WordGameContext";
 import { SecretLetterTile } from "./SecretLetterTile";
+import { getNewWord } from "../../Services/getNewWord";
 import Grid from "@mui/material/Unstable_Grid2";
 
 export const SecretWordContainer = () => {
   const [newSecretWord, setNewSecretWord] = useState<string[]>([]);
 
-  const { secretWord } = useGameContext();
+  const { secretWord, setSecretWord } = useGameContext();
+
+  useEffect(() => {
+    console.log("Hey");
+    getNewWord().then((response) => {
+      console.log(response);
+      response && setSecretWord(response.word, response.hint);
+    });
+  }, []);
 
   useMemo(() => {
     const secretWordArray = Array.from(secretWord);

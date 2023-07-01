@@ -29,11 +29,12 @@ const scoreHandler = (
 export const WordGameProvider = ({ children }: Props) => {
   const [state, dispatch] = useReducer(gameContextReducer, initialState);
 
-  const setSecretWord = (newSecretWord: string) => {
+  const setSecretWord = (newSecretWord: string, newHint: string) => {
     dispatch({
       type: "SET_SECRET_WORD",
       payload: {
         secretWord: newSecretWord,
+        hint: newHint,
       },
     });
   };
@@ -63,6 +64,7 @@ export const WordGameProvider = ({ children }: Props) => {
       errorCount: state.errorCount,
       rightCount: state.rightCount,
       secretWord: state.secretWord,
+      hint: state.hint,
       guessedLetter: state.guessedLetter,
       guessedLetters: state.guessedLetters,
       setSecretWord,
@@ -81,7 +83,7 @@ export const useGameContext = () => {
   const context = useContext(WordGameContext);
 
   if (context === undefined) {
-    throw new Error("useShop must be used within WordGameContext");
+    throw new Error("useGameContext must be used within WordGameContext");
   }
 
   return context;

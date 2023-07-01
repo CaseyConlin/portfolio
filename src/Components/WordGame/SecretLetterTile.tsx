@@ -12,9 +12,7 @@ export interface Props {
 }
 export const SecretLetterTile = (props: Props) => {
   const [isLetterShowing, setIsLetterShowing] = useState(false);
-  const [wasLetterRight, setWasLetterRight] = useState(false);
-  const [wasLetterWrong, setWasLetterWrong] = useState(false);
-  const [finalColor, setFinalColor] = useState("#D3D3D3");
+  const [tileColor, setTileColor] = useState("#D3D3D3");
 
   const { guessedLetter, guessedLetters, rightCount, errorCount, secretWord } =
     useGameContext();
@@ -32,9 +30,9 @@ export const SecretLetterTile = (props: Props) => {
       setIsLetterShowing(true);
 
       if (guessedLetters.includes(props.secretLetter.toUpperCase())) {
-        setFinalColor(lightGreen[200]);
+        setTileColor(lightGreen[200]);
       } else {
-        setFinalColor(deepOrange[200]);
+        setTileColor(deepOrange[200]);
       }
     }
   }, [props.secretLetter, secretWord, errorCount, rightCount, guessedLetters]);
@@ -62,7 +60,7 @@ export const SecretLetterTile = (props: Props) => {
           justifyContent: "center",
           alignItems: "center",
           color: "#000",
-          backgroundColor: finalColor,
+          backgroundColor: tileColor,
           textTransform: "uppercase",
           border: "1px solid",
           borderColor: "#444d58",
