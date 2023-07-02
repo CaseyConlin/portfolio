@@ -35,6 +35,13 @@ const marks = [
 export const NumberOfLettersSelector = () => {
   const { numberOfLetters, setNumberOfLetters } = useGameContext();
 
+  const handleChangeCommited = (
+    event: React.SyntheticEvent | Event,
+    newValue: number | number[]
+  ) => {
+    setNumberOfLetters(newValue);
+  };
+
   return (
     <div>
       <Slider
@@ -48,11 +55,7 @@ export const NumberOfLettersSelector = () => {
         marks
         // sx={{ color: "#000" }}
 
-        onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
-          event.target &&
-            event.target.value &&
-            setNumberOfLetters(Number(event.target.value));
-        }}
+        onChangeCommitted={handleChangeCommited}
       />
     </div>
   );

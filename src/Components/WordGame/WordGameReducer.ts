@@ -10,7 +10,7 @@ export const initialState = {
     word;
     hint;
   },
-  setNumberOfLetters: (number: number) => {
+  setNumberOfLetters: (number: number | number[]) => {
     number;
   },
   addGuessedLetter: (letter: string) => {
@@ -22,7 +22,7 @@ export const initialState = {
 };
 
 export type GameContextType = {
-  numberOfLetters: number;
+  numberOfLetters: number | number[];
   errorCount: number;
   rightCount: number;
   secretWord: string;
@@ -30,7 +30,7 @@ export type GameContextType = {
   guessedLetter: string;
   guessedLetters: string[];
   setSecretWord: (word: string, hint: string) => any;
-  setNumberOfLetters: (number: number) => void;
+  setNumberOfLetters: (number: number | number[]) => void;
   addGuessedLetter: (letter: string) => void;
   resetScores: () => void;
 };

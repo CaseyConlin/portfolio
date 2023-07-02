@@ -29,7 +29,7 @@ const scoreHandler = (
 export const WordGameProvider = ({ children }: Props) => {
   const [state, dispatch] = useReducer(gameContextReducer, initialState);
 
-  const setNumberOfLetters = (newNumberOfLetters: number) => {
+  const setNumberOfLetters = (newNumberOfLetters: number | number[]) => {
     dispatch({
       type: "SET_NUMBER_OF_LETTERS",
       payload: {
