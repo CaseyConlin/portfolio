@@ -18,7 +18,7 @@ export const Hint = () => {
         }}
         color="info"
         size="medium"
-        label={`Hint: ${hint}`}
+        label={`Hint: ${hint && hint}`}
         icon={
           <LightbulbCircleIcon
             fontSize="medium"

@@ -5,7 +5,6 @@ export const useNewWord = () => {
   const { setSecretWord } = useGameContext();
 
   getNewWord().then((response) => {
-    console.log(response);
     response && setSecretWord(response.word, response.hint);
   });
 };

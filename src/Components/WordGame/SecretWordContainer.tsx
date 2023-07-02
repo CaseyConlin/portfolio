@@ -7,19 +7,18 @@ import Grid from "@mui/material/Unstable_Grid2";
 export const SecretWordContainer = () => {
   const [newSecretWord, setNewSecretWord] = useState<string[]>([]);
 
-  const { secretWord, setSecretWord } = useGameContext();
+  const { secretWord, setSecretWord, numberOfLetters } = useGameContext();
 
   useEffect(() => {
-    console.log("Hey");
-    getNewWord().then((response) => {
+    getNewWord(numberOfLetters).then((response) => {
       console.log(response);
       response && setSecretWord(response.word, response.hint);
     });
   }, []);
 
-  useMemo(() => {
-    const secretWordArray = Array.from(secretWord);
-    setNewSecretWord(secretWordArray);
+  useEffect(() => {
+    const secretWordArray = secretWord && Array.from(secretWord);
+    secretWordArray && setNewSecretWord(secretWordArray);
   }, [secretWord]);
 
   return (
@@ -28,13 +27,14 @@ export const SecretWordContainer = () => {
       sx={{ justifyContent: "center" }}
       spacing={{ xs: 1, md: 1 }}
     >
-      {newSecretWord.map((letter, index) => (
-        <SecretLetterTile
-          secretLetter={letter}
-          index={index}
-          key={letter + index}
-        />
-      ))}
+      {newSecretWord &&
+        newSecretWord.map((letter, index) => (
+          <SecretLetterTile
+            secretLetter={letter}
+            index={index}
+            key={letter + index}
+          />
+        ))}
     </Grid>
   );
 };

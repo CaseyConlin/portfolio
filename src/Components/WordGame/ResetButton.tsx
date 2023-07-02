@@ -6,17 +6,26 @@ import Button from "@mui/material/Button";
 export const ResetButton = () => {
   const [isClicked, setIsClicked] = useState(false);
 
-  const { setSecretWord, guessedLetters } = useGameContext();
+  const {
+    setSecretWord,
+    resetScores,
+    errorCount,
+    guessedLetters,
+    numberOfLetters,
+  } = useGameContext();
 
   const clickHandler = () => {
-    console.log("hey");
+    resetScores();
 
-    getNewWord().then((response) => {
+    getNewWord(numberOfLetters).then((response) => {
       console.log(response);
       response && setSecretWord(response.word, response.hint);
     });
+
     setIsClicked(true);
     setTimeout(() => setIsClicked(false), 250);
+    console.log(errorCount);
+    console.log(guessedLetters);
   };
   return (
     <Button
@@ -44,7 +53,7 @@ export const ResetButton = () => {
           width: "47px",
           height: "47px",
           borderRadius: "47px",
-          fontSize: " .8rem",
+          fontSize: " .75rem",
           background: " hsl(345deg 100% 47%)",
           color: "#fff",
           transform: isClicked ? "translateY(0px)" : "translateY(-2px)",

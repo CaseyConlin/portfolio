@@ -24,6 +24,7 @@ import theme from "../../theme";
 import { KeyboardContainer } from "./KeyboardContainer";
 import { SecretWordContainer } from "./SecretWordContainer";
 import { ResetButton } from "./ResetButton";
+import { NumberOfLettersSelector } from "./NumberOfLettersSelector";
 import { Hint } from "./Hint";
 import { Rocket } from "./Rocket";
 import { WordGameProvider } from "./WordGameContext";
@@ -106,6 +107,7 @@ export const WordGame = () => {
                   <Hint />
                 </Box>
                 <Grid container justifyContent={"center"}>
+                  <NumberOfLettersSelector />
                   <ResetButton />
                 </Grid>
                 <Box sx={{ p: 2, justifyContent: "center" }}>

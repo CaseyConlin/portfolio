@@ -29,6 +29,15 @@ const scoreHandler = (
 export const WordGameProvider = ({ children }: Props) => {
   const [state, dispatch] = useReducer(gameContextReducer, initialState);
 
+  const setNumberOfLetters = (newNumberOfLetters: number) => {
+    dispatch({
+      type: "SET_NUMBER_OF_LETTERS",
+      payload: {
+        numberOfLetters: newNumberOfLetters,
+      },
+    });
+  };
+
   const setSecretWord = (newSecretWord: string, newHint: string) => {
     dispatch({
       type: "SET_SECRET_WORD",
@@ -38,9 +47,22 @@ export const WordGameProvider = ({ children }: Props) => {
       },
     });
   };
+
+  const resetScores = () => {
+    dispatch({
+      type: "RESET_SCORES",
+      payload: {
+        errorCount: 5,
+        rightCount: 0,
+        guessedLetters: [],
+        guessedLetter: "",
+      },
+    });
+  };
+
   const addGuessedLetter = (newLetter: string) => {
     const updatedGuessedLetters = state.guessedLetters.concat(newLetter);
-    console.log("guessed" + updatedGuessedLetters);
+
     const newScore = scoreHandler(
       state.rightCount,
       state.errorCount,
@@ -68,7 +90,10 @@ export const WordGameProvider = ({ children }: Props) => {
       guessedLetter: state.guessedLetter,
       guessedLetters: state.guessedLetters,
       setSecretWord,
+      setNumberOfLetters,
+      numberOfLetters: state.numberOfLetters,
       addGuessedLetter,
+      resetScores,
     }),
     [state.guessedLetters, addGuessedLetter]
   );
@@ -88,76 +113,3 @@ export const useGameContext = () => {
 
   return context;
 };
-
-// import { createContext, useContext, useReducer } from "react";
-
-// const WordGameContext = createContext<any>(null);
-
-// const WordGameDispatchContext = createContext<any>(null);
-
-// interface Props {
-//   children: React.ReactNode;
-// }
-
-// export function WordGameProvider({ children }: Props) {
-//   const [tasks, dispatch] = useReducer(wordGameReducer, initialTasks);
-
-//   return (
-//     <WordGameContext.Provider value={tasks}>
-//       <WordGameDispatchContext.Provider value={dispatch}>
-//         {children}
-//       </WordGameDispatchContext.Provider>
-//     </WordGameContext.Provider>
-//   );
-// }
-
-// export function useWordGameContext() {
-//   return useContext(WordGameContext);
-// }
-
-// export function useWordGameDispatchContext() {
-//   return useContext(WordGameDispatchContext);
-// }
-
-// function wordGameReducer(state: any, action: any) {
-//   const
-//   switch (action.type) {
-//     case "added": {
-//       return [
-//         ...state,
-//         {
-//           id: action.id,
-//           text: action.text,
-//           done: false,
-//         },
-//       ];
-//     }
-//     case "letterGuessed": {
-//       if (isLetterGuessed) setIsLetterShowing(isLetterGuessed){
-
-//         return(isLetterGuessed)
-//       };
-//     }
-//     case "changed": {
-//       return state.map((t: any) => {
-//         if (t.id === action.task.id) {
-//           return action.task;
-//         } else {
-//           return t;
-//         }
-//       });
-//     }
-//     case "deleted": {
-//       return state.filter((t: any) => t.id !== action.id);
-//     }
-//     default: {
-//       throw Error("Unknown action: " + action.type);
-//     }
-//   }
-// }
-
-// const initialTasks = [
-//   { id: 0, text: "Philosopher’s Path", done: true },
-//   { id: 1, text: "Visit the temple", done: false },
-//   { id: 2, text: "Drink matcha", done: false },
-// ];

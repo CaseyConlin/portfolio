@@ -10,8 +10,13 @@ export interface Props {
 }
 
 export const KeyboardLetterButton = (props: Props) => {
-  const { addGuessedLetter, secretWord, rightCount, errorCount } =
-    useGameContext();
+  const {
+    addGuessedLetter,
+    secretWord,
+    rightCount,
+    errorCount,
+    guessedLetters,
+  } = useGameContext();
   const [isLetterClicked, setIsLetterClicked] = useState(false);
   const [isLetterWrong, setIsLetterWrong] = useState(false);
   const [isLetterRight, setIsLetterRight] = useState(false);
@@ -35,7 +40,12 @@ export const KeyboardLetterButton = (props: Props) => {
     if (secretWord && (rightCount === secretWord.length || errorCount === 0)) {
       setIsLetterClicked(true);
     }
-  }, [rightCount, errorCount, secretWord]);
+    if (guessedLetters.length === 0) {
+      setIsLetterRight(false);
+      setIsLetterWrong(false);
+      setIsLetterClicked(false);
+    }
+  }, [rightCount, errorCount, secretWord, guessedLetters]);
 
   return (
     <Grid container sx={{ justifyContent: "center", p: 1 }} xs={1} sm={1}>

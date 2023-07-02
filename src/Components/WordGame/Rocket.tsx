@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { red } from "@mui/material/colors";
 import { indigo } from "@mui/material/colors";
 import { amber } from "@mui/material/colors";
-import { motion, Variants, useAnimate } from "framer-motion";
+import { motion } from "framer-motion";
 import styles from "./WordGameContainer.module.css";
 import { useGameContext } from "./WordGameContext";
+
 interface Props {
   isPlayerRocket: boolean;
 }
+
 export const Rocket = (props: Props) => {
   const [isOpenRightFin, setOpenRightFin] = useState(false);
   const [isOpenLeftFin, setOpenLeftFin] = useState(false);
@@ -17,12 +19,27 @@ export const Rocket = (props: Props) => {
   const [haveLiftOff, setHaveLiftOff] = useState(false);
 
   const { errorCount, rightCount, secretWord } = useGameContext();
-  const count = props.isPlayerRocket
-    ? 5 - Math.floor((rightCount / secretWord.length) * 5)
-    : errorCount;
+
+  //Each rocket manages its own state.
+  //Use the boolean stae for the player rocket to determine
+  //the relevant count from context to use in animating rocket parts.
+  const count =
+    secretWord && props.isPlayerRocket
+      ? 5 - Math.floor((rightCount / secretWord.length) * 5)
+      : errorCount;
   const color = props.isPlayerRocket ? indigo[500] : red[500];
 
   useEffect(() => {
+    //Update rocket part showing states based on context counter.
+    //If the counter resets to 5, reset animations.
+    if (count === 5) {
+      setOpenNose(false);
+      setOpenRightFin(false);
+      setOpenLeftFin(false);
+      setOpenWindow(false);
+      setHaveLiftOff(false);
+      setOpenFire(false);
+    }
     if (count <= 4) {
       setOpenNose(true);
     }
@@ -64,12 +81,8 @@ export const Rocket = (props: Props) => {
         delay: 1.5,
         ease: "easeIn",
       },
-
-      // borderRadius: ["20%", "20%", "50%", "50%", "20%"],
     },
   };
-
-  const [scope, animate] = useAnimate();
 
   const rocketWindowAnimation = {
     hidden: {
@@ -82,6 +95,8 @@ export const Rocket = (props: Props) => {
     },
   };
 
+  //Rocket is broken up into individual groups and paths
+  //which are animated in the larger SVG.
   return (
     <motion.svg
       xmlns="http://www.w3.org/2000/svg"
@@ -93,11 +108,6 @@ export const Rocket = (props: Props) => {
       className={styles.rocket}
       initial={"start"}
       animate={haveLiftOff ? ["fly", "out"] : ["", ""]}
-      // transition={{
-      //   times: [0, 0.1, 0.2, 0.3, 0.5, 0.7, 0.8, 1],
-      //   duration: 3,
-      //   delay: 2,
-      // }}
     >
       <desc>Created with Fabric.js 5.3.0</desc>
       <defs></defs>

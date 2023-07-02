@@ -1,4 +1,5 @@
 export const initialState = {
+  numberOfLetters: 6,
   errorCount: 5,
   secretWord: "",
   hint: "",
@@ -9,12 +10,19 @@ export const initialState = {
     word;
     hint;
   },
+  setNumberOfLetters: (number: number) => {
+    number;
+  },
   addGuessedLetter: (letter: string) => {
     [letter];
+  },
+  resetScores: () => {
+    /**/
   },
 };
 
 export type GameContextType = {
+  numberOfLetters: number;
   errorCount: number;
   rightCount: number;
   secretWord: string;
@@ -22,17 +30,34 @@ export type GameContextType = {
   guessedLetter: string;
   guessedLetters: string[];
   setSecretWord: (word: string, hint: string) => any;
+  setNumberOfLetters: (number: number) => void;
   addGuessedLetter: (letter: string) => void;
+  resetScores: () => void;
 };
 const gameContextReducer = (state: any, action: any) => {
   const { type, payload } = action;
 
   switch (type) {
+    case "SET_NUMBER_OF_LETTERS":
+      return {
+        ...state,
+        numberOfLetters: payload.numberOfLetters,
+      };
+
     case "SET_SECRET_WORD":
       return {
         ...state,
         secretWord: payload.secretWord,
         hint: payload.hint,
+      };
+
+    case "RESET_SCORES":
+      console.log("hey");
+      return {
+        errorCount: payload.errorCount,
+        rightCount: payload.rightCount,
+        guessedLetter: payload.guessedLetter,
+        guessedLetters: payload.guessedLetters,
       };
 
     case "ADD_GUESSED_LETTER":

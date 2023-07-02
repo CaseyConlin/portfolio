@@ -26,7 +26,7 @@ export const SecretLetterTile = (props: Props) => {
   }, [guessedLetter, props.secretLetter]);
 
   useEffect(() => {
-    if (rightCount === secretWord.length || errorCount === 0) {
+    if (secretWord && (rightCount === secretWord.length || errorCount === 0)) {
       setIsLetterShowing(true);
 
       if (guessedLetters.includes(props.secretLetter.toUpperCase())) {
@@ -34,6 +34,10 @@ export const SecretLetterTile = (props: Props) => {
       } else {
         setTileColor(deepOrange[200]);
       }
+    }
+    if (guessedLetters.length === 0) {
+      setTileColor("#D3D3D3");
+      setIsLetterShowing(false);
     }
   }, [props.secretLetter, secretWord, errorCount, rightCount, guessedLetters]);
 
