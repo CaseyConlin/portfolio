@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useGameContext } from "./WordGameContext";
 import { getNewWord } from "../../Services/getNewWord";
+import Grid from "@mui/material/Unstable_Grid2";
+import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
 
 export const ResetButton = () => {
@@ -28,39 +30,74 @@ export const ResetButton = () => {
     console.log(guessedLetters);
   };
   return (
-    <Button
-      variant="contained"
-      size="large"
-      color="error"
+    <Grid
+      px={2}
+      py={1}
+      lineHeight={1.25}
+      m={2}
+      bgcolor="white"
+      boxShadow={1}
       sx={{
-        minWidth: "50px",
-        background: "hsl(340deg 100% 32%)",
-        border: "none",
-        borderRadius: "50px",
-        padding: "0",
-        width: "50px",
-        height: "50px",
-        fontWeight: 600,
+        border: "1px solid black",
+        boxShadow: "1px -1px 4px  #212121 ",
       }}
+      borderRadius={1}
+      container
+      flexDirection={"row"}
+      justifyContent={"flex-start"}
+      alignItems={"center"}
+      xs={12}
     >
-      <span
-        onClick={clickHandler}
-        style={{
-          padding: "0",
-          display: "grid",
-          justifyContent: "center",
-          alignItems: "center",
-          width: isClicked ? "45px" : "47px",
-          height: isClicked ? "45px" : "47px",
-          borderRadius: "47px",
-          fontSize: " .75rem",
-          background: " hsl(345deg 100% 47%)",
-          color: "#fff",
-          transform: isClicked ? "translateY(0px)" : "translateY(-2px)",
+      <Box
+        mx={0.125}
+        sx={{
+          fontSize: "1.25rem",
+          display: "block",
+          padding: "2px 0px",
+          margin: 0,
+          textAlign: "center",
+          textTransform: "uppercase",
+          typography: "subtitle1",
+          fontFamily: "LucidaGrandeBold",
         }}
       >
         Reset
-      </span>
-    </Button>
+      </Box>
+      <Button
+        variant="contained"
+        size="large"
+        onClick={clickHandler}
+        color="warning"
+        sx={{
+          minWidth: "50px",
+
+          border: "none",
+          borderRadius: "25px",
+          padding: "0",
+          width: "25px",
+          height: "25px",
+          boxShadow: "1px -1px 4px  #212121 ",
+        }}
+      >
+        {/* <span
+          onClick={clickHandler}
+          style={{
+            padding: "0",
+            display: "grid",
+            justifyContent: "center",
+            alignItems: "center",
+            width: isClicked ? "20px" : "20px",
+            height: isClicked ? "20px" : "20px",
+            borderRadius: "47px",
+            fontSize: " .85rem",
+            background: " hsl(345deg 100% 47%)",
+            color: "#fff",
+            transform: isClicked ? "translateY(0px)" : "translateY(-2px)",
+            fontFamily: "LucidaGrandeBold",
+            boxShadow: "1px -1px 4px  #212121",
+          }}
+        ></span> */}
+      </Button>
+    </Grid>
   );
 };

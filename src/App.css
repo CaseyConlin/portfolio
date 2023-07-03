@@ -48,3 +48,22 @@
   font-style: normal;
   src: local("Nasa"), url(./assets/fonts/Nasa.ttf) format("truetype");
 }
+
+@font-face {
+  font-family: "VarelaRound-Regular";
+  font-style: normal;
+  src: local("VarelaRound-Regular"),
+    url(./assets/fonts/VarelaRound-Regular.ttf) format("truetype");
+}
+@font-face {
+  font-family: "LucidaGrande";
+  font-style: normal;
+  src: local("LucidaGrande"),
+    url(./assets/fonts/LucidaGrande.ttf) format("truetype");
+}
+@font-face {
+  font-family: "LucidaGrandeBold";
+  font-style: normal;
+  src: local("LucidaGrandeBold"),
+    url(./assets/fonts/LucidaGrandeBold.ttf) format("truetype");
+}

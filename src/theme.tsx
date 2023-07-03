@@ -4,9 +4,16 @@ import { red } from "@mui/material/colors";
 // A custom theme for this app
 const theme = createTheme({
   typography: {
-    fontFamily: ["Roboto", "Helvetica", "Arial", "sans-serif", "Nasa"].join(
-      ","
-    ),
+    fontFamily: [
+      "Roboto",
+      "Helvetica",
+      "Arial",
+      "sans-serif",
+      "Nasa",
+      "VarelaRound-Regular",
+      "LucidaGrande",
+      "LucidaGrandeBold",
+    ].join(","),
   },
   palette: {
     primary: {

@@ -48,53 +48,52 @@ export const KeyboardLetterButton = (props: Props) => {
   }, [rightCount, errorCount, secretWord, guessedLetters]);
 
   return (
-    <Grid container sx={{ justifyContent: "center", p: 1 }} xs={1} sm={1}>
-      <Button
-        sx={{
-          p: 1,
-          minWidth: "45px",
-          boxShadow: 3,
-          borderColor: "black",
-          color: "#000",
-          backgroundColor: "#D3D3D3",
-          fontWeight: 800,
-        }}
-        className="valera"
-        variant="outlined"
-        value={letter}
-        onClick={(e) => letterGuessHandler(e)}
-        disabled={isLetterClicked}
-      >
-        {isLetterRight && (
-          <CheckCircleIcon
-            fontSize="small"
-            sx={{
-              color: "green",
-              position: "absolute",
-              p: 0,
-              m: 0,
-              fontWeight: 800,
-              left: 0,
-              top: 0,
-            }}
-          />
-        )}
-        {isLetterWrong && (
-          <CancelIcon
-            fontSize="small"
-            sx={{
-              color: "red",
-              position: "absolute",
-              p: 0,
-              m: 0,
-              fontWeight: 800,
-              left: 0,
-              top: 0,
-            }}
-          />
-        )}
-        {letter}
-      </Button>
-    </Grid>
+    <Button
+      sx={{
+        p: 1,
+        minWidth: "45px",
+        boxShadow: 3,
+        borderColor: "black",
+        color: "#000",
+        backgroundColor: "white",
+        fontWeight: "bold",
+        fontFamily: "LucidaGrandeBold",
+      }}
+      className="valera"
+      variant="outlined"
+      value={letter}
+      onClick={(e) => letterGuessHandler(e)}
+      disabled={isLetterClicked}
+    >
+      {isLetterRight && (
+        <CheckCircleIcon
+          fontSize="small"
+          sx={{
+            color: "green",
+            position: "absolute",
+            p: 0,
+            m: 0,
+            fontWeight: 800,
+            left: 0,
+            top: 0,
+          }}
+        />
+      )}
+      {isLetterWrong && (
+        <CancelIcon
+          fontSize="small"
+          sx={{
+            color: "red",
+            position: "absolute",
+            p: 0,
+            m: 0,
+            fontWeight: 800,
+            left: 0,
+            top: 0,
+          }}
+        />
+      )}
+      {letter}
+    </Button>
   );
 };

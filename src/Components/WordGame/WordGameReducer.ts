@@ -52,8 +52,8 @@ const gameContextReducer = (state: any, action: any) => {
       };
 
     case "RESET_SCORES":
-      console.log("hey");
       return {
+        ...state,
         errorCount: payload.errorCount,
         rightCount: payload.rightCount,
         guessedLetter: payload.guessedLetter,

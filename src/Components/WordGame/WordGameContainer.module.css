@@ -1,21 +1,35 @@
-.blackboard {
-  width: 100%;
-  /* height: 300px; */
-  background: 
-  /* linear-gradient(#31a8f7 25%, #95cdf2 50%, #e9d7c7 100%); */ linear-gradient(
-    to bottom,
-    rgba(0, 145, 203, 1) 10%,
-    rgba(0, 145, 203, 0.9) 20%,
-    rgba(0, 145, 203, 0.8) 30%,
-    rgba(0, 145, 203, 0.7) 40%,
-    rgba(0, 145, 203, 0.6) 50%,
-    rgba(0, 145, 203, 0.5) 60%,
-    rgba(0, 145, 203, 0.4) 70%,
-    rgba(0, 145, 203, 0.3) 80%,
-    rgba(0, 145, 203, 0.2) 90%,
-    rgba(0, 145, 203, 0.1) 100%
-  );
+.starsContainer {
+  background-color: #000;
+  width: 100vw;
+  z-index: 0;
 }
+.rocketsBackground {
+  z-index: 1;
+  width: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  height: 1px;
+  width: 1px;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: -24vw -44vh 2px 2px #fff, 38vw -4vh 0px 0px #fff,
+    -20vw -48vh 1px 2px #fff, -39vw 38vh 3px 1px #fff, -42vw -11vh 0px 3px #fff,
+    12vw 15vh 3px 3px #fff, 42vw 6vh 3px 2px #fff, -8vw 9vh 0px 2px #fff,
+    34vw -38vh 1px 0px #fff, -17vw 45vh 3px 1px #fff, 22vw -36vh 3px 2px #fff,
+    -42vw 1vh 1px 0px #fff;
+  animation: zoom 15s alternate infinite;
+}
+
+@keyframes zoom {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-250px);
+  }
+}
+
 .rocket {
   position: relative;
   bottom: 0px;
