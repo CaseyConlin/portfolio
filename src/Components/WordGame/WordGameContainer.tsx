@@ -122,7 +122,7 @@ export const WordGame = () => {
                       backgroundColor: grey[200],
                     }}
                   >
-                    <Grid justifyContent="center" xs={8}>
+                    <Grid justifyContent="center" xs={7}>
                       {/* <Box sx={{ p: 2, justifyContent: "center" }}> */}
                       <KeyboardContainer />
                       {/* </Box> */}
@@ -131,8 +131,9 @@ export const WordGame = () => {
                       container
                       flexDirection={"column"}
                       flexWrap={"wrap"}
-                      justifyContent={"start"}
+                      justifyContent={"center"}
                       alignItems={"center"}
+                      xs={4}
                     >
                       <ErrorCountViewer />
                       <NumberOfLettersSelector />

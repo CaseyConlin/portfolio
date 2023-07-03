@@ -92,7 +92,7 @@ export const NumberOfLettersSelector = () => {
       borderRadius={1}
       container
       flexDirection={"column"}
-      justifyContent={"flex-start"}
+      justifyContent={"flex-end"}
       alignItems={"center"}
       xs={12}
     >

@@ -275,13 +275,9 @@ export const Rocket = (props: Props) => {
           </g>
         </g>
       </motion.svg>
-      <Planet />
-
-      <span
-        style={{ transform: "translateY:-1500px", backgroundColor: "white" }}
-      >
-        My Rocket
-      </span>
+      <div style={{ transform: "translateY(1500%)" }}>
+        <Planet />
+      </div>
     </Grid>
   );
 };

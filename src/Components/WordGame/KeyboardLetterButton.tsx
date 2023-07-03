@@ -52,12 +52,13 @@ export const KeyboardLetterButton = (props: Props) => {
       sx={{
         p: 1,
         minWidth: "45px",
-        boxShadow: 3,
+
         borderColor: "black",
         color: "#000",
         backgroundColor: "white",
         fontWeight: "bold",
         fontFamily: "LucidaGrandeBold",
+        boxShadow: "1px -1px 4px  #212121",
       }}
       className="valera"
       variant="outlined"

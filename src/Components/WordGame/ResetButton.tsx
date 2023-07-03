@@ -4,6 +4,7 @@ import { getNewWord } from "../../Services/getNewWord";
 import Grid from "@mui/material/Unstable_Grid2";
 import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
+import { red } from "@mui/material/colors";
 
 export const ResetButton = () => {
   const [isClicked, setIsClicked] = useState(false);
@@ -49,54 +50,54 @@ export const ResetButton = () => {
       xs={12}
     >
       <Box
-        mx={0.125}
         sx={{
+          marginRight: "10px",
           fontSize: "1.25rem",
           display: "block",
           padding: "2px 0px",
-          margin: 0,
           textAlign: "center",
           textTransform: "uppercase",
           typography: "subtitle1",
           fontFamily: "LucidaGrandeBold",
         }}
       >
-        Reset
+        New Word
       </Box>
       <Button
         variant="contained"
         size="large"
         onClick={clickHandler}
-        color="warning"
         sx={{
           minWidth: "50px",
-
-          border: "none",
-          borderRadius: "25px",
+          backgroundColor: red[900],
+          border: "1px solid black ",
+          borderRadius: "50%",
           padding: "0",
-          width: "25px",
-          height: "25px",
+          width: "55px",
+          height: "55px",
           boxShadow: "1px -1px 4px  #212121 ",
         }}
       >
-        {/* <span
+        <span
           onClick={clickHandler}
           style={{
             padding: "0",
             display: "grid",
             justifyContent: "center",
             alignItems: "center",
-            width: isClicked ? "20px" : "20px",
-            height: isClicked ? "20px" : "20px",
-            borderRadius: "47px",
+            width: isClicked ? "53px" : "53px",
+            height: isClicked ? "53px" : "53px",
+            borderRadius: "50%",
             fontSize: " .85rem",
-            background: " hsl(345deg 100% 47%)",
+            background: red[600],
             color: "#fff",
             transform: isClicked ? "translateY(0px)" : "translateY(-2px)",
             fontFamily: "LucidaGrandeBold",
             boxShadow: "1px -1px 4px  #212121",
           }}
-        ></span> */}
+        >
+          Reset
+        </span>
       </Button>
     </Grid>
   );

@@ -8,18 +8,19 @@ export const KeyboardContainer = () => {
     <Grid
       key={"secret"}
       container
-      justifyContent="center"
+      justifyContent={"center"}
+      alignItems={"center"}
       sx={{}}
       p={1}
-      m={1}
       spacing={{ xs: 1 }}
       xs={12}
+      className={"keyboard-container"}
     >
       {alpha.map((letterCode) => (
         <Grid
           key={letterCode}
           container
-          justifyContent="center"
+          justifyContent={"center"}
           alignItems={"center"}
           spacing={0}
           xs={2}
