@@ -11,7 +11,6 @@ export const SecretWordContainer = () => {
 
   useEffect(() => {
     getNewWord(numberOfLetters).then((response) => {
-      console.log(response);
       response && setSecretWord(response.word, response.hint);
     });
   }, []);

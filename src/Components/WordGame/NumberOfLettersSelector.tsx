@@ -55,7 +55,7 @@ export const NumberOfLettersSelector = () => {
   ) => {
     setNumberOfLetters(newValue);
   };
-  console.log(numberOfLetters);
+
   const NumberOfLettersSlider = styled(Slider)(({ theme }) => ({
     color: blue[600], //color of the slider between thumbs
 

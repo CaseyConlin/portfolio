@@ -11,6 +11,7 @@ export interface Props {
 
 export const KeyboardLetterButton = (props: Props) => {
   const {
+    guessedLetter,
     addGuessedLetter,
     secretWord,
     rightCount,
@@ -23,7 +24,7 @@ export const KeyboardLetterButton = (props: Props) => {
 
   const letter = String.fromCharCode(props.letterCharCode);
 
-  const letterGuessHandler = (
+  const letterButtonGuessHandler = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     setIsLetterClicked(true);
@@ -36,6 +37,23 @@ export const KeyboardLetterButton = (props: Props) => {
       setIsLetterWrong(true);
     }
   };
+
+  const userKeyboardGuessHandler = (userKeyboardLetter: string) => {
+    if (letter.toLocaleLowerCase() === userKeyboardLetter.toLocaleLowerCase()) {
+      if (secretWord.toLowerCase().includes(letter.toLowerCase())) {
+        setIsLetterRight(true);
+        setIsLetterClicked(true);
+      } else {
+        setIsLetterWrong(true);
+        setIsLetterClicked(true);
+      }
+    }
+  };
+
+  useEffect(() => {
+    userKeyboardGuessHandler(guessedLetter);
+  }, [guessedLetter]);
+
   useEffect(() => {
     if (secretWord && (rightCount === secretWord.length || errorCount === 0)) {
       setIsLetterClicked(true);
@@ -63,7 +81,7 @@ export const KeyboardLetterButton = (props: Props) => {
       className="valera"
       variant="outlined"
       value={letter}
-      onClick={(e) => letterGuessHandler(e)}
+      onClick={(e) => letterButtonGuessHandler(e)}
       disabled={isLetterClicked}
     >
       {isLetterRight && (

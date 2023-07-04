@@ -10,7 +10,7 @@ import { styled } from "@mui/material/styles";
 export const ResetButton = () => {
   const [isClicked, setIsClicked] = useState(false);
 
-  const ResetButtonWrapper = styled(Button)({
+  const ResetButton = styled(Button)({
     // boxShadow: 'none',
     // textTransform: 'none',
     // fontSize: 16,
@@ -32,7 +32,7 @@ export const ResetButton = () => {
     //   '"Segoe UI Symbol"',
     // ].join(','),
     "&:hover": {
-      boxShadow: "1px -1px 2px  #212121 ",
+      boxShadow: "1px -1px 0px  #212121 ",
     },
     "&:active": {
       boxShadow: "none",
@@ -42,6 +42,7 @@ export const ResetButton = () => {
     "&:focus": {
       boxShadow: "0 0 0 0.2rem rgba(0,123,255,.5)",
     },
+    fontFamily: "LucidaGrandeBold",
   });
 
   const {
@@ -56,14 +57,11 @@ export const ResetButton = () => {
     resetScores();
 
     getNewWord(numberOfLetters).then((response) => {
-      console.log(response);
       response && setSecretWord(response.word, response.hint);
     });
 
     setIsClicked(true);
     setTimeout(() => setIsClicked(false), 250);
-    console.log(errorCount);
-    console.log(guessedLetters);
   };
   return (
     <Grid
@@ -72,10 +70,10 @@ export const ResetButton = () => {
       lineHeight={1.25}
       m={0}
       bgcolor="white"
-      boxShadow={1}
       sx={{
         border: "1px solid black",
         boxShadow: "1px -1px 4px  #212121 ",
+        fontFamily: "LucidaGrandeBold",
       }}
       borderRadius={1}
       container
@@ -98,9 +96,10 @@ export const ResetButton = () => {
       >
         New Word
       </Box>
-      <ResetButtonWrapper
-        variant="contained"
-        size="large"
+      <Box
+        textAlign={"center"}
+        display={"flex"}
+        justifyContent={"center"}
         sx={{
           minWidth: "50px",
           backgroundColor: red[900],
@@ -109,31 +108,37 @@ export const ResetButton = () => {
           padding: "0",
           width: "55px",
           height: "55px",
-          boxShadow: "1px -1px 4px  #212121 ",
+
+          // boxShadow: "1px -1px 4px  #212121 ",
         }}
       >
-        <span
+        <ResetButton
           onClick={clickHandler}
           style={{
             padding: "0",
             display: "grid",
             justifyContent: "center",
             alignItems: "center",
+            minWidth: "50px",
+            minHeight: "50px",
             width: isClicked ? "53px" : "53px",
             height: isClicked ? "53px" : "53px",
             borderRadius: "50%",
-            border: "1px solid blue",
-            fontSize: " .85rem",
+            border: "1px solid black",
+            fontSize: " .8rem",
             background: red[600],
             color: "#fff",
-            transform: isClicked ? "translateY(0px)" : "translateY(-2px)",
-            fontFamily: "LucidaGrandeBold",
-            boxShadow: "1px -1px 4px  #212121",
+
+            transform: isClicked ? "translateY(0px) " : "translateY(-2px) ",
+            font: "LucidaGrandeBold",
+            boxShadow: isClicked
+              ? "1px -1px 2px  #212121"
+              : "1px -1px 4px  #212121",
           }}
         >
           Reset
-        </span>
-      </ResetButtonWrapper>
+        </ResetButton>
+      </Box>
     </Grid>
   );
 };

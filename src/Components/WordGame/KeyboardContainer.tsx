@@ -1,8 +1,44 @@
+import { useEffect } from "react";
 import Grid from "@mui/material/Unstable_Grid2";
+import { GameContextType } from "./WordGameReducer";
 import { KeyboardLetterButton } from "./KeyboardLetterButton";
+import { useGameContext } from "./WordGameContext";
 
 export const KeyboardContainer = () => {
   const alpha = Array.from(Array(26)).map((_, i) => i + 65);
+
+  const {
+    secretWord,
+    addGuessedLetter,
+    guessedLetters,
+    rightCount,
+    errorCount,
+  } = useGameContext();
+  const onKeyDown = (event: KeyboardEvent) => {
+    const newKey = event.key.toUpperCase();
+
+    if (
+      newKey.length === 1 &&
+      alpha.includes(newKey.charCodeAt(0)) &&
+      !guessedLetters.includes(newKey)
+    ) {
+      addGuessedLetter(newKey);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", onKeyDown);
+    if (secretWord && (rightCount === secretWord.length || errorCount === 0)) {
+      document.removeEventListener("keydown", onKeyDown);
+    }
+    if (guessedLetters.length === 0) {
+      document.addEventListener("keydown", onKeyDown);
+    }
+
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [addGuessedLetter, errorCount, rightCount, secretWord]);
 
   return (
     <Grid

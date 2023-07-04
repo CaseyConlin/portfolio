@@ -3,8 +3,6 @@ import { useGameContext } from "./WordGameContext";
 import { motion } from "framer-motion";
 import Grid from "@mui/material/Unstable_Grid2";
 import Box from "@mui/material/Box";
-import { lightGreen } from "@mui/material/colors";
-import { grey } from "@mui/material/colors";
 import { red } from "@mui/material/colors";
 
 export const ErrorCountViewer = () => {
