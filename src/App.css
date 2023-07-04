@@ -67,3 +67,7 @@
   src: local("LucidaGrandeBold"),
     url(./assets/fonts/LucidaGrandeBold.ttf) format("truetype");
 }
+
+body {
+  margin: 0;
+}

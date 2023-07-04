@@ -81,7 +81,7 @@ export const NumberOfLettersSelector = () => {
       px={2}
       py={1}
       lineHeight={1.25}
-      m={2}
+      m={1}
       bgcolor="white"
       boxShadow={1}
       sx={{

@@ -60,8 +60,22 @@ export const WordGame = () => {
 
         <ThemeProvider theme={theme}>
           <WordGameProvider>
-            <Grid container p={2}>
-              <Grid container flexDirection={"row"} xs={12} sm={5} lg={6}>
+            <Grid
+              container
+              p={3}
+              flexDirection={"row"}
+              justifyContent={"flex-end"}
+            >
+              <Grid
+                container
+                flexDirection={"row"}
+                justifyContent={"space-around"}
+                spacing={3}
+                my={5}
+                xs={12}
+                sm={5}
+                lg={5}
+              >
                 <Rocket isPlayerRocket={false} />
                 <Rocket isPlayerRocket={true} />
               </Grid>
@@ -105,7 +119,7 @@ export const WordGame = () => {
                       </IconButton>
                     }
                     title="LIFT_FF"
-                    subheader="Guess the letters in the word below to launch your rocket before the other team!"
+                    subheader="Guess the letters in the word below to build & launch your rocket before the other team!"
                   />
                   <Box sx={{ p: { xs: 0 }, mx: -2, justifyContent: "center" }}>
                     <SecretWordContainer />
@@ -114,7 +128,7 @@ export const WordGame = () => {
                   <Grid
                     className="input-grid"
                     container
-                    py={2}
+                    py={0}
                     justifyContent={"center"}
                     sx={{
                       flexDirection: "row",

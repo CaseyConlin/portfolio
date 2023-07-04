@@ -5,9 +5,44 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
 import { red } from "@mui/material/colors";
+import { styled } from "@mui/material/styles";
 
 export const ResetButton = () => {
   const [isClicked, setIsClicked] = useState(false);
+
+  const ResetButtonWrapper = styled(Button)({
+    // boxShadow: 'none',
+    // textTransform: 'none',
+    // fontSize: 16,
+    // padding: '6px 12px',
+    // border: '1px solid',
+    // lineHeight: 1.5,
+    // backgroundColor: '#0063cc',
+    // borderColor: '#0063cc',
+    // fontFamily: [
+    //   '-apple-system',
+    //   'BlinkMacSystemFont',
+    //   '"Segoe UI"',
+    //   'Roboto',
+    //   '"Helvetica Neue"',
+    //   'Arial',
+    //   'sans-serif',
+    //   '"Apple Color Emoji"',
+    //   '"Segoe UI Emoji"',
+    //   '"Segoe UI Symbol"',
+    // ].join(','),
+    "&:hover": {
+      boxShadow: "none",
+    },
+    "&:active": {
+      boxShadow: "none",
+      backgroundColor: "#0062cc",
+      borderColor: "#005cbf",
+    },
+    "&:focus": {
+      boxShadow: "0 0 0 0.2rem rgba(0,123,255,.5)",
+    },
+  });
 
   const {
     setSecretWord,
@@ -35,7 +70,7 @@ export const ResetButton = () => {
       px={2}
       py={1}
       lineHeight={1.25}
-      m={2}
+      m={0}
       bgcolor="white"
       boxShadow={1}
       sx={{
@@ -63,10 +98,9 @@ export const ResetButton = () => {
       >
         New Word
       </Box>
-      <Button
+      <ResetButtonWrapper
         variant="contained"
         size="large"
-        onClick={clickHandler}
         sx={{
           minWidth: "50px",
           backgroundColor: red[900],
@@ -88,6 +122,7 @@ export const ResetButton = () => {
             width: isClicked ? "53px" : "53px",
             height: isClicked ? "53px" : "53px",
             borderRadius: "50%",
+            border: "1px solid blue",
             fontSize: " .85rem",
             background: red[600],
             color: "#fff",
@@ -98,7 +133,7 @@ export const ResetButton = () => {
         >
           Reset
         </span>
-      </Button>
+      </ResetButtonWrapper>
     </Grid>
   );
 };

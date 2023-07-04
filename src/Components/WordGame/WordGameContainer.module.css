@@ -5,7 +5,7 @@
 }
 .rocketsBackground {
   z-index: 1;
-  width: 100%;
+  width: 100vw;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -31,7 +31,6 @@
 }
 
 .rocket {
-  position: relative;
   bottom: 0px;
   stroke: #fff;
   stroke-width: 1;
