@@ -32,7 +32,7 @@ export const ResetButton = () => {
     //   '"Segoe UI Symbol"',
     // ].join(','),
     "&:hover": {
-      boxShadow: "none",
+      boxShadow: "1px -1px 2px  #212121 ",
     },
     "&:active": {
       boxShadow: "none",

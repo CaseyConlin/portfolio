@@ -119,7 +119,7 @@ export const WordGame = () => {
                       </IconButton>
                     }
                     title="LIFT_FF"
-                    subheader="Guess the letters in the word below to build & launch your rocket before the other team!"
+                    subheader="Guess the letters in the word below to build & launch our rocket before the other team!"
                   />
                   <Box sx={{ p: { xs: 0 }, mx: -2, justifyContent: "center" }}>
                     <SecretWordContainer />
@@ -128,12 +128,13 @@ export const WordGame = () => {
                   <Grid
                     className="input-grid"
                     container
-                    py={0}
+                    py={1}
                     justifyContent={"center"}
                     sx={{
                       flexDirection: "row",
                       flexWrap: "wrap",
                       backgroundColor: grey[200],
+                      boxShadow: "1px -1px 3px  #212121 ",
                     }}
                   >
                     <Grid justifyContent="center" xs={7}>
