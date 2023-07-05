@@ -1,6 +1,9 @@
+// Receive props from Secret Word Container to set letter. Listen with useEffect
+// for changes to context, and update state based on guessed letter matches, and
+// counts of errors and correct guesses.
 import { useEffect, useState } from "react";
 import Grid from "@mui/material/Unstable_Grid2";
-import { styled } from "@mui/material/styles";
+import { Box } from "@mui/system";
 import { useGameContext } from "../../WordGameContext/WordGameContext";
 import { SecretLetter } from "./SecretLetter";
 import { lightGreen } from "@mui/material/colors";
@@ -16,8 +19,6 @@ export const SecretLetterTile = (props: Props) => {
 
   const { guessedLetter, guessedLetters, rightCount, errorCount, secretWord } =
     useGameContext();
-
-  const Item = styled("div")(({ theme }) => ({}));
 
   useEffect(() => {
     if (guessedLetter === props.secretLetter.toUpperCase()) {
@@ -52,14 +53,13 @@ export const SecretLetterTile = (props: Props) => {
       xs={1}
       sm={1}
     >
-      <Item
+      <Box
         sx={{
           p: 0,
           width: { xs: "25px", md: "45px" },
           minWidth: { xs: "25px", md: "45px" },
-
           height: { xs: "25px", md: "45px" },
-          boxShadow: 3,
+          boxShadow: "1px -1px 4px  #212121 inset ",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -68,19 +68,19 @@ export const SecretLetterTile = (props: Props) => {
           textTransform: "uppercase",
           border: "1px solid",
           borderColor: "#444d58",
-          borderRadius: "12px",
+          borderRadius: 2,
           textAlign: "center",
           fontWeight: 900,
+          fontFamily: "VarelaRound-Regular",
+          fontSize: "1.4rem",
         }}
-        className="valera"
         key={props.secretLetter + props.index * 2}
       >
         <SecretLetter
           secretLetter={props.secretLetter}
-          index={props.index}
           isLetterShowing={isLetterShowing}
         />
-      </Item>
+      </Box>
     </Grid>
   );
 };

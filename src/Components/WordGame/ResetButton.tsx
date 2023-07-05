@@ -26,7 +26,7 @@ export const ResetButton = () => {
     boxShadow: "1px -1px 4px  #212121",
 
     "&:hover": {
-      boxShadow: "1px -1px 3px  #212121 ",
+      boxShadow: "1px -1px 2px  #212121 ",
       backgroundColor: red[600],
     },
 

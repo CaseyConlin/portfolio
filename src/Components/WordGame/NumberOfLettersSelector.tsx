@@ -72,7 +72,6 @@ export const NumberOfLettersSelector = () => {
       lineHeight={1.25}
       m={1}
       bgcolor="white"
-      boxShadow={1}
       sx={{
         border: "1px solid black",
         boxShadow: "1px -1px 4px  #212121 ",
