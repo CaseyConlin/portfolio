@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { useGameContext } from "../../WordGameContext/WordGameContext";
 import { getNewWord } from "../../Services/getNewWord";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -7,6 +9,7 @@ import { red } from "@mui/material/colors";
 import { styled } from "@mui/material/styles";
 
 export const ResetButton = () => {
+  const [resetNeeded, setIsResetNeeded] = useState(false);
   const ResetButton = styled(Button)({
     padding: "0",
     display: "grid",
@@ -43,7 +46,15 @@ export const ResetButton = () => {
     fontFamily: "LucidaGrandeBold",
   });
 
-  const { setSecretWord, resetScores, numberOfLetters } = useGameContext();
+  const {
+    setSecretWord,
+    secretWord,
+    numberOfLetters,
+    resetScores,
+    errorCount,
+    rightCount,
+    guessedLetters,
+  } = useGameContext();
 
   const clickHandler = () => {
     resetScores();
@@ -52,6 +63,17 @@ export const ResetButton = () => {
       response && setSecretWord(response.word, response.hint);
     });
   };
+
+  useEffect(() => {
+    if (secretWord && (rightCount === secretWord.length || errorCount === 0)) {
+      setIsResetNeeded(true);
+    }
+    if (guessedLetters.length === 0) {
+      setIsResetNeeded(false);
+    }
+  }, [rightCount, errorCount, guessedLetters]);
+
+  const MotionResetButton = motion(ResetButton);
   return (
     <Grid
       px={2}
@@ -99,7 +121,22 @@ export const ResetButton = () => {
           height: "55px",
         }}
       >
-        <ResetButton onClick={clickHandler}>Reset</ResetButton>
+        <MotionResetButton
+          animate={
+            resetNeeded && {
+              boxShadow: ["0px 0px 1px red", "0px 0px 20px red"],
+              backgroundColor: ["#b71c1c", "#ff5252"],
+            }
+          }
+          transition={{
+            repeat: Infinity,
+            repeatType: "reverse",
+            duration: 1.5,
+          }}
+          onClick={clickHandler}
+        >
+          Reset
+        </MotionResetButton>
       </Box>
     </Grid>
   );
