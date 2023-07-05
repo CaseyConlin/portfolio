@@ -1,0 +1,66 @@
+.starsContainer {
+  background-color: #000;
+  width: 100vw;
+  z-index: 0;
+}
+.rocketsBackground {
+  z-index: 1;
+  width: 100vw;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  height: 1px;
+  width: 1px;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: -24vw -44vh 2px 2px #fff, 38vw -4vh 0px 0px #fff,
+    -20vw -48vh 1px 2px #fff, -39vw 38vh 3px 1px #fff, -42vw -11vh 0px 3px #fff,
+    12vw 15vh 3px 3px #fff, 42vw 6vh 3px 2px #fff, -8vw 9vh 0px 2px #fff,
+    34vw -38vh 1px 0px #fff, -17vw 45vh 3px 1px #fff, 22vw -36vh 3px 2px #fff,
+    -42vw 1vh 1px 0px #fff;
+  animation: stars 30s alternate infinite;
+}
+
+@keyframes stars {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-250px);
+  }
+}
+
+.rocket {
+  bottom: 0px;
+  stroke: #fff;
+  stroke-width: 1;
+  stroke-dasharray: none;
+  stroke-linecap: butt;
+  stroke-dashoffset: 0;
+  stroke-linejoin: miter;
+  stroke-miterlimit: 4;
+  fill-opacity: 0;
+  fill-rule: nonzero;
+}
+.fin {
+  /* stroke: rgb(247, 47, 58);
+  fill: rgb(247, 47, 58); */
+  fill-opacity: 1;
+}
+.window {
+  stroke: rgb(19, 107, 231);
+
+  fill-opacity: 1;
+}
+
+.rocketbody {
+  stroke: #000;
+  fill: #fff;
+  fill-opacity: 1;
+}
+.fire {
+  stroke: rgb(233, 153, 25);
+  fill: rgb(233, 153, 25);
+
+  fill-opacity: 1;
+}
