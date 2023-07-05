@@ -1,5 +1,8 @@
+// Component for small field to provide a count of remaining errors before the
+// opposing team's rocket blasts off. State is updated based on context.
+
 import { useEffect, useState } from "react";
-import { useGameContext } from "./WordGameContext";
+import { useGameContext } from "../../WordGameContext/WordGameContext";
 import { motion } from "framer-motion";
 import Grid from "@mui/material/Unstable_Grid2";
 import Box from "@mui/material/Box";
@@ -61,9 +64,7 @@ export const ErrorCountViewer = () => {
           backgroundColor: red[600],
           zIndex: 100,
           color: "white",
-          textShadow:
-            // "0 0 7px #fff, 0 0 10px #fff,0 0 21px #fff,0 0 42px #f5f368,0 0 82px #f5f368,0 0 92px #f5f368,0 0 102px #f5f368,0 0 151px #f5f368",
-            "0px 0px 0px  #fff ,0px 0px 7px  #ffffff8c",
+          textShadow: "0px 0px 0px  #fff ,0px 0px 7px  #ffffff8c",
         }}
       >
         <motion.div

@@ -1,5 +1,5 @@
 import { getNewWord } from "./getNewWord";
-import { useGameContext } from "../Components/WordGame/WordGameContext";
+import { useGameContext } from "../WordGameContext/WordGameContext";
 
 export const useNewWord = () => {
   const { setSecretWord } = useGameContext();

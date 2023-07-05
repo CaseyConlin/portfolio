@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Grid from "@mui/material/Unstable_Grid2";
 import { styled } from "@mui/material/styles";
-import { useGameContext } from "./WordGameContext";
+import { useGameContext } from "../../WordGameContext/WordGameContext";
 import { SecretLetter } from "./SecretLetter";
 import { lightGreen } from "@mui/material/colors";
 import { deepOrange } from "@mui/material/colors";

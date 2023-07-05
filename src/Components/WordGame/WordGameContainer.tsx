@@ -27,8 +27,8 @@ import { ResetButton } from "./ResetButton";
 import { NumberOfLettersSelector } from "./NumberOfLettersSelector";
 import { ErrorCountViewer } from "./ErrorCountView";
 import { Hint } from "./Hint";
-import { Rocket } from "./Rocket";
-import { WordGameProvider } from "./WordGameContext";
+import { RocketContainer } from "./RocketContainer";
+import { WordGameProvider } from "../../WordGameContext/WordGameContext";
 import { grey } from "@mui/material/colors";
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -76,8 +76,8 @@ export const WordGame = () => {
                 sm={5}
                 lg={5}
               >
-                <Rocket isPlayerRocket={false} />
-                <Rocket isPlayerRocket={true} />
+                <RocketContainer isPlayerRocket={false} />
+                <RocketContainer isPlayerRocket={true} />
               </Grid>
               <Grid xs={12} sm={7} lg={6}>
                 <Card sx={{ m: 2 }}>

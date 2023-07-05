@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
-import { useGameContext } from "./WordGameContext";
+import { useGameContext } from "../../WordGameContext/WordGameContext";
 import { SecretLetterTile } from "./SecretLetterTile";
 import { getNewWord } from "../../Services/getNewWord";
 import Grid from "@mui/material/Unstable_Grid2";

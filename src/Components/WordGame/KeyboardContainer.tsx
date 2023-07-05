@@ -1,8 +1,10 @@
+// Container for Keyboard Buttons. Map through an array of charcodes to get A-Z
+// for keyboard. UseEffect hook listens for actual keyboard keydown events and
+// updates context for use in updating Keyboard Button Component.
 import { useEffect } from "react";
 import Grid from "@mui/material/Unstable_Grid2";
-import { GameContextType } from "./WordGameReducer";
 import { KeyboardLetterButton } from "./KeyboardLetterButton";
-import { useGameContext } from "./WordGameContext";
+import { useGameContext } from "../../WordGameContext/WordGameContext";
 
 export const KeyboardContainer = () => {
   const alpha = Array.from(Array(26)).map((_, i) => i + 65);
@@ -14,9 +16,9 @@ export const KeyboardContainer = () => {
     rightCount,
     errorCount,
   } = useGameContext();
+
   const onKeyDown = (event: KeyboardEvent) => {
     const newKey = event.key.toUpperCase();
-
     if (
       newKey.length === 1 &&
       alpha.includes(newKey.charCodeAt(0)) &&
@@ -59,6 +61,9 @@ export const KeyboardContainer = () => {
           justifyContent={"center"}
           alignItems={"center"}
           spacing={0}
+          sx={{
+            aspectRatio: 1 / 1,
+          }}
           xs={2}
         >
           <KeyboardLetterButton letterCharCode={letterCode} />

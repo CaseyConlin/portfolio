@@ -1,14 +1,16 @@
-import { useState } from "react";
+// Input component to set number of letters for secret word. Number of letters
+// for secret word is set in context using the component's onChangeCommitted
+// callback function. Updating the word is triggered by the Reset button, not
+// the slider changing.
 import Slider from "@mui/material/Slider";
-import { useGameContext } from "./WordGameContext";
+import { useGameContext } from "../../WordGameContext/WordGameContext";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Unstable_Grid2";
 import { Box } from "@mui/material";
 import { blue } from "@mui/material/colors";
-import { useEffect } from "react";
 
 function valuetext(value: number) {
-  return value;
+  return `${value}`;
 }
 
 const marks = [
@@ -39,15 +41,7 @@ const marks = [
 ];
 
 export const NumberOfLettersSelector = () => {
-  const [value, setValue] = useState<
-    number | string | Array<number | string>
-  >();
-
   const { numberOfLetters, setNumberOfLetters } = useGameContext();
-
-  const handleSliderChange = (event: Event, newValue: number | number[]) => {
-    setValue(newValue);
-  };
 
   const handleChangeCommited = (
     event: React.SyntheticEvent | Event,
@@ -56,19 +50,14 @@ export const NumberOfLettersSelector = () => {
     setNumberOfLetters(newValue);
   };
 
-  const NumberOfLettersSlider = styled(Slider)(({ theme }) => ({
-    color: blue[600], //color of the slider between thumbs
+  const NumberOfLettersSlider = styled(Slider)(() => ({
+    color: blue[600],
 
-    "& .MuiSlider-rail": {
-      color: blue[500], ////color of the slider outside  teh area between thumbs
-    },
     "& .MuiSlider-thumb": {
       color: blue[800],
-      border: `1px solid white`,
       borderRadius: 0,
       height: "20px",
       width: "10px",
-      boxShadow: "1px -1px 10px #1110101 ",
     },
 
     "& .MuiSlider-markLabel": {
@@ -86,7 +75,6 @@ export const NumberOfLettersSelector = () => {
       boxShadow={1}
       sx={{
         border: "1px solid black",
-
         boxShadow: "1px -1px 4px  #212121 ",
       }}
       borderRadius={1}
@@ -113,6 +101,7 @@ export const NumberOfLettersSelector = () => {
       </Box>
       <NumberOfLettersSlider
         aria-label="Number of Letters"
+        getAriaValueText={valuetext}
         defaultValue={numberOfLetters}
         min={5}
         max={10}

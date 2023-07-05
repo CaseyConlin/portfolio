@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useGameContext } from "./WordGameContext";
+import { useGameContext } from "../../WordGameContext/WordGameContext";
 import { getNewWord } from "../../Services/getNewWord";
 import Grid from "@mui/material/Unstable_Grid2";
 import { Box } from "@mui/material";
@@ -8,50 +7,43 @@ import { red } from "@mui/material/colors";
 import { styled } from "@mui/material/styles";
 
 export const ResetButton = () => {
-  const [isClicked, setIsClicked] = useState(false);
-
   const ResetButton = styled(Button)({
-    // boxShadow: 'none',
-    // textTransform: 'none',
-    // fontSize: 16,
-    // padding: '6px 12px',
-    // border: '1px solid',
-    // lineHeight: 1.5,
-    // backgroundColor: '#0063cc',
-    // borderColor: '#0063cc',
-    // fontFamily: [
-    //   '-apple-system',
-    //   'BlinkMacSystemFont',
-    //   '"Segoe UI"',
-    //   'Roboto',
-    //   '"Helvetica Neue"',
-    //   'Arial',
-    //   'sans-serif',
-    //   '"Apple Color Emoji"',
-    //   '"Segoe UI Emoji"',
-    //   '"Segoe UI Symbol"',
-    // ].join(','),
+    padding: "0",
+    display: "grid",
+    justifyContent: "center",
+    alignItems: "center",
+    minWidth: "50px",
+    minHeight: "50px",
+    width: "54px",
+    height: "54px",
+    borderRadius: "50%",
+    border: "1px solid black",
+    fontSize: " .8rem",
+    backgroundColor: red[600],
+    color: "#fff",
+    transform: "translateY(-2px) ",
+    font: "LucidaGrandeBold",
+    boxShadow: "1px -1px 4px  #212121",
+
     "&:hover": {
-      boxShadow: "1px -1px 0px  #212121 ",
+      boxShadow: "1px -1px 3px  #212121 ",
+      backgroundColor: red[600],
     },
+
     "&:active": {
-      boxShadow: "none",
-      backgroundColor: "#0062cc",
-      borderColor: "#005cbf",
+      transform: "translateY(0px) ",
+      boxShadow: "1px -1px 2px  #212121",
+      weight: "53px",
+      height: "53px",
     },
+
     "&:focus": {
       boxShadow: "0 0 0 0.2rem rgba(0,123,255,.5)",
     },
     fontFamily: "LucidaGrandeBold",
   });
 
-  const {
-    setSecretWord,
-    resetScores,
-    errorCount,
-    guessedLetters,
-    numberOfLetters,
-  } = useGameContext();
+  const { setSecretWord, resetScores, numberOfLetters } = useGameContext();
 
   const clickHandler = () => {
     resetScores();
@@ -59,9 +51,6 @@ export const ResetButton = () => {
     getNewWord(numberOfLetters).then((response) => {
       response && setSecretWord(response.word, response.hint);
     });
-
-    setIsClicked(true);
-    setTimeout(() => setIsClicked(false), 250);
   };
   return (
     <Grid
@@ -108,36 +97,9 @@ export const ResetButton = () => {
           padding: "0",
           width: "55px",
           height: "55px",
-
-          // boxShadow: "1px -1px 4px  #212121 ",
         }}
       >
-        <ResetButton
-          onClick={clickHandler}
-          style={{
-            padding: "0",
-            display: "grid",
-            justifyContent: "center",
-            alignItems: "center",
-            minWidth: "50px",
-            minHeight: "50px",
-            width: isClicked ? "53px" : "53px",
-            height: isClicked ? "53px" : "53px",
-            borderRadius: "50%",
-            border: "1px solid black",
-            fontSize: " .8rem",
-            background: red[600],
-            color: "#fff",
-
-            transform: isClicked ? "translateY(0px) " : "translateY(-2px) ",
-            font: "LucidaGrandeBold",
-            boxShadow: isClicked
-              ? "1px -1px 2px  #212121"
-              : "1px -1px 4px  #212121",
-          }}
-        >
-          Reset
-        </ResetButton>
+        <ResetButton onClick={clickHandler}>Reset</ResetButton>
       </Box>
     </Grid>
   );
