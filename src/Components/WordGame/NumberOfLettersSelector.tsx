@@ -47,7 +47,7 @@ export const NumberOfLettersSelector = () => {
     event: React.SyntheticEvent | Event,
     newValue: number | number[]
   ) => {
-    setNumberOfLetters(newValue);
+    event && setNumberOfLetters(newValue);
   };
 
   const NumberOfLettersSlider = styled(Slider)(() => ({

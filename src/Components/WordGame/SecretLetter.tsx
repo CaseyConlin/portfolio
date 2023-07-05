@@ -1,8 +1,8 @@
 // Small component to display the hidden letter in its box if the player guesses
 // it. Props come from the parent Secret Letter Tile component.
 
-import { motion } from "framer-motion";
-import Fade from "@mui/material/Fade";
+// import { motion } from "framer-motion";
+// import Fade from "@mui/material/Fade";
 
 export interface Props {
   secretLetter: string;

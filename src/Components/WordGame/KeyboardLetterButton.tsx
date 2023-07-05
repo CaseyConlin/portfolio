@@ -113,16 +113,6 @@ export const KeyboardLetterButton = (props: Props) => {
       }}
     >
       <KeyBoardButton
-        // sx={{
-        //   p: 1,
-        //   minWidth: "45px",
-        //   borderColor: "black",
-        //   color: "#000",
-        //   backgroundColor: "white",
-        //   fontWeight: "bold",
-        //   font: "LucidaGrandeBold",
-        //   boxShadow: "1px -1px 4px  #212121",
-        // }}
         value={letter}
         onClick={(e) => letterButtonGuessHandler(e)}
         disabled={isLetterClicked}
