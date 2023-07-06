@@ -25,10 +25,9 @@ export const WordGame = () => {
             flexDirection={"row"}
             justifyContent={"space-around"}
             spacing={{ xs: 0, sm: 3, md: 3 }}
-            my={5}
+            my={{ xs: 1, sm: 5 }}
             xs={12}
             sm={5}
-            lg={5}
             order={{ xs: 2, md: 0 }}
           >
             <RocketContainer isPlayerRocket={false} />

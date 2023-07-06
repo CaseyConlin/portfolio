@@ -75,7 +75,7 @@ export const Rocket = (props: Props) => {
       repeat: 1,
     },
     out: {
-      y: ["0vh", "-100vh"],
+      y: ["0vh", "-120vh"],
       transition: {
         duration: 1,
         delay: 1.5,

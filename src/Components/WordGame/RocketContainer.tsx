@@ -17,7 +17,8 @@ export const RocketContainer = (props: Props) => {
       justifyContent={"space-between"}
       alignItems={"center"}
       borderRadius={2}
-      xs={4}
+      xs={5}
+      sm={4}
       sx={{ backgroundColor: "#ffffff30" }}
     >
       <RocketBanner isPlayerRocket={props.isPlayerRocket} />
@@ -27,7 +28,8 @@ export const RocketContainer = (props: Props) => {
         justifyContent={"flex-end"}
         alignItems={"center"}
         borderRadius={2}
-        p={2}
+        px={{ xs: 0, sm: 2 }}
+        py={{ xs: 2, sm: 2 }}
       >
         <Rocket isPlayerRocket={props.isPlayerRocket} />
         <Planet isPlayerRocket={props.isPlayerRocket} />
