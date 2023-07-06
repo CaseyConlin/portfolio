@@ -42,6 +42,7 @@ export const KeyboardLetterButton = (props: Props) => {
     }
   };
 
+  //Mark key right or wrong on click.
   const userKeyboardGuessHandler = (userKeyboardLetter: string) => {
     if (letter.toLocaleLowerCase() === userKeyboardLetter.toLocaleLowerCase()) {
       if (secretWord.toLowerCase().includes(letter.toLowerCase())) {
@@ -54,10 +55,12 @@ export const KeyboardLetterButton = (props: Props) => {
     }
   };
 
+  //Listen for user keyboard keydown.
   useEffect(() => {
     userKeyboardGuessHandler(guessedLetter);
   }, [guessedLetter]);
 
+  //Listen for end of game.
   useEffect(() => {
     if (secretWord && (rightCount === secretWord.length || errorCount === 0)) {
       setIsLetterClicked(true);
@@ -71,7 +74,7 @@ export const KeyboardLetterButton = (props: Props) => {
 
   const KeyBoardButton = styled(Button)(({ theme }) => ({
     padding: theme.spacing(1),
-    minWidth: "45px",
+    // minWidth: "45px",
     border: "1px solid #000",
     color: "#000",
     backgroundColor: "white",
@@ -104,18 +107,22 @@ export const KeyboardLetterButton = (props: Props) => {
       justifyContent={"center"}
       sx={{
         borderRadius: 1,
-        minWidth: "45px",
-        minHeight: "45px",
+        minWidth: { xs: "35px", sm: "45px" },
+        minHeight: { xs: "35px", sm: "45px" },
         backgroundColor: "#000",
         padding: "0",
-        width: "47px",
-        height: "47px",
+        width: { xs: "37px", sm: "47px" },
+        height: { xs: "37px", sm: "47px" },
       }}
     >
       <KeyBoardButton
         value={letter}
         onClick={(e) => letterButtonGuessHandler(e)}
         disabled={isLetterClicked}
+        sx={{
+          minWidth: { xs: "35px", sm: "45px" },
+          width: { xs: "35px", sm: "45px" },
+        }}
       >
         {isLetterRight && (
           <CheckCircleIcon

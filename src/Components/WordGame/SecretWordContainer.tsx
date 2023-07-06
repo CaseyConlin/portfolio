@@ -35,6 +35,8 @@ export const SecretWordContainer = () => {
       container
       sx={{ justifyContent: "center" }}
       spacing={{ xs: 1, md: 1 }}
+      px={1}
+      m={0.1}
     >
       {newSecretWord &&
         newSecretWord.map((letter, index) => (

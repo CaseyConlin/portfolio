@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import Grid from "@mui/material/Unstable_Grid2";
 import Box from "@mui/material/Box";
 import { red } from "@mui/material/colors";
+import { Typography } from "@mui/material";
 
 export const ErrorCountViewer = () => {
   const [errorNumber, setErrorNumber] = useState<number>();
@@ -18,9 +19,9 @@ export const ErrorCountViewer = () => {
 
   return (
     <Grid
-      p={1}
+      p={{ xs: 0, sm: 1 }}
       lineHeight={1.25}
-      m={0.25}
+      m={{ xs: 0, sm: 0.25 }}
       bgcolor="white"
       boxShadow={1}
       sx={{
@@ -33,14 +34,16 @@ export const ErrorCountViewer = () => {
       flexDirection={"column"}
       justifyContent={"flex-start"}
       alignItems={"center"}
-      xs={12}
+      alignSelf={{ xs: "stretch", sm: "center" }}
+      xs={4}
+      sm={12}
     >
       <Box
         mx={0.125}
         sx={{
-          fontSize: "1.25rem",
+          fontSize: { xs: "1rem", sm: "1.25rem" },
           display: "block",
-          padding: "10px 0px",
+          padding: { xs: "2px 0px", sm: "10px 0px" },
           margin: 0,
           textAlign: "center",
           textTransform: "uppercase",
@@ -50,13 +53,13 @@ export const ErrorCountViewer = () => {
       >
         Errors Left
       </Box>
-      <div
-        style={{
+      <Box
+        sx={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          width: "60px",
-          height: "60px",
+          width: { xs: "35px", sm: "60px" },
+          height: { xs: "35px", sm: "60px" },
           borderRadius: "50%",
           border: `1px solid ${red[900]}`,
           boxShadow:
@@ -78,9 +81,11 @@ export const ErrorCountViewer = () => {
             stiffness: 700 - errorCount * 100,
           }}
         >
-          <span style={{ fontSize: "1.75rem" }}>{errorNumber}</span>
+          <Typography sx={{ fontSize: { xs: "1.5rem", sm: "1.75rem" } }}>
+            {errorNumber}
+          </Typography>
         </motion.div>
-      </div>
+      </Box>
     </Grid>
   );
 };
