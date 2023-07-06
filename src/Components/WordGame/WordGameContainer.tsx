@@ -14,16 +14,22 @@ export const WordGame = () => {
       <div className={styles.rocketsBackground}></div>
 
       <WordGameProvider>
-        <Grid container p={3} flexDirection={"row"} justifyContent={"flex-end"}>
+        <Grid
+          container
+          p={{ xs: 0, lg: 3 }}
+          flexDirection={{ xs: "column", sm: "row", lg: "row" }}
+          justifyContent={"flex-end"}
+        >
           <Grid
             container
             flexDirection={"row"}
             justifyContent={"space-around"}
-            spacing={3}
+            spacing={{ xs: 0, sm: 3, md: 3 }}
             my={5}
             xs={12}
             sm={5}
             lg={5}
+            order={{ xs: 2, md: 0 }}
           >
             <RocketContainer isPlayerRocket={false} />
             <RocketContainer isPlayerRocket={true} />

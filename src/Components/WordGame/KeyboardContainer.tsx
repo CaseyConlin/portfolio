@@ -64,7 +64,8 @@ export const KeyboardContainer = () => {
           sx={{
             aspectRatio: 1 / 1,
           }}
-          xs={2}
+          xs={1.3}
+          sm={2}
         >
           <KeyboardLetterButton letterCharCode={letterCode} />
         </Grid>

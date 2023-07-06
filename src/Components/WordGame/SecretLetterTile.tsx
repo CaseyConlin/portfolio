@@ -48,17 +48,18 @@ export const SecretLetterTile = (props: Props) => {
       sx={{
         justifyContent: "center",
         alignContent: "center",
-        p: 1,
+
+        aspectRatio: 1 / 1,
       }}
       xs={1}
-      sm={1}
+      p={{ xs: 2.5, md: 3.5 }}
     >
       <Box
         sx={{
-          p: 0,
-          width: { xs: "25px", md: "45px" },
-          minWidth: { xs: "25px", md: "45px" },
-          height: { xs: "25px", md: "45px" },
+          width: { xs: "32px", md: "45px" },
+          height: { xs: "32px", md: "45px" },
+          minWidth: { xs: "32px", md: "45px" },
+          minHeight: { xs: "32px", md: "45px" },
           boxShadow: "1px -1px 4px  #212121 inset ",
           display: "flex",
           justifyContent: "center",

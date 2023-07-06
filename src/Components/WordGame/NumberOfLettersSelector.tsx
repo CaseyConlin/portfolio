@@ -8,6 +8,8 @@ import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Unstable_Grid2";
 import { Box } from "@mui/material";
 import { blue } from "@mui/material/colors";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 function valuetext(value: number) {
   return `${value}`;
@@ -42,6 +44,8 @@ const marks = [
 
 export const NumberOfLettersSelector = () => {
   const { numberOfLetters, setNumberOfLetters } = useGameContext();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
   const handleChangeCommited = (
     event: React.SyntheticEvent | Event,
@@ -67,10 +71,10 @@ export const NumberOfLettersSelector = () => {
 
   return (
     <Grid
-      px={2}
-      py={1}
+      px={{ xs: 1.5, sm: 2 }}
+      py={{ xs: 0, sm: 1 }}
       lineHeight={1.25}
-      m={1}
+      m={{ xs: 0, sm: 1 }}
       bgcolor="white"
       sx={{
         border: "1px solid black",
@@ -79,15 +83,17 @@ export const NumberOfLettersSelector = () => {
       borderRadius={1}
       container
       flexDirection={"column"}
-      justifyContent={"flex-end"}
+      justifyContent={{ xs: "center", sm: "flex-end" }}
       alignItems={"center"}
-      xs={12}
+      alignSelf={{ xs: "stretch", sm: "center" }}
+      xs={4}
+      sm={12}
     >
       <Box
         mx={0.125}
+        p={{ xs: 0, sm: 1 }}
         sx={{
           fontSize: "1.25rem",
-          display: "block",
           padding: "2px 0px",
           margin: 0,
           textAlign: "center",
@@ -105,7 +111,7 @@ export const NumberOfLettersSelector = () => {
         min={5}
         max={10}
         valueLabelDisplay="auto"
-        marks={marks}
+        marks={matches && marks}
         onChangeCommitted={handleChangeCommited}
       />
     </Grid>
