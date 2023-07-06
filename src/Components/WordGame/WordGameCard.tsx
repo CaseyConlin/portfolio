@@ -5,11 +5,17 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 import Grid from "@mui/material/Unstable_Grid2";
 import Box from "@mui/material/Box";
 import "../../App.css";
-
+import VideogameAssetIcon from "@mui/icons-material/VideogameAsset";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import EmailIcon from "@mui/icons-material/Email";
 import { KeyboardContainer } from "./KeyboardContainer";
 import { SecretWordContainer } from "./SecretWordContainer";
 import { ResetButton } from "./ResetButton";
@@ -115,7 +121,8 @@ export const WordGameCard = () => {
         </Grid>
       </Grid>
       <CardActions>
-        <Typography>Play Info</Typography>
+        <VideogameAssetIcon fontSize="large" sx={{ paddingRight: "10px" }} />
+        <Typography> Game Info</Typography>
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
@@ -127,6 +134,9 @@ export const WordGameCard = () => {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
+          <Typography variant="h5" color="text.primary">
+            Gameplay
+          </Typography>
           <Typography variant="body2" color="text.secondary">
             Use your keyboard or the buttons above to guess letters in the
             secret word like Hangman. Every correct letter gets you a little
@@ -136,6 +146,64 @@ export const WordGameCard = () => {
             the number of letters for the secret word, and hit reset for a new
             word. You got this!
           </Typography>
+          <Typography variant="h5" color="text.primary" pt={2}>
+            Development
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Like this website, the game, Liftoff, is built using React and
+            TypeScript. Many of the components manage their own state with React
+            Context helping keep everyting in sync. The words and hints come
+            from API calls to{" "}
+            <a href="www.wordsapi.com" target="_blank">
+              Words API
+            </a>{" "}
+            using Axios. Components are styled using Material UI with some
+            exceptions. Animations are managed with the Framer Motion library.
+            You can check out the{" "}
+            <a href="https://github.com/CaseyConlin/portfolio" target="_blank">
+              {" "}
+              repo here
+            </a>
+            . Best of luck, and I hope you enjoy the game!
+          </Typography>
+          <Typography variant="h5" color="text.primary" pt={2}>
+            About the Developer
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            My name is Casey Conlin. I grew up playing video games and I'm
+            helplessly drawn to puzzles and word games, so the concpetion,
+            design, and devlopment of this game was a lot of fun for me! I'm a
+            frontend developer with experience building applications and
+            webpages with React, JavaScript, PHP, and CSS. I've worked in
+            nonprofits and libraries over 10 years as a team leader and
+            consultant specializing in technology, marketing, project
+            management, strategic planning, and more, but I've always been
+            working on web development through my web design and development
+            company,{" "}
+            <a href="https://www.parkcrestdesign.com/" target="_blank">
+              Parkcrest Design
+            </a>
+            . If you have any question, or just want to connect, please feel
+            free to reach out! Thanks for vising the website!
+          </Typography>
+
+          <Typography variant="h5" color="text.primary" pt={2}>
+            Contact
+          </Typography>
+          <Stack direction="row" p={0} spacing={0}>
+            <Button
+              href="https://www.linkedin.com/in/caseyconlin/"
+              target="_blank"
+            >
+              <LinkedInIcon fontSize="large" />
+            </Button>
+            <Button href="https://github.com/CaseyConlin/" target="_blank">
+              <GitHubIcon fontSize="large" />
+            </Button>
+            <Button href="mailto:casey.conlin@gmail.com" target="_blank">
+              <EmailIcon fontSize="large" />
+            </Button>
+          </Stack>
         </CardContent>
       </Collapse>
     </Card>
