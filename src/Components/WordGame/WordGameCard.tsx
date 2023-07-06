@@ -138,13 +138,14 @@ export const WordGameCard = () => {
             Gameplay
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Use your keyboard or the buttons above to guess letters in the
-            secret word like Hangman. Every correct letter gets you a little
-            closer to building & launching your rocket, but any missed letter
-            will mean another part of the other team's rocket gets put in place.
-            Five missed letters, and you lose. Use the control panel to change
-            the number of letters for the secret word, and hit reset for a new
-            word. You got this!
+            [radio squeal noise] Use your keyboard or the buttons above to guess
+            the letters in the secret word like Hangman. Every correct letter
+            gets you a little closer to building & launching your rocket, but
+            any missed letter will mean another part of the other team's rocket
+            gets put in place and they get closer to launching. Five missed
+            letters, and we lose. Use the control panel to change the number of
+            letters for the secret word, and hit the reset button for a new
+            word. You got this! Over and out.[radio squeal noise]
           </Typography>
           <Typography variant="h5" color="text.primary" pt={2}>
             Development
@@ -152,7 +153,7 @@ export const WordGameCard = () => {
           <Typography variant="body2" color="text.secondary">
             Like this website, the game, Liftoff, is built using React and
             TypeScript. Many of the components manage their own state with React
-            Context helping keep everyting in sync. The words and hints come
+            Context helping keep everything in sync. The words and hints come
             from API calls to{" "}
             <a href="www.wordsapi.com" target="_blank">
               Words API
@@ -171,10 +172,10 @@ export const WordGameCard = () => {
           </Typography>
           <Typography variant="body2" color="text.secondary">
             My name is Casey Conlin. I grew up playing video games and I'm
-            helplessly drawn to puzzles and word games, so the concpetion,
-            design, and devlopment of this game was a lot of fun for me! I'm a
-            frontend developer with experience building applications and
-            webpages with React, JavaScript, PHP, and CSS. I've worked in
+            helplessly drawn to puzzles and word games, so the conception,
+            design, and development of this game was a lot of fun for me! I'm a
+            frontend developer with experience building applications and web
+            pages with React, JavaScript, PHP, and CSS. I've worked in
             nonprofits and libraries over 10 years as a team leader and
             consultant specializing in technology, marketing, project
             management, strategic planning, and more, but I've always been
@@ -183,8 +184,8 @@ export const WordGameCard = () => {
             <a href="https://www.parkcrestdesign.com/" target="_blank">
               Parkcrest Design
             </a>
-            . If you have any question, or just want to connect, please feel
-            free to reach out! Thanks for vising the website!
+            . If you have any questions, or just want to connect, please feel
+            free to reach out! Thanks for visiting the website!
           </Typography>
 
           <Typography variant="h5" color="text.primary" pt={2}>
