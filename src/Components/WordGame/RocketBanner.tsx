@@ -1,4 +1,5 @@
-import Box from "@mui/material/Box";
+import { Grid } from "@mui/material";
+
 import { red } from "@mui/material/colors";
 import { blue } from "@mui/material/colors";
 
@@ -10,7 +11,7 @@ export const RocketBanner = (props: Props) => {
   const color = props.isPlayerRocket ? blue[500] : red[500];
 
   return (
-    <Box
+    <Grid
       textAlign={"center"}
       alignContent={"center"}
       py={2}
@@ -27,6 +28,6 @@ export const RocketBanner = (props: Props) => {
       }}
     >
       {props.isPlayerRocket ? "Us" : "Them"}
-    </Box>
+    </Grid>
   );
 };

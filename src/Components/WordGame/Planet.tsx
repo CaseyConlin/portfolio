@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { red } from "@mui/material/colors";
 import { blue } from "@mui/material/colors";
+import { Box } from "@mui/material";
 
 interface Props {
   isPlayerRocket: boolean;
@@ -11,9 +12,9 @@ export const Planet = (props: Props) => {
   const delay = props.isPlayerRocket ? 1 : 0;
 
   return (
-    <div
-      style={{
-        width: "85%",
+    <Box
+      sx={{
+        width: { xs: "70%", md: "80%", lg: "85%" },
       }}
     >
       <motion.svg
@@ -199,6 +200,6 @@ export const Planet = (props: Props) => {
           </g>
         </g>
       </motion.svg>
-    </div>
+    </Box>
   );
 };

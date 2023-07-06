@@ -81,7 +81,6 @@ export const KeyboardLetterButton = (props: Props) => {
     fontWeight: "bold",
     font: "LucidaGrandeBold",
     boxShadow: "1px -1px 4px  #212121",
-
     transform: "translateY(-2px) ",
 
     "&:hover": {

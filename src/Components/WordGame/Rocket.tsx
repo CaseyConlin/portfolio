@@ -75,7 +75,7 @@ export const Rocket = (props: Props) => {
       repeat: 1,
     },
     out: {
-      y: ["0vh", "-100vh"],
+      y: ["0vh", "-120vh"],
       transition: {
         duration: 1,
         delay: 1.5,
@@ -100,14 +100,14 @@ export const Rocket = (props: Props) => {
     <motion.svg
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
-      width="150"
-      height="150"
+      width="135"
+      height="135"
       viewBox="0 0 200 200"
       variants={rocketAnimation}
       className={styles.rocket}
       initial={"start"}
       animate={haveLiftOff ? ["fly", "out"] : ["", ""]}
-      style={{ marginBottom: "-45px" }}
+      style={{ marginBottom: "-45px", zIndex: 100 }}
     >
       <g
         transform="matrix(1 0 0 1 100.2672507609 90.1782811413)"

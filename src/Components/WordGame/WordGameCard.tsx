@@ -111,9 +111,9 @@ export const WordGameCard = () => {
           container
           flexDirection={{ xs: "row", md: "column" }}
           flexWrap={"wrap"}
-          justifyContent={{ xs: "space-around", sm: "flex-start" }}
+          justifyContent={{ xs: "space-around", md: "flex-start" }}
           xs={12}
-          sm={4}
+          md={4}
         >
           <ErrorCountViewer />
           <NumberOfLettersSelector />
@@ -145,7 +145,7 @@ export const WordGameCard = () => {
             gets put in place and they get closer to launching. Five missed
             letters, and we lose. Use the control panel to change the number of
             letters for the secret word, and hit the reset button for a new
-            word. You got this! Over and out.[radio squeal noise]
+            word. You got this! Over and out. [radio squeal noise]
           </Typography>
           <Typography variant="h5" color="text.primary" pt={2}>
             Development

@@ -76,7 +76,7 @@ export const ResetButton = () => {
   const MotionResetButton = motion(ResetButton);
   return (
     <Grid
-      px={{ xs: 1, sm: 2 }}
+      px={{ xs: 1, md: 2 }}
       py={1}
       lineHeight={1.25}
       m={0}
@@ -89,11 +89,11 @@ export const ResetButton = () => {
       borderRadius={1}
       container
       flexDirection={"row"}
-      justifyContent={{ xs: "center", sm: "flex-start" }}
+      justifyContent={{ xs: "center", md: "flex-start" }}
       alignItems={"center"}
-      alignSelf={{ xs: "stretch", sm: "center" }}
+      alignSelf={{ xs: "stretch", md: "center" }}
       xs={2}
-      sm={12}
+      md={12}
     >
       <Box
         sx={{
@@ -104,7 +104,7 @@ export const ResetButton = () => {
           textTransform: "uppercase",
           typography: "subtitle1",
           fontFamily: "LucidaGrandeBold",
-          display: { xs: "none", sm: "block" },
+          display: { xs: "none", md: "block" },
         }}
       >
         New Word

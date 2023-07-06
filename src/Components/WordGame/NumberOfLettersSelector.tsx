@@ -72,9 +72,9 @@ export const NumberOfLettersSelector = () => {
   return (
     <Grid
       px={{ xs: 1.5, sm: 2 }}
-      py={{ xs: 0, sm: 1 }}
+      py={{ xs: 0, md: 1 }}
       lineHeight={1.25}
-      m={{ xs: 0, sm: 1 }}
+      m={{ xs: 0, md: 1 }}
       bgcolor="white"
       sx={{
         border: "1px solid black",
@@ -83,11 +83,11 @@ export const NumberOfLettersSelector = () => {
       borderRadius={1}
       container
       flexDirection={"column"}
-      justifyContent={{ xs: "center", sm: "flex-end" }}
+      justifyContent={{ xs: "center", md: "flex-end" }}
       alignItems={"center"}
-      alignSelf={{ xs: "stretch", sm: "center" }}
+      alignSelf={{ xs: "stretch", md: "center" }}
       xs={4}
-      sm={12}
+      md={12}
     >
       <Box
         mx={0.125}
