@@ -15,10 +15,14 @@ export const RocketContainer = (props: Props) => {
       container
       flexDirection={"column"}
       justifyContent={"space-between"}
-      alignItems={"center"}
+      alignItems={{ lg: "center" }}
       borderRadius={2}
+      order={{
+        xs: props.isPlayerRocket ? 0 : 1,
+        md: props.isPlayerRocket ? 1 : 0,
+      }}
       xs={5}
-      sm={4}
+      md={4}
       sx={{ backgroundColor: "#ffffff30" }}
     >
       <RocketBanner isPlayerRocket={props.isPlayerRocket} />
@@ -28,8 +32,10 @@ export const RocketContainer = (props: Props) => {
         justifyContent={"flex-end"}
         alignItems={"center"}
         borderRadius={2}
-        px={{ xs: 0, sm: 2 }}
-        py={{ xs: 2, sm: 2 }}
+        wrap="nowrap"
+        p={0}
+        px={{ xs: 0, lg: 2 }}
+        py={{ xs: 2, md: 2 }}
       >
         <Rocket isPlayerRocket={props.isPlayerRocket} />
         <Planet isPlayerRocket={props.isPlayerRocket} />

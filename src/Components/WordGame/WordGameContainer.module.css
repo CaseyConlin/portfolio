@@ -43,13 +43,10 @@
   fill-rule: nonzero;
 }
 .fin {
-  /* stroke: rgb(247, 47, 58);
-  fill: rgb(247, 47, 58); */
   fill-opacity: 1;
 }
 .window {
   stroke: rgb(19, 107, 231);
-
   fill-opacity: 1;
 }
 
@@ -61,6 +58,5 @@
 .fire {
   stroke: rgb(233, 153, 25);
   fill: rgb(233, 153, 25);
-
   fill-opacity: 1;
 }

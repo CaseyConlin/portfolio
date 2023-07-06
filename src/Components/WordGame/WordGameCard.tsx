@@ -111,9 +111,9 @@ export const WordGameCard = () => {
           container
           flexDirection={{ xs: "row", md: "column" }}
           flexWrap={"wrap"}
-          justifyContent={{ xs: "space-around", sm: "flex-start" }}
+          justifyContent={{ xs: "space-around", md: "flex-start" }}
           xs={12}
-          sm={4}
+          md={4}
         >
           <ErrorCountViewer />
           <NumberOfLettersSelector />

@@ -34,9 +34,9 @@ export const ErrorCountViewer = () => {
       flexDirection={"column"}
       justifyContent={"flex-start"}
       alignItems={"center"}
-      alignSelf={{ xs: "stretch", sm: "center" }}
+      alignSelf={{ xs: "stretch", md: "center" }}
       xs={4}
-      sm={12}
+      md={12}
     >
       <Box
         mx={0.125}
