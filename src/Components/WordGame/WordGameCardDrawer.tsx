@@ -7,6 +7,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import EmailIcon from "@mui/icons-material/Email";
 import IconButton from "@mui/material/IconButton";
+import { red } from "@mui/material/colors";
 
 interface Props {
   isDrawerOpen: boolean;
@@ -88,9 +89,9 @@ export const WordGameCardDrawer = (props: Props) => {
       <Typography variant="h5" color="text.primary" pt={2}>
         Contact
       </Typography>
-      <Stack direction="row" p={0} spacing={0}>
+      <Stack direction="row" p={0} spacing={0} color={red[600]}>
         <IconButton
-          color="primary"
+          color="inherit"
           href="https://www.linkedin.com/in/caseyconlin/"
           target="_blank"
           aria-label="LinkedIn"
@@ -98,7 +99,7 @@ export const WordGameCardDrawer = (props: Props) => {
           <LinkedInIcon fontSize="large" />
         </IconButton>
         <IconButton
-          color="primary"
+          color="inherit"
           href="https://github.com/CaseyConlin/"
           target="_blank"
           aria-label="GitHub"
@@ -106,7 +107,7 @@ export const WordGameCardDrawer = (props: Props) => {
           <GitHubIcon fontSize="large" />
         </IconButton>
         <IconButton
-          color="primary"
+          color="inherit"
           href="mailto:casey.conlin@gmail.com"
           target="_blank"
           aria-label="email"

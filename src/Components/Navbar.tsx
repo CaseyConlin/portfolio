@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -9,16 +9,17 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
+import { Link } from "@mui/material";
 import { CCLogo } from "./CCLogo";
-
 import { red } from "@mui/material/colors";
 
-const pages = ["Selected Work", "About", "Contact"];
+const links = [
+  { label: "Selected Work", link: "#works" },
+  { label: "About/Contact", link: "#about" },
+];
 
 export const Navbar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -30,7 +31,7 @@ export const Navbar = () => {
 
   return (
     <AppBar position="static" sx={{ backgroundColor: "#fff", color: "#000" }}>
-      <Container maxWidth="xl">
+      <Container id="home" maxWidth="xl">
         <Toolbar disableGutters>
           <CCLogo
             fontSize="large"
@@ -41,7 +42,7 @@ export const Navbar = () => {
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href="#home"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -82,10 +83,15 @@ export const Navbar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+              {links.map((link) => (
+                <MenuItem
+                  component={Link}
+                  href={link.link}
+                  key={link.label}
+                  onClick={handleCloseNavMenu}
+                >
                   <Typography color={red[500]} textAlign="center">
-                    {page}
+                    {link.label}
                   </Typography>
                 </MenuItem>
               ))}
@@ -119,10 +125,12 @@ export const Navbar = () => {
               display: { xs: "none", md: "flex" },
             }}
           >
-            {pages.map((page) => (
+            {links.map((link) => (
               <Button
-                key={page}
+                key={link.label}
                 onClick={handleCloseNavMenu}
+                component={Link}
+                href={link.link}
                 sx={{
                   my: 2,
                   color: red[600],
@@ -132,7 +140,7 @@ export const Navbar = () => {
                   textTransform: "none",
                 }}
               >
-                {page}
+                {link.label}
               </Button>
             ))}
           </Box>
