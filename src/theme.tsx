@@ -1,6 +1,6 @@
 import { createTheme } from "@mui/material/styles";
+import red from "@mui/material/colors/red";
 
-// A custom theme for this app
 const theme = createTheme({
   typography: {
     fontFamily: [
@@ -12,7 +12,18 @@ const theme = createTheme({
       "VarelaRound-Regular",
       "LucidaGrande",
       "LucidaGrandeBold",
+      "BadScript-Regular",
     ].join(","),
+  },
+  palette: {
+    // primary: {
+    //   main: '#0971f1',
+    //   darker: '#053e85',
+    // },
+    buttonFeature: {
+      main: red[500],
+      contrastText: "#fff",
+    },
   },
 });
 

@@ -18,7 +18,7 @@ export const getNewWord = async (letterCount: number | number[] = 6) => {
     const response = await axios.request(options);
     return {
       word: response.data.word,
-      hint: response.data.results[0].typeOf[0],
+      hint: response.data.results && response.data.results[0].typeOf[0],
     };
   } catch (error) {
     console.error(error);
