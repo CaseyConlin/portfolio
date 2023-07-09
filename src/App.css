@@ -67,6 +67,12 @@
   src: local("LucidaGrandeBold"),
     url(./assets/fonts/LucidaGrandeBold.ttf) format("truetype");
 }
+@font-face {
+  font-family: "BadScript-Regular";
+  font-style: normal;
+  src: local("BadScript-Regular"),
+    url(./assets/fonts/BadScript-Regular.ttf) format("truetype");
+}
 
 body {
   margin: 0;
