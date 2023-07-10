@@ -1,6 +1,7 @@
 import { styled } from "@mui/material/styles";
 import Chip from "@mui/material/Chip";
 import Box from "@mui/material/Box";
+import { motion } from "framer-motion";
 import { TailwindIcon } from "./icons/TailwindIcon";
 import { ReactIcon } from "./icons/ReactIcon";
 import { TypescriptIcon } from "./icons/TypescriptIcon";
@@ -53,8 +54,42 @@ const chipData = [
 ];
 
 export const ChipsArray = (techItems: TechItems) => {
+  const BoxMotion = motion(Box);
+  const ListItemMotion = motion(ListItem);
+
+  const chipAnimationVariants = {
+    initial: {
+      x: "-45vw",
+    },
+    animate: {
+      x: "0vw",
+      transition: {
+        staggerChildren: 0.25,
+        type: "spring",
+        damping: 15,
+        mass: 1,
+        stiffness: 45,
+        staggerDirection: -1,
+      },
+    },
+    exit: {
+      x: "-45rem",
+
+      transition: {
+        staggerChildren: 0.35,
+        staggerDirection: -1,
+        when: "afterChildren",
+        delay: 4,
+        type: "spring",
+        damping: 15,
+        mass: 1,
+        stiffness: 45,
+      },
+    },
+  };
+
   return (
-    <Box
+    <BoxMotion
       sx={{
         display: "flex",
         justifyContent: "start",
@@ -64,16 +99,29 @@ export const ChipsArray = (techItems: TechItems) => {
         m: 0,
       }}
       component="ul"
+      variants={chipAnimationVariants}
+      initial="initial"
+      whileInView="animate"
+      exit="exit"
+      viewport={{ margin: "-50px" }}
     >
       {chipData
         .filter((item) => techItems.techItems.toString().includes(item.name))
         .map((data) => {
           return (
-            <ListItem key={data.name}>
+            <ListItemMotion
+              key={data.name}
+              variants={chipAnimationVariants}
+              exit={{ x: "-45rem" }}
+              transition={{
+                exit: { duration: 5 },
+              }}
+              layout
+            >
               <Chip icon={data.icon} color="buttonFeature" label={data.name} />
-            </ListItem>
+            </ListItemMotion>
           );
         })}
-    </Box>
+    </BoxMotion>
   );
 };

@@ -40,6 +40,8 @@ export const Feature = ({
       sx={{
         backgroundColor: isImageRight ? grey[800] : grey[200],
         color: isImageRight ? "white" : "black",
+        zIndex: 100,
+        position: "relative",
       }}
     >
       <Container sx={{ p: { xs: 1, md: 2 } }} maxWidth="xl">

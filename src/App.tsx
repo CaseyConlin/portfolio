@@ -1,10 +1,10 @@
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme";
-import { Typography } from "@mui/material";
+import { SectionHeading } from "./Components/SectionHeading";
 import { WordGame } from "./Components/WordGame/WordGameContainer";
 import { Navbar } from "./Components/Navbar";
 import { Feature } from "./Components/Feature/Feature";
-import { ContactCard } from "./Components/ContactComponent";
+import { ContactCard } from "./Components/Contact/ContactComponent";
 import { Footer } from "./Components/Footer";
 
 function App() {
@@ -13,17 +13,10 @@ function App() {
       <ThemeProvider theme={theme}>
         <Navbar />
         <WordGame />
-        <Typography
-          variant="h2"
-          mb={3}
-          mt={{ md: 10 }}
-          px={4}
-          fontSize={{ xs: "2xl", sm: "3xl", md: "7xl" }}
-          fontWeight={900}
-          id="works"
-        >
-          Selected Work
-        </Typography>
+        <SectionHeading headingText="About Me" id="about" />
+        <ContactCard />
+
+        <SectionHeading headingText="Selected Work" id="works" />
         <Feature
           title="Parkcrest Design"
           description="Thomsen Painting's website provides a polished digital presence that matches and highlights the business’s extensive work and expertise in interior and exterior painting as well as hardwood furniture and historical property restoration. The site features subtle animation elements custom-developed to match branding coupled with a clean look that allows visitors to easily navigate the site and find the services available from Thomsen Painting. The navigation and site structure also provide SEO benefits as search engine crawlers can easily index and surface the site using keywords and structure in portfolio categories and portfolio projects listed on the site. The site also features an up-to-date feed for Thomsen’s Paintings healthy and engaging Instagram profile. The site uses the WordPress CMS to allow easy editing of the site content and pages."
@@ -163,8 +156,6 @@ function App() {
             techItems: ["React", "CSS", "JavaScript", "PHP", "MySQL"],
           }}
         />
-
-        <ContactCard />
 
         <Footer />
       </ThemeProvider>

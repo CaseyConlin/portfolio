@@ -14,8 +14,8 @@ import { CCLogo } from "./CCLogo";
 import { red } from "@mui/material/colors";
 
 const links = [
-  { label: "Selected Work", link: "#works" },
   { label: "About/Contact", link: "#about" },
+  { label: "Selected Work", link: "#works" },
 ];
 
 export const Navbar = () => {
