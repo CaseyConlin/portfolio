@@ -1,17 +1,16 @@
+import { motion } from "framer-motion";
 import Box from "@mui/material/Box";
-import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
 import Masonry from "@mui/lab/Masonry";
 import { MasonryPersonalCard } from "./MasonryPersonalSubCard";
 import { MasonryContactCard } from "./MasonryContactSubCard";
 import Photo from "/conlin.jpg";
 import Photo2 from "/dogs.png";
-import Photo3 from "/bike.png";
+import { cardAnimationVariants } from "./CardAnimation";
 
 const cards = [
   <MasonryPersonalCard height={275} key="mpc" />,
 
-  <img
+  <motion.img
     key="image1"
     src={`${Photo}?w=162&auto=format`}
     alt={Photo}
@@ -26,11 +25,14 @@ const cards = [
       boxShadow:
         "0px 5px 5px -3px rgba(0,0,0,0.2), 0px 8px 10px 1px rgba(0,0,0,0.14), 0px 3px 14px 2px rgba(0,0,0,0.12)",
     }}
+    variants={cardAnimationVariants}
+    initial="initial"
+    whileInView="animate"
   />,
   <MasonryContactCard height={262} key="mcc" />,
 
-  <img
-    key="image1"
+  <motion.img
+    key="image2"
     src={`${Photo2}?w=162&auto=format`}
     alt={Photo2}
     loading="lazy"
@@ -43,22 +45,10 @@ const cards = [
       boxShadow:
         "0px 5px 5px -3px rgba(0,0,0,0.2), 0px 8px 10px 1px rgba(0,0,0,0.14), 0px 3px 14px 2px rgba(0,0,0,0.12)",
     }}
+    variants={cardAnimationVariants}
+    initial="initial"
+    whileInView="animate"
   />,
-
-  // <img
-  //   key="image1"
-  //   src={`${Photo3}?w=162&auto=format`}
-  //   alt={Photo3}
-  //   loading="lazy"
-  //   style={{
-  //     borderRadius: 4,
-  //     display: "block",
-  //     width: "45%",
-  //     transform: "rotate(1deg)",
-  //     boxShadow:
-  //       "0px 5px 5px -3px rgba(0,0,0,0.2), 0px 8px 10px 1px rgba(0,0,0,0.14), 0px 3px 14px 2px rgba(0,0,0,0.12)",
-  //   }}
-  // />,
 ];
 
 export const ContactMasonry = () => {

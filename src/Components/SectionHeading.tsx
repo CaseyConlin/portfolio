@@ -4,13 +4,14 @@ import { motion } from "framer-motion";
 export interface Props {
   headingText: string;
   id: string;
+  marginOffset: number;
 }
 
-export const SectionHeading = ({ headingText, id }: Props) => {
+export const SectionHeading = ({ headingText, id, marginOffset }: Props) => {
   return (
     <Typography
       variant="h2"
-      mb={-6.5}
+      mb={marginOffset}
       pb={0}
       pt={{ md: 20 }}
       px={4}

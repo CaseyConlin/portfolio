@@ -2,7 +2,7 @@
 
 
 <g transform="matrix(0.16 0 0 0.16 12 12)" >
-<g style="opacity: .2" >
+<g style="opacity: .3" >
 <g transform="matrix(1 0 0 1 0 7)" >
 <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(199,215,226); fill-rule: nonzero; opacity: 1;" transform=" translate(-64, -71)" d="M 64 29 C 41.08018288202207 29 22.5 47.80404050710668 22.5 71 C 22.5 94.19595949289332 41.08018288202207 113 64 113 C 86.91981711797793 113 105.5 94.19595949289332 105.5 71 C 105.5 47.80404050710668 86.91981711797793 29 64 29 Z" stroke-linecap="round" />
 </g>
