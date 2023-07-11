@@ -75,19 +75,22 @@ export const WordGameAlert = () => {
   useEffect(() => {
     if (secretWord && (rightCount === secretWord.length || errorCount === 0)) {
       setIsAlert(true);
+      console.log("ho");
+
       if (errorCount === 0) {
         setAlertLose();
       } else {
         setAlertWin();
       }
     }
-  }, [secretWord, errorCount, rightCount, guessedLetters]);
+  }, [errorCount, rightCount]);
 
   useEffect(() => {
     if (guessedLetters.length === 0) {
+      console.log("hey");
       setIsAlert(false);
     }
-  }, [secretWord, guessedLetters]);
+  }, [guessedLetters]);
 
   return (
     <Box sx={{ overflow: "hidden" }}>
@@ -99,8 +102,7 @@ export const WordGameAlert = () => {
         }}
         severity={alertSeverity}
         variants={alertAnimationVariant}
-        initial="initial"
-        animate={isAlert && "animate"}
+        animate="animate"
         exit="exit"
       >
         {alertMessage}
