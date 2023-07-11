@@ -11,6 +11,7 @@ import { SassIcon } from "./icons/SassIcon";
 import { WordpressIcon } from "./icons/WordpressIcon";
 import { BootstrapIcon } from "./icons/BoostrapIcon";
 import { MongoDBIcon } from "./icons/MongoDBIcon";
+import { MySqlIcon } from "./icons/MySQL";
 import { ExpressIcon } from "./icons/ExpressIcon";
 import { ReactSpringIcon } from "./icons/ReactSpringIcon";
 import { FramerIcon } from "./icons/FramerIcon";
@@ -23,7 +24,6 @@ import { CssIcon } from "./icons/CssIcon";
 import { JestIcon } from "./icons/JestIcon";
 import { FigmaIcon } from "./icons/FigmaIcon";
 import { DigitalOceanIcon } from "./icons/DigitalOceanIcon";
-import { MySqlIcon } from "./icons/MySQL";
 const ListItem = styled("li")(({ theme }) => ({
   margin: theme.spacing(0.5),
 }));
@@ -40,13 +40,13 @@ const chipData = [
   { name: "Bootstrap", icon: <BootstrapIcon /> },
   { name: "Sass", icon: <SassIcon /> },
   { name: "CSS", icon: <CssIcon /> },
-  { name: "WordPress", icon: <WordpressIcon /> },
   { name: "Node.js", icon: <NodejsIcon /> },
   { name: "MongoDB", icon: <MongoDBIcon /> },
   { name: "MySQL", icon: <MySqlIcon /> },
   { name: "Express.js", icon: <ExpressIcon /> },
   { name: "React Spring", icon: <ReactSpringIcon /> },
   { name: "Framer Motion", icon: <FramerIcon /> },
+  { name: "WordPress", icon: <WordpressIcon /> },
   { name: "API", icon: <ApiIcon /> },
   { name: "Jest", icon: <JestIcon /> },
   { name: "Figma", icon: <FigmaIcon /> },

@@ -5,6 +5,8 @@ import Typography from "@mui/material/Typography";
 import { ContactMasonry } from "./ContactMasonry";
 import Planet from "/images/planet-moon.svg";
 import Ufo from "/images/ufo.svg";
+import Backgroud from "/images/elipse.svg";
+
 import { grey } from "@mui/material/colors";
 export const ContactCard = () => {
   return (
@@ -14,10 +16,10 @@ export const ContactCard = () => {
         zIndex: 100,
         position: "relative",
         backgroundColor: grey[100],
-        backgroundImage: `url(${Planet}), url(${Ufo})`,
+        backgroundImage: `url(${Planet}), url(${Ufo}), url(${Backgroud})`,
         backgroundRepeat: "no-repeat",
-        backgroundSize: "500px, 150px",
-        backgroundPosition: { md: "0% 250%, 40% 50%" },
+        backgroundSize: "500px, 150px, 100%",
+        backgroundPosition: { md: "bottom left, center , bottom right" },
       }}
     >
       <Container maxWidth="lg">
@@ -36,7 +38,7 @@ export const ContactCard = () => {
               working with libraries and nonprofits. I've worked in and managed
               remote and in-person teams to create really positive environments
               where we can support each in tackling large workloads and have fun
-              while doing it. In addition to my own web development business,{" "}
+              while we do it. In addition to my own web development business,{" "}
               <a href="https://www.parkcrestdesign.com/" target="_blank">
                 Parkcrest Design
               </a>

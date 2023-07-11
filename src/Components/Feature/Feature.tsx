@@ -88,6 +88,7 @@ export const Feature = ({
                     endIcon={<GitHub fontSize="small" />}
                     sx={{ fontWeight: 600, textTransform: "none" }}
                     href={repo}
+                    target="_blank"
                   >
                     See the Repo
                   </Button>

@@ -26,6 +26,7 @@ export const SectionHeading = ({ headingText, id, marginOffset }: Props) => {
         whileInView={{ y: 0 }}
         transition={{ delay: 0.5 }}
         viewport={{ margin: "-50px" }}
+        id={id}
       >
         {headingText}
       </motion.div>

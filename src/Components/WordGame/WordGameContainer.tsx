@@ -3,7 +3,6 @@
 import Grid from "@mui/material/Unstable_Grid2";
 import "../../App.css";
 import styles from "./WordGameContainer.module.css";
-
 import { RocketContainer } from "./RocketContainer";
 import { WordGameProvider } from "../../WordGameContext/WordGameContext";
 import { WordGameCard } from "./WordGameCard";
@@ -19,6 +18,7 @@ export const WordGame = () => {
           p={{ xs: 0, lg: 3 }}
           flexDirection={{ xs: "column", sm: "row", lg: "row" }}
           justifyContent={"flex-end"}
+          id="liftoff"
         >
           <Grid
             container

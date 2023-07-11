@@ -1,5 +1,4 @@
 import { useTheme } from "@mui/material/styles";
-import { motion } from "framer-motion";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -12,17 +11,15 @@ import ConstructionIcon from "@mui/icons-material/Construction";
 import PedalBikeIcon from "@mui/icons-material/PedalBike";
 import PetsIcon from "@mui/icons-material/Pets";
 import { red } from "@mui/material/colors";
-import { cardAnimationVariants } from "./CardAnimation";
 
 export interface Props {
   height: number;
 }
 export const MasonryPersonalCard = ({ height }: Props) => {
   const theme = useTheme();
-  const CardMotion = motion(Card);
 
   return (
-    <CardMotion
+    <Card
       raised
       sx={{
         display: "flex",
@@ -33,9 +30,6 @@ export const MasonryPersonalCard = ({ height }: Props) => {
         height: `${height.toString()}px`,
         transform: "rotate(2deg)",
       }}
-      variants={cardAnimationVariants}
-      initial="initial"
-      whileInView="animate"
     >
       <CardContent>
         <Typography id="about" fontWeight={900} variant="h4" color={red[500]}>
@@ -70,6 +64,6 @@ export const MasonryPersonalCard = ({ height }: Props) => {
           </ListItem>
         </List>
       </CardContent>
-    </CardMotion>
+    </Card>
   );
 };

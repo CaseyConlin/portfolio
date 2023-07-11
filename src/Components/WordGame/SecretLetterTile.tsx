@@ -53,6 +53,7 @@ export const SecretLetterTile = (props: Props) => {
       }}
       xs={1}
       p={{ xs: 2.5, md: 3.5 }}
+      pt={{ xs: 0.5, md: 1 }}
     >
       <Box
         sx={{

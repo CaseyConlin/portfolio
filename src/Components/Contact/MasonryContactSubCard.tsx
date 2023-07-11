@@ -1,5 +1,4 @@
 import { useTheme } from "@mui/material/styles";
-import { motion } from "framer-motion";
 import CardActions from "@mui/material/CardActions";
 import Stack from "@mui/material/Stack";
 import Card from "@mui/material/Card";
@@ -12,17 +11,15 @@ import GitHub from "@mui/icons-material/GitHub";
 import LinkedIn from "@mui/icons-material/LinkedIn";
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 import { red } from "@mui/material/colors";
-import { cardAnimationVariants } from "./CardAnimation";
 
 export interface Props {
   height: number;
 }
 export const MasonryContactCard = ({ height }: Props) => {
   const theme = useTheme();
-  const CardMotion = motion(Card);
 
   return (
-    <CardMotion
+    <Card
       raised
       sx={{
         display: "flex",
@@ -32,9 +29,6 @@ export const MasonryContactCard = ({ height }: Props) => {
         height: `${height.toString()}px`,
         transform: "rotate(-1deg)",
       }}
-      variants={cardAnimationVariants}
-      initial="initial"
-      whileInView="animate"
     >
       <CardContent>
         <Typography id="about" fontWeight={900} variant="h4">
@@ -97,6 +91,6 @@ export const MasonryContactCard = ({ height }: Props) => {
           </Button>
         </Stack>
       </CardActions>
-    </CardMotion>
+    </Card>
   );
 };

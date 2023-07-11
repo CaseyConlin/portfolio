@@ -4,7 +4,7 @@ import Masonry from "@mui/lab/Masonry";
 import { MasonryPersonalCard } from "./MasonryPersonalSubCard";
 import { MasonryContactCard } from "./MasonryContactSubCard";
 import Photo from "/conlin.jpg";
-import Photo2 from "/dogs.png";
+import Photo2 from "/dogs.webp";
 import { cardAnimationVariants } from "./CardAnimation";
 
 const cards = [
@@ -29,6 +29,7 @@ const cards = [
     initial="initial"
     whileInView="animate"
   />,
+
   <MasonryContactCard height={262} key="mcc" />,
 
   <motion.img
@@ -51,12 +52,34 @@ const cards = [
   />,
 ];
 
+const chipAnimationVariants = {
+  initial: { opacity: 0, scale: 0.5 },
+  animate: {
+    staggerChildren: 0.25,
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.8,
+      delay: 0.5,
+      ease: [0, 0.71, 0.2, 1.01],
+    },
+  },
+};
+
+const MasonryMotion = motion(Masonry);
 export const ContactMasonry = () => {
   return (
     <Box sx={{ width: { xs: "100%" }, minHeight: 393 }}>
-      <Masonry columns={2} spacing={2}>
+      <MasonryMotion
+        columns={2}
+        spacing={2}
+        variants={chipAnimationVariants}
+        initial="initial"
+        whileInView="animate"
+        viewport={{ margin: "-50px" }}
+      >
         {cards.map((card) => card)}
-      </Masonry>
+      </MasonryMotion>
     </Box>
   );
 };
