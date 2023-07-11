@@ -10,6 +10,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import Box from "@mui/material/Box";
 import "../../App.css";
 import VideogameAssetIcon from "@mui/icons-material/VideogameAsset";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { KeyboardContainer } from "./KeyboardContainer";
 import { SecretWordContainer } from "./SecretWordContainer";
 import { ResetButton } from "./ResetButton";
@@ -19,7 +20,6 @@ import { WordGameCardDrawer } from "./WordGameCardDrawer";
 import { Hint } from "./Hint";
 import { grey } from "@mui/material/colors";
 import { red } from "@mui/material/colors";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 export const WordGameCard = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -54,7 +54,7 @@ export const WordGameCard = () => {
           color: "#fff",
           bgcolor: red[400],
           p: 2,
-          mb: 5,
+          mb: 1,
           fontSize: "2.5rem",
         }}
         avatar={
@@ -73,6 +73,7 @@ export const WordGameCard = () => {
         title="LIFT_FF"
         subheader="Guess the letters in the word below to build & launch our rocket before the other team!"
       />
+
       <Box sx={{ p: { xs: 0 }, mx: -2, justifyContent: "center" }}>
         <SecretWordContainer />
         <Hint />

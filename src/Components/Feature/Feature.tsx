@@ -40,15 +40,17 @@ export const Feature = ({
       sx={{
         backgroundColor: isImageRight ? grey[800] : grey[200],
         color: isImageRight ? "white" : "black",
+        zIndex: 100,
+        position: "relative",
       }}
     >
       <Container sx={{ p: { xs: 1, md: 2 } }} maxWidth="xl">
-        <Grid container py={3}>
+        <Grid container py={{ xs: 1, md: 5 }}>
           <Grid xs={12} px={{ xs: 1, md: 2 }}>
             <Typography
               variant="h3"
               display="block"
-              fontSize={{ xs: "4xl", sm: "5xl", md: "6xl" }}
+              fontSize={{ xs: "3xl", sm: "4xl", md: "5xl" }}
               fontWeight={800}
             >
               {title}
@@ -86,6 +88,7 @@ export const Feature = ({
                     endIcon={<GitHub fontSize="small" />}
                     sx={{ fontWeight: 600, textTransform: "none" }}
                     href={repo}
+                    target="_blank"
                   >
                     See the Repo
                   </Button>

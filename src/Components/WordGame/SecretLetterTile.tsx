@@ -52,7 +52,8 @@ export const SecretLetterTile = (props: Props) => {
         aspectRatio: 1 / 1,
       }}
       xs={1}
-      p={{ xs: 2.5, md: 3.5 }}
+      px={{ xs: 2.5, md: 3.5 }}
+      py={{ xs: 0.25, md: 1 }}
     >
       <Box
         sx={{

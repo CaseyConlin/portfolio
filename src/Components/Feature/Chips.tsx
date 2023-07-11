@@ -1,6 +1,7 @@
 import { styled } from "@mui/material/styles";
 import Chip from "@mui/material/Chip";
 import Box from "@mui/material/Box";
+import { motion } from "framer-motion";
 import { TailwindIcon } from "./icons/TailwindIcon";
 import { ReactIcon } from "./icons/ReactIcon";
 import { TypescriptIcon } from "./icons/TypescriptIcon";
@@ -10,6 +11,7 @@ import { SassIcon } from "./icons/SassIcon";
 import { WordpressIcon } from "./icons/WordpressIcon";
 import { BootstrapIcon } from "./icons/BoostrapIcon";
 import { MongoDBIcon } from "./icons/MongoDBIcon";
+import { MySqlIcon } from "./icons/MySQL";
 import { ExpressIcon } from "./icons/ExpressIcon";
 import { ReactSpringIcon } from "./icons/ReactSpringIcon";
 import { FramerIcon } from "./icons/FramerIcon";
@@ -22,7 +24,6 @@ import { CssIcon } from "./icons/CssIcon";
 import { JestIcon } from "./icons/JestIcon";
 import { FigmaIcon } from "./icons/FigmaIcon";
 import { DigitalOceanIcon } from "./icons/DigitalOceanIcon";
-import { MySqlIcon } from "./icons/MySQL";
 const ListItem = styled("li")(({ theme }) => ({
   margin: theme.spacing(0.5),
 }));
@@ -39,13 +40,13 @@ const chipData = [
   { name: "Bootstrap", icon: <BootstrapIcon /> },
   { name: "Sass", icon: <SassIcon /> },
   { name: "CSS", icon: <CssIcon /> },
-  { name: "WordPress", icon: <WordpressIcon /> },
   { name: "Node.js", icon: <NodejsIcon /> },
   { name: "MongoDB", icon: <MongoDBIcon /> },
   { name: "MySQL", icon: <MySqlIcon /> },
   { name: "Express.js", icon: <ExpressIcon /> },
   { name: "React Spring", icon: <ReactSpringIcon /> },
   { name: "Framer Motion", icon: <FramerIcon /> },
+  { name: "WordPress", icon: <WordpressIcon /> },
   { name: "API", icon: <ApiIcon /> },
   { name: "Jest", icon: <JestIcon /> },
   { name: "Figma", icon: <FigmaIcon /> },
@@ -53,8 +54,42 @@ const chipData = [
 ];
 
 export const ChipsArray = (techItems: TechItems) => {
+  const BoxMotion = motion(Box);
+  const ListItemMotion = motion(ListItem);
+
+  const chipAnimationVariants = {
+    initial: {
+      x: "-45vw",
+    },
+    animate: {
+      x: "0vw",
+      transition: {
+        staggerChildren: 0.25,
+        type: "spring",
+        damping: 15,
+        mass: 1,
+        stiffness: 45,
+        staggerDirection: -1,
+      },
+    },
+    exit: {
+      x: "-45rem",
+
+      transition: {
+        staggerChildren: 0.35,
+        staggerDirection: -1,
+        when: "afterChildren",
+        delay: 4,
+        type: "spring",
+        damping: 15,
+        mass: 1,
+        stiffness: 45,
+      },
+    },
+  };
+
   return (
-    <Box
+    <BoxMotion
       sx={{
         display: "flex",
         justifyContent: "start",
@@ -64,16 +99,29 @@ export const ChipsArray = (techItems: TechItems) => {
         m: 0,
       }}
       component="ul"
+      variants={chipAnimationVariants}
+      initial="initial"
+      whileInView="animate"
+      exit="exit"
+      viewport={{ margin: "-50px" }}
     >
       {chipData
         .filter((item) => techItems.techItems.toString().includes(item.name))
         .map((data) => {
           return (
-            <ListItem key={data.name}>
+            <ListItemMotion
+              key={data.name}
+              variants={chipAnimationVariants}
+              exit={{ x: "-45rem" }}
+              transition={{
+                exit: { duration: 5 },
+              }}
+              layout
+            >
               <Chip icon={data.icon} color="buttonFeature" label={data.name} />
-            </ListItem>
+            </ListItemMotion>
           );
         })}
-    </Box>
+    </BoxMotion>
   );
 };
