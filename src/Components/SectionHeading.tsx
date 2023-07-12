@@ -11,11 +11,11 @@ export const SectionHeading = ({ headingText, id, marginOffset }: Props) => {
   return (
     <Typography
       variant="h2"
-      mb={marginOffset}
+      mb={{ xs: marginOffset + 1.5, md: marginOffset + 1, lg: marginOffset }}
       pb={0}
-      pt={{ md: 20 }}
-      px={4}
-      fontSize={{ xs: "2xl", sm: "3xl", md: "6rem" }}
+      pt={{ xs: 10, md: 20 }}
+      px={{ xs: 3, md: 4 }}
+      fontSize={{ xs: "2.875rem", sm: "4rem", md: "6rem" }}
       fontWeight={900}
       id={id}
       sx={{ backgroundColor: "#000", color: "white" }}

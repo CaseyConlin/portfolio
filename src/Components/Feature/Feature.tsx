@@ -5,6 +5,8 @@ import Typography from "@mui/material/Typography";
 import { NewTabIcon } from "./NewTabIcon";
 import Grid from "@mui/material/Unstable_Grid2";
 import Container from "@mui/material/Container";
+import CardMedia from "@mui/material/CardMedia";
+
 import { GitHub } from "@mui/icons-material";
 import { ChipsArray } from "./Chips";
 import { Stack } from "@mui/material";
@@ -50,7 +52,7 @@ export const Feature = ({
             <Typography
               variant="h3"
               display="block"
-              fontSize={{ xs: "3xl", sm: "4xl", md: "5xl" }}
+              fontSize={{ xs: "2rem", sm: "4xl", md: "5xl" }}
               fontWeight={800}
             >
               {title}
@@ -62,7 +64,7 @@ export const Feature = ({
             xs={12}
             md={6}
             px={{ xs: 1, md: 2 }}
-            order={{ md: isImageRight ? 1 : 0 }}
+            order={{ xs: 1, md: isImageRight ? 1 : 0 }}
           >
             <Box textAlign={"left"}>
               <Typography fontSize="1.125rem" mt={2} mb={3}>
@@ -97,12 +99,12 @@ export const Feature = ({
             </Box>
           </Grid>
           <Grid container xs={12} md={6} p={{ xs: 1, md: 2 }}>
-            <Box>
-              <video
-                style={{
-                  maxWidth: "100%",
-                  borderRadius: 5,
-                  boxShadow: "-3px 2px 10px #000000bc, -5px 3px 5px #00000094",
+            <Box sx={{ display: "grid", alignItems: "center" }}>
+              <CardMedia
+                component="video"
+                sx={{
+                  width: { xs: "100%", sm: "75%", md: "100%" },
+                  mx: "auto",
                 }}
                 autoPlay
                 playsInline

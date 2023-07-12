@@ -19,12 +19,20 @@ export const ContactCard = () => {
         backgroundImage: `url(${Planet}), url(${Ufo}), url(${Backgroud})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "500px, 150px, 100%",
-        backgroundPosition: { md: "bottom left, center , bottom right" },
+        backgroundPosition: { md: "bottom left, center, bottom" },
       }}
     >
       <Container maxWidth="lg">
         <Grid container>
-          <Grid container p={1} pr={5} pt={5} xs={12} md={6}>
+          <Grid
+            container
+            p={1}
+            pb={4}
+            pr={{ md: 5 }}
+            pt={{ md: 5 }}
+            xs={12}
+            md={6}
+          >
             <Typography
               variant="subtitle1"
               color="text.primary"
