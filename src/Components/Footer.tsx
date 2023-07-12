@@ -26,14 +26,20 @@ export const Footer = () => {
     >
       <Container maxWidth="xl" sx={{ marginTop: 5 }}>
         <Box>
-          <Toolbar sx={{ justifyContent: "center" }}>
+          <Toolbar
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              my: 2,
+            }}
+          >
             {links.map((link) => (
               <Button
                 key={link.label}
                 component={Link}
                 href={link.link}
                 sx={{
-                  my: 2,
                   color: "#fff",
                   display: "block",
                   fontSize: "1.25rem",
@@ -80,75 +86,5 @@ export const Footer = () => {
         </Grid>
       </Container>
     </Box>
-    // <Box
-    //   component="footer"
-    //   sx={{
-    //     backgroundColor: grey[900],
-    //     color: "#fff",
-    //     p: 6,
-    //   }}
-    // >
-    //   <Container maxWidth="lg" sx={{ marginTop: 5 }}>
-    //     <Grid container justifyContent="center">
-    //       <BottomNavigation
-    //         showLabels
-    //         component="nav"
-    //         sx={{
-    //           backgroundColor: "transparent",
-    //           color: "#fff",
-    //           width: "75%",
-    //         }}
-
-    //         //   value={value}
-    //         //   onChange={(event, newValue) => {
-    //         //     setValue(newValue);
-    //         //   }}
-    //       >
-    //         <BottomNavigationAction label="Work" component="a" />
-
-    //         <BottomNavigationAction label="About" />
-    //       </BottomNavigation>
-
-    //       <Grid
-    //         item
-    //         xs={12}
-    //         my={5}
-    //         justifyContent={"center"}
-    //         textAlign="center"
-    //       >
-    //         <Typography
-    //           variant="h5"
-    //           textAlign="center"
-    //           fontWeight="800"
-    //           sx={{ marginBottom: 1 }}
-    //         >
-    //           Connect
-    //         </Typography>
-    //         <Button
-    //           href="https://github.com/CaseyConlin/"
-    //           color="inherit"
-    //           target="_blank"
-    //         >
-    //           <GitHub fontSize="large" />
-    //         </Button>
-    //         <Button
-    //           href="https://www.linkedin.com/in/caseyconlin/"
-    //           color="inherit"
-    //           sx={{ pl: 1, pr: 1 }}
-    //           target="_blank"
-    //         >
-    //           <LinkedIn fontSize="large" />
-    //         </Button>
-    //         <Button
-    //           href="mailto:casey.conlin@gmail.com"
-    //           color="inherit"
-    //           target="_blank"
-    //         >
-    //           <Email fontSize="large" />
-    //         </Button>
-    //       </Grid>
-    //     </Grid>
-    //   </Container>
-    // </Box>
   );
 };
