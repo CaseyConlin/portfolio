@@ -89,6 +89,7 @@ export const Navbar = () => {
                   href={link.link}
                   key={link.label}
                   onClick={handleCloseNavMenu}
+                  data-testid={link.label + "testId"}
                 >
                   <Typography color={red[500]} textAlign="center">
                     {link.label}
