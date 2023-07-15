@@ -10,9 +10,14 @@ import { cardAnimationVariants } from "./CardAnimation";
 const cards = [
   <MasonryPersonalCard height={275} key="mpc" />,
 
-  <Box sx={{ width: { xs: "50%", md: "10%" }, transform: "rotate(1deg)" }}>
+  <Box
+    key={"image1"}
+    sx={{
+      width: { xs: "50%", md: "10%" },
+      transform: "rotate(1deg)",
+    }}
+  >
     <motion.img
-      key="image1"
       src={`${Photo}?w=162&auto=format`}
       alt={Photo}
       loading="lazy"
@@ -33,9 +38,14 @@ const cards = [
   </Box>,
 
   <MasonryContactCard height={262} key="mcc" />,
-  <Box sx={{ width: { xs: "50%", md: "10%" }, transform: "rotate(1deg)" }}>
+  <Box
+    key={"image2"}
+    sx={{
+      width: { xs: "50%", md: "10%" },
+      transform: "rotate(1deg)",
+    }}
+  >
     <motion.img
-      key="image2"
       src={`${Photo2}?w=162&auto=format`}
       alt={Photo2}
       loading="lazy"

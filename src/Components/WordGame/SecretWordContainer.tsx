@@ -16,13 +16,18 @@ export const SecretWordContainer = () => {
     "T",
     "O",
     "F",
+    "F",
   ]);
 
-  const { secretWord, setSecretWord, numberOfLetters } = useGameContext();
+  const { secretWord, setSecretWord, numberOfLetters, setApiError } =
+    useGameContext();
 
   useEffect(() => {
     getNewWord(numberOfLetters).then((response) => {
-      response && setSecretWord(response.word, response.hint);
+      if (response && response.word) {
+        setSecretWord(response.word, response.hint);
+      }
+      if (response && response.apiError) setApiError(response.apiError);
     });
   }, []);
 

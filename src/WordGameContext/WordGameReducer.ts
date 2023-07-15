@@ -1,7 +1,8 @@
 export const initialState = {
-  numberOfLetters: 6,
+  numberOfLetters: 7,
   errorCount: 5,
-  secretWord: "",
+  secretWord: "liftoff",
+  apiError: "",
   hint: "",
   rightCount: 0,
   guessedLetter: "",
@@ -9,6 +10,9 @@ export const initialState = {
   setSecretWord: (word: string, hint: string) => {
     word;
     hint;
+  },
+  setApiError: (apiError: string) => {
+    apiError;
   },
   setNumberOfLetters: (number: number | number[]) => {
     number;
@@ -26,10 +30,12 @@ export type GameContextType = {
   errorCount: number;
   rightCount: number;
   secretWord: string;
+  apiError: string;
   hint: string;
   guessedLetter: string;
   guessedLetters: string[];
   setSecretWord: (word: string, hint: string) => any;
+  setApiError: (apiError: string) => any;
   setNumberOfLetters: (number: number | number[]) => void;
   addGuessedLetter: (letter: string) => void;
   resetScores: () => void;
@@ -49,6 +55,11 @@ const gameContextReducer = (state: any, action: any) => {
         ...state,
         secretWord: payload.secretWord,
         hint: payload.hint,
+      };
+    case "SET_API_ERROR":
+      return {
+        ...state,
+        apiError: payload.apiError,
       };
 
     case "RESET_SCORES":

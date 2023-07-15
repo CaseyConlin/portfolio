@@ -54,13 +54,20 @@ export const ResetButton = () => {
     errorCount,
     rightCount,
     guessedLetters,
+    setApiError,
   } = useGameContext();
 
   const clickHandler = () => {
     resetScores();
 
     getNewWord(numberOfLetters).then((response) => {
-      response && setSecretWord(response.word, response.hint);
+      if (response && response.word) {
+        setApiError("");
+        setSecretWord(response.word, response.hint);
+      }
+      if (response && response.apiError) {
+        setApiError(response.apiError);
+      }
     });
   };
 

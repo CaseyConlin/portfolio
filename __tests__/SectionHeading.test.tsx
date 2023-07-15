@@ -1,6 +1,6 @@
 import React from "react";
 import { SectionHeading } from "../src/Components/SectionHeading";
-import { it, describe, beforeAll, expect } from "vitest";
+import { it, describe, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import "intersection-observer";
 

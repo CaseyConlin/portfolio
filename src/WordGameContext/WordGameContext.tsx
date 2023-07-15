@@ -48,6 +48,15 @@ export const WordGameProvider = ({ children }: Props) => {
     });
   };
 
+  const setApiError = (newApiError: string) => {
+    dispatch({
+      type: "SET_API_ERROR",
+      payload: {
+        apiError: newApiError,
+      },
+    });
+  };
+
   const resetScores = () => {
     dispatch({
       type: "RESET_SCORES",
@@ -86,16 +95,18 @@ export const WordGameProvider = ({ children }: Props) => {
       errorCount: state.errorCount,
       rightCount: state.rightCount,
       secretWord: state.secretWord,
+      apiError: state.apiError,
       hint: state.hint,
       guessedLetter: state.guessedLetter,
       guessedLetters: state.guessedLetters,
       setSecretWord,
+      setApiError,
       setNumberOfLetters,
       numberOfLetters: state.numberOfLetters,
       addGuessedLetter,
       resetScores,
     }),
-    [state.guessedLetters, addGuessedLetter]
+    [state.guessedLetters, addGuessedLetter, setApiError]
   );
   return (
     <WordGameContext.Provider value={memoedValue}>

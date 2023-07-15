@@ -52,14 +52,30 @@ export const WordGameAlert = () => {
     "success"
   );
 
-  const { guessedLetters, rightCount, errorCount, secretWord } =
-    useGameContext();
+  const {
+    guessedLetters,
+    rightCount,
+    errorCount,
+    secretWord,
+    setApiError,
+    apiError,
+  } = useGameContext();
 
   const AlertMotion = motion(Alert);
 
+  const errorMessage = (errMessage: string) => {
+    if (errMessage !== "") {
+      setIsAlert(true);
+      setAlertMessage(errMessage);
+      setAlertServerity("error");
+    }
+    if (errMessage === "") {
+      setIsAlert(false);
+      setAlertMessage(errMessage);
+      setAlertServerity("success");
+    }
+  };
   const setAlertWin = () => {
-    console.log("hey");
-    console.log(Math.floor(Math.random() * (winMessages.length - 0) + 0));
     setAlertMessage(
       winMessages[Math.floor(Math.random() * (winMessages.length - 0) + 0)]
     );
@@ -75,7 +91,6 @@ export const WordGameAlert = () => {
   useEffect(() => {
     if (secretWord && (rightCount === secretWord.length || errorCount === 0)) {
       setIsAlert(true);
-      console.log("ho");
 
       if (errorCount === 0) {
         setAlertLose();
@@ -87,10 +102,13 @@ export const WordGameAlert = () => {
 
   useEffect(() => {
     if (guessedLetters.length === 0) {
-      console.log("hey");
       setIsAlert(false);
     }
   }, [guessedLetters]);
+
+  useEffect(() => {
+    errorMessage(apiError);
+  }, [apiError, setApiError]);
 
   return (
     <Box sx={{ overflow: "hidden" }}>
