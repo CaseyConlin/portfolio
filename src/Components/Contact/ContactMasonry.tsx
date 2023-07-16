@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Masonry from "@mui/lab/Masonry";
 import { MasonryPersonalCard } from "./MasonryPersonalSubCard";
 import { MasonryContactCard } from "./MasonryContactSubCard";
-import Photo from "/conlin.jpg";
+import Photo from "/conlin.webp";
 import Photo2 from "/dogs.webp";
 import { cardAnimationVariants } from "./CardAnimation";
 
