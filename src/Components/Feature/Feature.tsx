@@ -6,11 +6,11 @@ import { NewTabIcon } from "./NewTabIcon";
 import Grid from "@mui/material/Unstable_Grid2";
 import Container from "@mui/material/Container";
 import CardMedia from "@mui/material/CardMedia";
-
 import { GitHub } from "@mui/icons-material";
 import { ChipsArray } from "./Chips";
 import { Stack } from "@mui/material";
 import { grey } from "@mui/material/colors";
+import { red } from "@mui/material/colors/";
 
 export interface Props {
   decorative?: string;
@@ -34,6 +34,7 @@ export const Feature = ({
   techItems,
 }: Props) => {
   const videoEl = useRef(null);
+  console.log(techItems);
 
   return (
     <Box
@@ -41,7 +42,7 @@ export const Feature = ({
       my={4}
       sx={{
         backgroundColor: isImageRight ? grey[800] : grey[200],
-        color: isImageRight ? "white" : "black",
+        color: isImageRight ? "#fff" : "#000",
         zIndex: 100,
         position: "relative",
       }}
@@ -67,16 +68,25 @@ export const Feature = ({
             order={{ xs: 1, md: isImageRight ? 1 : 0 }}
           >
             <Box textAlign={"left"}>
-              <Typography fontSize="1.125rem" mt={2} mb={3}>
+              <Typography
+                fontSize="1.125rem"
+                mt={2}
+                mb={3}
+                data-testid={"test-description"}
+              >
                 {description}
               </Typography>
               <Stack direction="row" spacing={2}>
                 <Button
                   size="large"
                   variant="contained"
-                  color="buttonFeature"
                   endIcon={<NewTabIcon fontSize="small" />}
-                  sx={{ fontWeight: 600, textTransform: "none" }}
+                  sx={{
+                    fontWeight: 600,
+                    textTransform: "none",
+                    color: "#fff",
+                    backgroundColor: red[500],
+                  }}
                   href={url}
                   target="_blank"
                 >
@@ -86,9 +96,19 @@ export const Feature = ({
                   <Button
                     size="large"
                     variant="outlined"
-                    color={isImageRight ? "inherit" : "buttonFeature"}
+                    // color={isImageRight ? "inherit" : "buttonFeature"}
                     endIcon={<GitHub fontSize="small" />}
-                    sx={{ fontWeight: 600, textTransform: "none" }}
+                    sx={{
+                      fontWeight: 600,
+                      textTransform: "none",
+                      borderColor: isImageRight ? "inherit" : red[500],
+                      backgroundColor: isImageRight ? "inherit" : "",
+                      color: isImageRight ? "inherit" : "red",
+                      "&:hover": {
+                        borderColor: red[900],
+                        color: isImageRight ? red["A200"] : "inherit",
+                      },
+                    }}
                     href={repo}
                     target="_blank"
                   >

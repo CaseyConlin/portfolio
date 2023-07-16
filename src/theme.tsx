@@ -16,13 +16,9 @@ const theme = createTheme({
     ].join(","),
   },
   palette: {
-    // primary: {
-    //   main: '#0971f1',
-    //   darker: '#053e85',
-    // },
     buttonFeature: {
       main: red[500],
-      contrastText: "#fff",
+      contrastText: "#ffffff",
     },
   },
 });

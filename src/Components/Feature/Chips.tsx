@@ -24,6 +24,8 @@ import { CssIcon } from "./icons/CssIcon";
 import { JestIcon } from "./icons/JestIcon";
 import { FigmaIcon } from "./icons/FigmaIcon";
 import { DigitalOceanIcon } from "./icons/DigitalOceanIcon";
+import red from "@mui/material/colors/red";
+
 const ListItem = styled("li")(({ theme }) => ({
   margin: theme.spacing(0.5),
 }));
@@ -118,7 +120,11 @@ export const ChipsArray = (techItems: TechItems) => {
               }}
               layout
             >
-              <Chip icon={data.icon} color="buttonFeature" label={data.name} />
+              <Chip
+                icon={data.icon}
+                sx={{ color: "#fff", backgroundColor: red[500] }}
+                label={data.name}
+              />
             </ListItemMotion>
           );
         })}
