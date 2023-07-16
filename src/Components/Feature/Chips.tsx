@@ -61,16 +61,13 @@ export const ChipsArray = (techItems: TechItems) => {
 
   const chipAnimationVariants = {
     initial: {
-      x: "-45vw",
+      x: "-80vw",
     },
     animate: {
       x: "0vw",
       transition: {
+        duration: 1.25,
         staggerChildren: 0.25,
-        type: "spring",
-        damping: 15,
-        mass: 1,
-        stiffness: 45,
         staggerDirection: -1,
       },
     },
@@ -82,10 +79,6 @@ export const ChipsArray = (techItems: TechItems) => {
         staggerDirection: -1,
         when: "afterChildren",
         delay: 4,
-        type: "spring",
-        damping: 15,
-        mass: 1,
-        stiffness: 45,
       },
     },
   };
