@@ -2,8 +2,6 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 
 axios.interceptors.response.use(
   (res) => {
-    const controller = new AbortController();
-
     const { data } = res;
     console.log(data);
     const dataId = data.results[0].typeOf;
@@ -25,11 +23,15 @@ axios.interceptors.response.use(
     if (!dataId) {
       console.log("got here");
 
-      // res.status = 525;
+      res.status = 525;
+      res.statusText = "Bad API Request";
+
       // throw res;
       // throw new Error("Bad API Response");
+      Promise.reject("Bad API Response");
       // The one below is the closest iin terms of errors.
-      throw new axios.Cancel("Bad API Response");
+      console.log(res);
+      return res;
 
       // new axios.CanceledError("Bad API Response");
 
@@ -52,7 +54,12 @@ axios.interceptors.response.use(
     }
     // retry while API returns word with no typeOf property for hint or Network Error
 
-    if (!(message == "Bad API Response")) {
+    if (
+      !(
+        message.includes("Bad API Response") ||
+        message.includes("Network Error")
+      )
+    ) {
       // if (!message.includes("Bad API Response" || "Network Error")) {
       return Promise.reject(err);
     }
@@ -77,6 +84,9 @@ export const getNewWord = async (letterCount: number | number[] = 6) => {
     retry: 3,
     method: "GET",
     url: "https://wordsapiv1.p.rapidapi.com/words/?letterPattern=%5E%5Ba-z%5D%2B%24&frequencyMin=3&random=true",
+    // validateStatus: function (status: number) {
+    //   return status < 500; // Resolve only if the status code is less than 500
+    // },
     params: {
       limit: "1",
       letters: letterCount,
@@ -91,6 +101,8 @@ export const getNewWord = async (letterCount: number | number[] = 6) => {
 
   try {
     const response = (await axios.request(options)) as AxiosResponse;
+    console.log(response.status);
+
     return {
       word: response.data.word,
       hint: response.data.results && response.data.results[0].typeOf[0],
@@ -102,9 +114,6 @@ export const getNewWord = async (letterCount: number | number[] = 6) => {
       return {
         apiError: "We're having trouble connecting to our word list 🫥.",
       };
-    } else if (err.message.includes("Bad API Responseerrorhandler")) {
-      console.log("heyya");
-      return await axios.request(options);
     } else {
       return { apiError: err.message };
     }
