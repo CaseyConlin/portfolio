@@ -69,18 +69,21 @@ export const WordGameAlert = () => {
       setAlertMessage(errMessage);
       setAlertServerity("error");
     }
-    if (errMessage === "") {
+    if (errMessage !== apiError) {
+      console.log("hey");
       setIsAlert(false);
       setAlertMessage(errMessage);
       setAlertServerity("success");
     }
   };
+
   const setAlertWin = () => {
     setAlertMessage(
       winMessages[Math.floor(Math.random() * (winMessages.length - 0) + 0)]
     );
     setAlertServerity("success");
   };
+
   const setAlertLose = () => {
     setAlertMessage(
       loseMessages[Math.floor(Math.random() * (loseMessages.length - 0) + 0)]

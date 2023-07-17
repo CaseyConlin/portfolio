@@ -20,6 +20,12 @@ export const getNewWord = async (letterCount: number | number[] = 6) => {
       hint: result.results && result.results[0].typeOf[0],
     };
   } catch (error) {
-    return { apiError: "We're having trouble connecting to our word list 🫥" };
+    let message = "";
+    if (error instanceof Error) message = error.message;
+    if (message.includes("Failed to fetch")) {
+      return { apiError: "Bad Internet Connection" };
+    } else {
+      return { apiError: message };
+    }
   }
 };

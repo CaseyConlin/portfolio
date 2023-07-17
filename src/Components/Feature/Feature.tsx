@@ -34,7 +34,6 @@ export const Feature = ({
   techItems,
 }: Props) => {
   const videoEl = useRef(null);
-  console.log(techItems);
 
   return (
     <Box
