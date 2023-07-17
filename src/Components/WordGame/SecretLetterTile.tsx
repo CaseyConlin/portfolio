@@ -73,7 +73,7 @@ export const SecretLetterTile = (props: Props) => {
           borderRadius: 2,
           textAlign: "center",
           fontWeight: 900,
-          fontFamily: "VarelaRound-Regular",
+          fontFamily: "Space Grotesk",
           fontSize: "1.4rem",
         }}
         key={props.secretLetter + props.index * 2}

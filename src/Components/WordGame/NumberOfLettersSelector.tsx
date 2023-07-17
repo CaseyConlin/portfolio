@@ -65,7 +65,8 @@ export const NumberOfLettersSelector = () => {
     },
 
     "& .MuiSlider-markLabel": {
-      fontFamily: "LucidaGrandeBold",
+      fontFamily: "Space Grotesk",
+      fontWeight: 500,
     },
   }));
 
@@ -99,7 +100,8 @@ export const NumberOfLettersSelector = () => {
           textAlign: "center",
           textTransform: "uppercase",
           typography: "subtitle1",
-          fontFamily: "LucidaGrandeBold",
+          fontFamily: "Space Grotesk",
+          fontWeight: 800,
         }}
       >
         Letters

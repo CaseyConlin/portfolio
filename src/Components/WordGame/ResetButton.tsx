@@ -25,7 +25,8 @@ export const ResetButton = () => {
     backgroundColor: red[600],
     color: "#fff",
     transform: "translateY(-2px) ",
-    font: "LucidaGrandeBold",
+    font: "Space Grotesk",
+    fontWeight: 800,
     boxShadow: "1px -1px 4px  #212121",
 
     "&:hover": {
@@ -43,7 +44,7 @@ export const ResetButton = () => {
     "&:focus": {
       boxShadow: "0 0 0 0.2rem rgba(0,123,255,.5)",
     },
-    fontFamily: "LucidaGrandeBold",
+    fontFamily: "Space Grotesk",
   });
 
   const {
@@ -91,7 +92,8 @@ export const ResetButton = () => {
       sx={{
         border: "1px solid black",
         boxShadow: "1px -1px 4px  #212121 ",
-        fontFamily: "LucidaGrandeBold",
+        fontFamily: "Space Grotesk",
+        fontWeight: 800,
       }}
       borderRadius={1}
       container
@@ -110,7 +112,8 @@ export const ResetButton = () => {
           textAlign: "center",
           textTransform: "uppercase",
           typography: "subtitle1",
-          fontFamily: "LucidaGrandeBold",
+          fontFamily: "Space Grotesk",
+          fontWeight: 800,
           display: { xs: "none", md: "block" },
         }}
       >
