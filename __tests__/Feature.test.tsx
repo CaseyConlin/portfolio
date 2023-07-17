@@ -34,4 +34,18 @@ describe("<Feature />", () => {
     expect(link);
     expect(link).toBe("https://www.parkcrestdesign.com/");
   });
+  it("Renders Feature repo prop.", () => {
+    const ctaButton = screen.getByText("See the Repo");
+    expect(ctaButton.textContent).toBe("See the Repo");
+    const link = ctaButton.getAttribute("href");
+    expect(link);
+    expect(link).toBe("https://github.com/CaseyConlin/parkcrestdesign");
+  });
+  it("Renders Feature video prop.", () => {
+    const video = screen.getByTestId("screenshot-video");
+    const src = video.getAttribute("src");
+    expect(src).toBe(
+      "https://embed-ssl.wistia.com/deliveries/8b0214f426735ce77d32b78f20e80114e977ca3a/file.mp4"
+    );
+  });
 });

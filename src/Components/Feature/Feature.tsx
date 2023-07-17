@@ -132,6 +132,7 @@ export const Feature = ({
                 muted
                 ref={videoEl}
                 src={videoSource}
+                data-testid="screenshot-video"
               />
             </Box>
           </Grid>
