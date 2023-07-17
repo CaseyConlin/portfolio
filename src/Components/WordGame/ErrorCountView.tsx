@@ -26,7 +26,8 @@ export const ErrorCountViewer = () => {
       boxShadow={1}
       sx={{
         border: "1px solid black",
-        fontFamily: "LucidaGrandeBold",
+        fontFamily: "Space Grotesk",
+        fontWeight: 800,
         boxShadow: "1px -1px 4px  #212121",
       }}
       borderRadius={1}
@@ -48,7 +49,8 @@ export const ErrorCountViewer = () => {
           textAlign: "center",
           textTransform: "uppercase",
           typography: "title",
-          fontFamily: "LucidaGrandeBold",
+          fontFamily: "Space Grotesk",
+          fontWeight: 800,
         }}
       >
         Errors Left

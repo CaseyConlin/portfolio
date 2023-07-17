@@ -78,8 +78,8 @@ export const KeyboardLetterButton = (props: Props) => {
     border: "1px solid #000",
     color: "#000",
     backgroundColor: "white",
-    fontWeight: "bold",
-    font: "LucidaGrandeBold",
+    font: "Space Grotesk",
+    fontWeight: 800,
     boxShadow: "1px -1px 4px  #212121",
     transform: "translateY(-2px) ",
 
@@ -96,7 +96,7 @@ export const KeyboardLetterButton = (props: Props) => {
     "&:focus": {
       boxShadow: "0 0 0 0.2rem rgba(0,123,255,.5)",
     },
-    fontFamily: "LucidaGrandeBold",
+    fontFamily: "Space Grotesk",
   }));
 
   return (
