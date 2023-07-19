@@ -1,9 +1,6 @@
-// import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-// import { useGameContext } from "../../WordGameContext/WordGameContext";
-// import { getNewWord } from "../../Services/getNewWord";
 import Grid from "@mui/material/Unstable_Grid2";
-import { Box } from "@mui/material";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { red } from "@mui/material/colors";
 import { styled } from "@mui/material/styles";
@@ -14,7 +11,6 @@ export interface Props {
 }
 
 export const ResetButton = ({ resetGame, isResetNeeded }: Props) => {
-  // const [resetNeeded, setIsResetNeeded] = useState(false);
   const ResetButton = styled(Button)({
     padding: "0",
     display: "grid",
@@ -51,40 +47,6 @@ export const ResetButton = ({ resetGame, isResetNeeded }: Props) => {
     },
     fontFamily: "Space Grotesk",
   });
-
-  // const {
-  //   setSecretWord,
-  //   secretWord,
-  //   numberOfLetters,
-  //   resetScores,
-  //   errorCount,
-  //   rightCount,
-  //   guessedLetters,
-  //   setApiError,
-  // } = useGameContext();
-
-  // const clickHandler = () => {
-  //   resetScores();
-
-  //   getNewWord(numberOfLetters).then((response) => {
-  //     if (response && response.word) {
-  //       setApiError("");
-  //       setSecretWord(response.word, response.hint);
-  //     }
-  //     if (response && response.apiError) {
-  //       setApiError(response.apiError);
-  //     }
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   if (secretWord && (rightCount === secretWord.length || errorCount === 0)) {
-  //     setIsResetNeeded(true);
-  //   }
-  //   if (guessedLetters.length === 0) {
-  //     setIsResetNeeded(false);
-  //   }
-  // }, [rightCount, errorCount, guessedLetters]);
 
   const MotionResetButton = motion(ResetButton);
   return (

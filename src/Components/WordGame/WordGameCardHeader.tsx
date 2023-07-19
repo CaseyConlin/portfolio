@@ -1,11 +1,7 @@
 import CardHeader from "@mui/material/CardHeader";
-
 import Avatar from "@mui/material/Avatar";
-
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
-
 import "../../App.css";
-
 import { red } from "@mui/material/colors";
 
 export const WordGameCardHeader = () => {

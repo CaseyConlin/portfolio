@@ -1,13 +1,9 @@
-// Each rocket manages its own state. A boolean state for the player
-// rocket determines the color and relevant count and from context to use in animating
-// rocket parts.
 import { useEffect, useState } from "react";
 import { red } from "@mui/material/colors";
 import { blue } from "@mui/material/colors";
 import { amber } from "@mui/material/colors";
 import { motion } from "framer-motion";
 import styles from "./WordGameContainer.module.css";
-// import { useGameContext } from "../../WordGameContext/WordGameContext";
 
 interface Props {
   isPlayerRocket: boolean;
@@ -29,8 +25,6 @@ export const Rocket = ({
   const [isOpenFire, setOpenFire] = useState(false);
   const [haveLiftOff, setHaveLiftOff] = useState(false);
 
-  // const { errorCount, rightCount, secretWord } = useGameContext();
-
   const count =
     secretWord && isPlayerRocket
       ? 5 - Math.floor((rightCount / secretWord.length) * 5)
@@ -38,7 +32,7 @@ export const Rocket = ({
   const color = isPlayerRocket ? blue[500] : red[500];
 
   useEffect(() => {
-    //Update rocket part showing states based on counter from context.
+    //Update rocket part showing states based on counter passed as props from higher component.
     //If the counter resets to 5, reset animations.
     if (count === 5) {
       setOpenNose(false);

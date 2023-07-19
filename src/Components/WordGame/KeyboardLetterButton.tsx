@@ -1,13 +1,9 @@
-// Receive Charcodes from Keyboard container as props. Manage state for each
-// keyboard letter button using onClick and useEffect for actual user keyboard
-// keydown events.
-// import { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
+import Grid from "@mui/material/Unstable_Grid2";
 import Button from "@mui/material/Button";
-import { Box } from "@mui/material";
+import Box from "@mui/material/Box";
 import CancelIcon from "@mui/icons-material/Cancel";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-// import { useGameContext } from "../../WordGameContext/WordGameContext";
 
 export interface Props {
   keyboardLetter: string;
@@ -24,67 +20,8 @@ export const KeyboardLetterButton = ({
   wrong,
   click,
 }: Props) => {
-  // const {
-  //   guessedLetter,
-  //   addGuessedLetter,
-  //   secretWord,
-  //   rightCount,
-  //   errorCount,
-  //   guessedLetters,
-  // } = useGameContext();
-  // const [isLetterClicked, setIsLetterClicked] = useState(false);
-  // const [isLetterWrong, setIsLetterWrong] = useState(false);
-  // const [isLetterRight, setIsLetterRight] = useState(false);
-
-  // const letter = String.fromCharCode(letterCharCode);
-
-  // const letterButtonGuessHandler = (
-  //   event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  // ) => {
-  //   setIsLetterClicked(true);
-  //   const target = event.target as HTMLButtonElement;
-  //   addGuessedLetter(target.value);
-
-  //   if (secretWord.toLowerCase().includes(letter.toLowerCase())) {
-  //     setIsLetterRight(true);
-  //   } else {
-  //     setIsLetterWrong(true);
-  //   }
-  // };
-
-  // //Mark key right or wrong on click.
-  // const userKeyboardGuessHandler = (userKeyboardLetter: string) => {
-  //   if (letter.toLocaleLowerCase() === userKeyboardLetter.toLocaleLowerCase()) {
-  //     if (secretWord.toLowerCase().includes(letter.toLowerCase())) {
-  //       setIsLetterRight(true);
-  //       setIsLetterClicked(true);
-  //     } else {
-  //       setIsLetterWrong(true);
-  //       setIsLetterClicked(true);
-  //     }
-  //   }
-  // };
-
-  // //Listen for user keyboard keydown.
-  // useEffect(() => {
-  //   userKeyboardGuessHandler(guessedLetter);
-  // }, [guessedLetter]);
-
-  // //Listen for end of game.
-  // useEffect(() => {
-  //   if (secretWord && (rightCount === secretWord.length || errorCount === 0)) {
-  //     setIsLetterClicked(true);
-  //   }
-  //   if (guessedLetters.length === 0) {
-  //     setIsLetterRight(false);
-  //     setIsLetterWrong(false);
-  //     setIsLetterClicked(false);
-  //   }
-  // }, [rightCount, errorCount, secretWord, guessedLetters]);
-
   const KeyBoardButton = styled(Button)(({ theme }) => ({
     padding: theme.spacing(1),
-    // minWidth: "45px",
     border: "1px solid #000",
     color: "#000",
     backgroundColor: "white",
@@ -110,59 +47,73 @@ export const KeyboardLetterButton = ({
   }));
 
   return (
-    <Box
-      textAlign={"center"}
-      display={"flex"}
+    <Grid
+      key={keyboardLetter}
+      container
       justifyContent={"center"}
+      alignItems={"center"}
+      spacing={0}
       sx={{
-        borderRadius: 1,
-        minWidth: { xs: "35px", sm: "45px" },
-        minHeight: { xs: "35px", sm: "45px" },
-        backgroundColor: "#000",
-        padding: "0",
-        width: { xs: "37px", sm: "47px" },
-        height: { xs: "37px", sm: "47px" },
+        aspectRatio: 1 / 1,
       }}
+      xs={1.3}
+      sm={1.7}
+      md={2}
     >
-      <KeyBoardButton
-        value={keyboardLetter}
-        onClick={click}
-        disabled={guessed}
+      <Box
+        textAlign={"center"}
+        display={"flex"}
+        justifyContent={"center"}
         sx={{
+          borderRadius: 1,
           minWidth: { xs: "35px", sm: "45px" },
-          width: { xs: "35px", sm: "45px" },
+          minHeight: { xs: "35px", sm: "45px" },
+          backgroundColor: "#000",
+          padding: "0",
+          width: { xs: "37px", sm: "47px" },
+          height: { xs: "37px", sm: "47px" },
         }}
       >
-        {right && (
-          <CheckCircleIcon
-            fontSize="small"
-            sx={{
-              color: "green",
-              position: "absolute",
-              p: 0,
-              m: 0,
-              fontWeight: 800,
-              left: 0,
-              top: 0,
-            }}
-          />
-        )}
-        {wrong && (
-          <CancelIcon
-            fontSize="small"
-            sx={{
-              color: "red",
-              position: "absolute",
-              p: 0,
-              m: 0,
-              fontWeight: 800,
-              left: 0,
-              top: 0,
-            }}
-          />
-        )}
-        {keyboardLetter}
-      </KeyBoardButton>
-    </Box>
+        <KeyBoardButton
+          value={keyboardLetter}
+          onClick={click}
+          disabled={guessed}
+          sx={{
+            minWidth: { xs: "35px", sm: "45px" },
+            width: { xs: "35px", sm: "45px" },
+          }}
+        >
+          {right && (
+            <CheckCircleIcon
+              fontSize="small"
+              sx={{
+                color: "green",
+                position: "absolute",
+                p: 0,
+                m: 0,
+                fontWeight: 800,
+                left: 0,
+                top: 0,
+              }}
+            />
+          )}
+          {wrong && (
+            <CancelIcon
+              fontSize="small"
+              sx={{
+                color: "red",
+                position: "absolute",
+                p: 0,
+                m: 0,
+                fontWeight: 800,
+                left: 0,
+                top: 0,
+              }}
+            />
+          )}
+          {keyboardLetter}
+        </KeyBoardButton>
+      </Box>
+    </Grid>
   );
 };
