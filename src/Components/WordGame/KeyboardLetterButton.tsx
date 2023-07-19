@@ -66,12 +66,12 @@ export const KeyboardLetterButton = ({
         justifyContent={"center"}
         sx={{
           borderRadius: 1,
-          minWidth: { xs: "35px", sm: "45px" },
-          minHeight: { xs: "35px", sm: "45px" },
+          minWidth: { xs: "32px", sm: "45px" },
+          minHeight: { xs: "32px", sm: "45px" },
           backgroundColor: "#000",
           padding: "0",
-          width: { xs: "37px", sm: "47px" },
-          height: { xs: "37px", sm: "47px" },
+          width: { xs: "33px", sm: "47px" },
+          height: { xs: "33px", sm: "47px" },
         }}
       >
         <KeyBoardButton
@@ -79,8 +79,9 @@ export const KeyboardLetterButton = ({
           onClick={click}
           disabled={guessed}
           sx={{
-            minWidth: { xs: "35px", sm: "45px" },
-            width: { xs: "35px", sm: "45px" },
+            minWidth: { xs: "32px", sm: "45px" },
+            width: { xs: "32px", sm: "45px" },
+            fontSize: { xs: "1rem", sm: "1.5rem" },
           }}
         >
           {right && (

@@ -1,19 +1,27 @@
 import { useState, useEffect } from "react";
-import { getNewWord } from "../../Services/getNewWord";
+
 import { RocketContainer } from "./RocketContainer";
+import { RocketWrapper } from "./RocketWrapper";
+import { WordGameCardContainer } from "./WordGameCardContainer";
 import { WordGameCardHeader } from "./WordGameCardHeader";
-import { SecretWordSection } from "./SecretWordSection";
-import { KeyboardContainer } from "./KeyboardContainer";
-import { KeyboardLetterButton } from "./KeyboardLetterButton";
 import { SecretWordContainer } from "./SecretWordContainer";
+import { SecretWordWrapper } from "./SecretWordWrapper";
 import { WordGameAlert } from "./WordGameAlert";
 import { SecretLetterTile } from "./SecretLetterTile";
+import { UserInterfaceContainer } from "./UserInterfaceContainer";
+import { KeyboardContainer } from "./KeyboardContainer";
+import { KeyboardWrapper } from "./KeyboardWrapper";
+import { KeyboardLetterButton } from "./KeyboardLetterButton";
+import { ControlsContainer } from "./ControlsContainer";
 import { ResetButton } from "./ResetButton";
 import { NumberOfLettersSelector } from "./NumberOfLettersSelector";
 import { ErrorCountViewer } from "./ErrorCountView";
 import { WordGameCardDrawer } from "./WordGameCardDrawer";
 import { Hint } from "./Hint";
+
+import { getNewWord } from "../../Services/getNewWord";
 import { winMessages, loseMessages } from "./alertMessages";
+
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
@@ -21,14 +29,13 @@ import Button from "@mui/material/Button";
 import VideogameAssetIcon from "@mui/icons-material/VideogameAsset";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import Grid from "@mui/material/Unstable_Grid2";
-import { grey } from "@mui/material/colors";
+
 import "../../App.css";
 import styles from "./WordGameContainer.module.css";
 
 export const WordGame = () => {
   const [numberOfLetters, setNumberOfLetters] = useState<number | number[]>(7);
   const [errorCount, setErrorCount] = useState(5);
-
   const [hint, setHint] = useState("");
   const [rightCount, setRightCount] = useState(0);
   const [guessedLetters, setGuessedLetters] = useState([""]);
@@ -50,6 +57,7 @@ export const WordGame = () => {
     "F",
   ]);
 
+  //Grab a word from the API once on page load.
   useEffect(() => {
     getNewWord(numberOfLetters).then((response) => {
       if (response && response.word) {
@@ -61,6 +69,7 @@ export const WordGame = () => {
     });
   }, []);
 
+  //Listen for state changes that mean the player has won or lost.
   useEffect(() => {
     if (errorCount === 0 || rightCount === secretWord.length) {
       setIsGameOver(true);
@@ -76,6 +85,7 @@ export const WordGame = () => {
     String.fromCharCode(i + 65)
   );
 
+  // Listen for the player's physical keyboard events.
   useEffect(() => {
     document.addEventListener("keydown", onKeyDown);
     if (secretWord && (rightCount === secretWord.length || errorCount === 0)) {
@@ -137,12 +147,10 @@ export const WordGame = () => {
     };
 
   const keyboardLetterHandler = (letter: string) => {
-    console.log(guessedLetters);
     setGuessedLetters([...guessedLetters, letter]);
     if (secretWord.includes(letter)) {
       const letterScore = (secretWord.filter((val) => val === letter) || [])
         .length;
-
       setRightCount(letterScore + rightCount);
     } else {
       setErrorCount(errorCount - 1);
@@ -151,10 +159,6 @@ export const WordGame = () => {
 
   const onKeyDown = (event: KeyboardEvent) => {
     const newKey = event.key.toUpperCase();
-    console.log(newKey);
-    console.log(event);
-    console.log(guessedLetters);
-
     if (
       newKey.length === 1 &&
       alpha.includes(newKey) &&
@@ -163,6 +167,7 @@ export const WordGame = () => {
       return keyboardLetterHandler(newKey);
     }
   };
+
   return (
     <div className={styles.starsContainer}>
       <div className={styles.rocketsBackground}></div>
@@ -174,36 +179,28 @@ export const WordGame = () => {
         justifyContent={"flex-end"}
         id="liftoff"
       >
-        <Grid
-          container
-          flexDirection={"row"}
-          justifyContent={"space-around"}
-          spacing={{ xs: 0, lg: 3 }}
-          my={{ xs: 1, sm: 5 }}
-          xs={12}
-          sm={5}
-          order={{ xs: 2, md: 0 }}
-        >
-          <RocketContainer
+        <RocketContainer>
+          <RocketWrapper
             isPlayerRocket={false}
             secretWord={secretWord}
             rightCount={rightCount}
             errorCount={errorCount}
           />
-          <RocketContainer
+          <RocketWrapper
             isPlayerRocket={true}
             secretWord={secretWord}
             rightCount={rightCount}
             errorCount={errorCount}
           />
-        </Grid>
-        <Grid xs={12} sm={7} lg={6}>
+        </RocketContainer>
+        <WordGameCardContainer>
           <Card sx={{ m: { xs: 1, sm: 2 } }}>
             <WordGameCardHeader />
 
-            <SecretWordSection>
+            <SecretWordContainer>
               <WordGameAlert alertMessage={alertMessage} />
-              <SecretWordContainer>
+
+              <SecretWordWrapper>
                 {secretWord &&
                   secretWord.map((letter: string, index: number) => (
                     <SecretLetterTile
@@ -215,27 +212,17 @@ export const WordGame = () => {
                       wrong={isGameOver && !guessedLetters.includes(letter)}
                     />
                   ))}
-              </SecretWordContainer>
+              </SecretWordWrapper>
 
               <Hint hint={hint} />
-            </SecretWordSection>
+            </SecretWordContainer>
 
-            <Grid
-              className="input-grid"
-              container
-              py={1}
-              justifyContent={"center"}
-              sx={{
-                flexDirection: "row",
-                flexWrap: "wrap",
-                backgroundColor: grey[200],
-                boxShadow: "1px -1px 3px  #212121 ",
-              }}
-            >
-              <Grid justifyContent="center" xs={12} md={7}>
-                <KeyboardContainer>
+            <UserInterfaceContainer>
+              <KeyboardContainer>
+                <KeyboardWrapper>
                   {alpha.map((letter) => (
                     <KeyboardLetterButton
+                      key={letter}
                       keyboardLetter={letter}
                       click={() => keyboardLetterHandler(letter)}
                       guessed={guessedLetters.includes(letter) || isGameOver}
@@ -249,27 +236,22 @@ export const WordGame = () => {
                       }
                     />
                   ))}
-                </KeyboardContainer>
-              </Grid>
-              <Grid
-                container
-                flexDirection={{ xs: "row", md: "column" }}
-                flexWrap={"wrap"}
-                justifyContent={{ xs: "space-around", md: "flex-start" }}
-                xs={12}
-                md={4}
-              >
+                </KeyboardWrapper>
+              </KeyboardContainer>
+              <ControlsContainer>
                 <ErrorCountViewer errorCount={errorCount} />
+
                 <NumberOfLettersSelector
                   numberOfLetters={numberOfLetters}
                   setNumberOfLetters={setNumberOfLetters}
                 />
+
                 <ResetButton
                   isResetNeeded={isGameOver}
                   resetGame={resetGameHandler}
                 />
-              </Grid>
-            </Grid>
+              </ControlsContainer>
+            </UserInterfaceContainer>
             <CardActions onClick={() => setIsDrawerOpen(true)}>
               <Button sx={{ color: "#000" }}>
                 <VideogameAssetIcon
@@ -285,7 +267,7 @@ export const WordGame = () => {
               isDrawerOpen={isDrawerOpen}
             />
           </Card>
-        </Grid>
+        </WordGameCardContainer>
       </Grid>
     </div>
   );
