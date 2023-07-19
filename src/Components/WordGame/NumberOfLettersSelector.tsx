@@ -1,9 +1,4 @@
-// Input component to set number of letters for secret word. Number of letters
-// for secret word is set in context using the component's onChangeCommitted
-// callback function. Updating the word is triggered by the Reset button, not
-// the slider changing.
 import Slider from "@mui/material/Slider";
-import { useGameContext } from "../../WordGameContext/WordGameContext";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Unstable_Grid2";
 import { Box } from "@mui/material";
@@ -11,6 +6,10 @@ import { blue } from "@mui/material/colors";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 
+export interface Props {
+  numberOfLetters: number | number[];
+  setNumberOfLetters: (number: number | number[]) => void;
+}
 function valuetext(value: number) {
   return `${value}`;
 }
@@ -42,8 +41,10 @@ const marks = [
   },
 ];
 
-export const NumberOfLettersSelector = () => {
-  const { numberOfLetters, setNumberOfLetters } = useGameContext();
+export const NumberOfLettersSelector = ({
+  numberOfLetters,
+  setNumberOfLetters,
+}: Props) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
 

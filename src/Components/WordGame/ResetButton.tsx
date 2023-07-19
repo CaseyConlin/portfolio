@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { useGameContext } from "../../WordGameContext/WordGameContext";
-import { getNewWord } from "../../Services/getNewWord";
 import Grid from "@mui/material/Unstable_Grid2";
-import { Box } from "@mui/material";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { red } from "@mui/material/colors";
 import { styled } from "@mui/material/styles";
 
-export const ResetButton = () => {
-  const [resetNeeded, setIsResetNeeded] = useState(false);
+export interface Props {
+  isResetNeeded: boolean;
+  resetGame: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+export const ResetButton = ({ resetGame, isResetNeeded }: Props) => {
   const ResetButton = styled(Button)({
     padding: "0",
     display: "grid",
@@ -46,40 +47,6 @@ export const ResetButton = () => {
     },
     fontFamily: "Space Grotesk",
   });
-
-  const {
-    setSecretWord,
-    secretWord,
-    numberOfLetters,
-    resetScores,
-    errorCount,
-    rightCount,
-    guessedLetters,
-    setApiError,
-  } = useGameContext();
-
-  const clickHandler = () => {
-    resetScores();
-
-    getNewWord(numberOfLetters).then((response) => {
-      if (response && response.word) {
-        setApiError("");
-        setSecretWord(response.word, response.hint);
-      }
-      if (response && response.apiError) {
-        setApiError(response.apiError);
-      }
-    });
-  };
-
-  useEffect(() => {
-    if (secretWord && (rightCount === secretWord.length || errorCount === 0)) {
-      setIsResetNeeded(true);
-    }
-    if (guessedLetters.length === 0) {
-      setIsResetNeeded(false);
-    }
-  }, [rightCount, errorCount, guessedLetters]);
 
   const MotionResetButton = motion(ResetButton);
   return (
@@ -136,7 +103,7 @@ export const ResetButton = () => {
       >
         <MotionResetButton
           animate={
-            resetNeeded && {
+            isResetNeeded && {
               boxShadow: ["0px 0px 1px red", "0px 0px 20px red"],
               backgroundColor: ["#b71c1c", "#ff5252"],
             }
@@ -146,7 +113,7 @@ export const ResetButton = () => {
             repeatType: "reverse",
             duration: 1.5,
           }}
-          onClick={clickHandler}
+          onClick={resetGame}
         >
           Reset
         </MotionResetButton>

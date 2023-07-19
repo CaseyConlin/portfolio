@@ -1,16 +1,15 @@
-// Small component to display the hidden letter in its box if the player guesses
-// it. Props come from the parent Secret Letter Tile component.
+// Small component to display the hidden letter in its box if the player guesses it.
 
 import Fade from "@mui/material/Fade";
 
 export interface Props {
   secretLetter: string;
-  isLetterShowing: boolean;
+  show: boolean;
 }
-export const SecretLetter = (props: Props) => {
+export const SecretLetter = ({ secretLetter, show }: Props) => {
   return (
-    <Fade in={props.isLetterShowing}>
-      <span>{props.secretLetter}</span>
+    <Fade in={show}>
+      <span>{secretLetter}</span>
     </Fade>
   );
 };
