@@ -76,6 +76,20 @@ export const WordGame = () => {
     String.fromCharCode(i + 65)
   );
 
+  useEffect(() => {
+    document.addEventListener("keydown", onKeyDown);
+    if (secretWord && (rightCount === secretWord.length || errorCount === 0)) {
+      document.removeEventListener("keydown", onKeyDown);
+    }
+    if (guessedLetters.length === 0) {
+      document.addEventListener("keydown", onKeyDown);
+    }
+
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [secretWord, errorCount, rightCount, guessedLetters]);
+
   const setAlertWin = () => {
     setAlertMessage({
       message:
@@ -123,6 +137,7 @@ export const WordGame = () => {
     };
 
   const keyboardLetterHandler = (letter: string) => {
+    console.log(guessedLetters);
     setGuessedLetters([...guessedLetters, letter]);
     if (secretWord.includes(letter)) {
       const letterScore = (secretWord.filter((val) => val === letter) || [])
@@ -131,6 +146,21 @@ export const WordGame = () => {
       setRightCount(letterScore + rightCount);
     } else {
       setErrorCount(errorCount - 1);
+    }
+  };
+
+  const onKeyDown = (event: KeyboardEvent) => {
+    const newKey = event.key.toUpperCase();
+    console.log(newKey);
+    console.log(event);
+    console.log(guessedLetters);
+
+    if (
+      newKey.length === 1 &&
+      alpha.includes(newKey) &&
+      !guessedLetters.includes(newKey)
+    ) {
+      return keyboardLetterHandler(newKey);
     }
   };
   return (
