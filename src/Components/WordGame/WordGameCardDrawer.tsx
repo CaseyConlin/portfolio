@@ -39,12 +39,12 @@ export const WordGameCardDrawer = (props: Props) => {
         Gameplay
       </Typography>
       <Typography variant="body2" color="text.primary">
-        <i>[radio squeal noise]</i> Use your keyboard or the buttons above to
-        guess the letters in the secret word like Hangman. Every correct letter
-        gets you a little closer to building & launching your rocket, but any
-        missed letter will mean another part of the other team's rocket gets put
-        in place and they get closer to launching. Five missed letters, and we
-        lose. Use the control panel to change the number of letters for the
+        <i>[radio squeal noise]</i> Use your keyboard or the buttons on-screen
+        to guess the letters in the secret word like Hangman. Every correct
+        letter gets you a little closer to building & launching your rocket, but
+        any missed letter will mean another part of the other team's rocket gets
+        put in place and they get closer to launching. Five missed letters, and
+        we lose. Use the control panel to change the number of letters for the
         secret word, and hit the reset button for a new word. You got this! Over
         and out. <i>[radio squeal noise]</i>
       </Typography>
@@ -52,20 +52,22 @@ export const WordGameCardDrawer = (props: Props) => {
         Development
       </Typography>
       <Typography variant="body2" color="text.primary">
-        Like this website the game is built using React and TypeScript. Many of
-        the components manage their own state with React Context helping keep
-        everything in sync. The words and hints come from API calls to{" "}
+        Like this website the game is built using React and TypeScript.
+        Initially built to take advantage of the useContext hook to manage state
+        across several components, the game was refactored to use a component
+        composition model to flatten the app and concentrate state management
+        and logic in a parent component. The words and hints come from API calls
+        to{" "}
         <a href="www.wordsapi.com" target="_blank">
           Words API
-        </a>{" "}
-        using Axios. Components are styled using Material UI with some
+        </a>
+        . Many UI components come from the Material UI library with some
         exceptions. Animations are managed with the Framer Motion library. You
         can check out the{" "}
         <a href="https://github.com/CaseyConlin/portfolio" target="_blank">
-          {" "}
           repo here
         </a>
-        . Best of luck, and I hope you enjoy the game!
+        . Best of luck out there, and I hope you enjoy the game!
       </Typography>
       <Typography variant="h5" color="text.primary" pt={2}>
         About the Developer
