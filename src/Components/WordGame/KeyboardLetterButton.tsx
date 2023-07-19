@@ -1,76 +1,86 @@
 // Receive Charcodes from Keyboard container as props. Manage state for each
 // keyboard letter button using onClick and useEffect for actual user keyboard
 // keydown events.
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import { useGameContext } from "../../WordGameContext/WordGameContext";
+// import { useGameContext } from "../../WordGameContext/WordGameContext";
 
 export interface Props {
-  letterCharCode: number;
+  keyboardLetter: string;
+  guessed: boolean;
+  right?: boolean;
+  wrong?: boolean;
+  click: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-export const KeyboardLetterButton = (props: Props) => {
-  const {
-    guessedLetter,
-    addGuessedLetter,
-    secretWord,
-    rightCount,
-    errorCount,
-    guessedLetters,
-  } = useGameContext();
-  const [isLetterClicked, setIsLetterClicked] = useState(false);
-  const [isLetterWrong, setIsLetterWrong] = useState(false);
-  const [isLetterRight, setIsLetterRight] = useState(false);
+export const KeyboardLetterButton = ({
+  keyboardLetter,
+  guessed,
+  right,
+  wrong,
+  click,
+}: Props) => {
+  // const {
+  //   guessedLetter,
+  //   addGuessedLetter,
+  //   secretWord,
+  //   rightCount,
+  //   errorCount,
+  //   guessedLetters,
+  // } = useGameContext();
+  // const [isLetterClicked, setIsLetterClicked] = useState(false);
+  // const [isLetterWrong, setIsLetterWrong] = useState(false);
+  // const [isLetterRight, setIsLetterRight] = useState(false);
 
-  const letter = String.fromCharCode(props.letterCharCode);
+  // const letter = String.fromCharCode(letterCharCode);
 
-  const letterButtonGuessHandler = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    setIsLetterClicked(true);
-    const target = event.target as HTMLButtonElement;
-    addGuessedLetter(target.value);
+  // const letterButtonGuessHandler = (
+  //   event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  // ) => {
+  //   setIsLetterClicked(true);
+  //   const target = event.target as HTMLButtonElement;
+  //   addGuessedLetter(target.value);
 
-    if (secretWord.toLowerCase().includes(letter.toLowerCase())) {
-      setIsLetterRight(true);
-    } else {
-      setIsLetterWrong(true);
-    }
-  };
+  //   if (secretWord.toLowerCase().includes(letter.toLowerCase())) {
+  //     setIsLetterRight(true);
+  //   } else {
+  //     setIsLetterWrong(true);
+  //   }
+  // };
 
-  //Mark key right or wrong on click.
-  const userKeyboardGuessHandler = (userKeyboardLetter: string) => {
-    if (letter.toLocaleLowerCase() === userKeyboardLetter.toLocaleLowerCase()) {
-      if (secretWord.toLowerCase().includes(letter.toLowerCase())) {
-        setIsLetterRight(true);
-        setIsLetterClicked(true);
-      } else {
-        setIsLetterWrong(true);
-        setIsLetterClicked(true);
-      }
-    }
-  };
+  // //Mark key right or wrong on click.
+  // const userKeyboardGuessHandler = (userKeyboardLetter: string) => {
+  //   if (letter.toLocaleLowerCase() === userKeyboardLetter.toLocaleLowerCase()) {
+  //     if (secretWord.toLowerCase().includes(letter.toLowerCase())) {
+  //       setIsLetterRight(true);
+  //       setIsLetterClicked(true);
+  //     } else {
+  //       setIsLetterWrong(true);
+  //       setIsLetterClicked(true);
+  //     }
+  //   }
+  // };
 
-  //Listen for user keyboard keydown.
-  useEffect(() => {
-    userKeyboardGuessHandler(guessedLetter);
-  }, [guessedLetter]);
+  // //Listen for user keyboard keydown.
+  // useEffect(() => {
+  //   userKeyboardGuessHandler(guessedLetter);
+  // }, [guessedLetter]);
 
-  //Listen for end of game.
-  useEffect(() => {
-    if (secretWord && (rightCount === secretWord.length || errorCount === 0)) {
-      setIsLetterClicked(true);
-    }
-    if (guessedLetters.length === 0) {
-      setIsLetterRight(false);
-      setIsLetterWrong(false);
-      setIsLetterClicked(false);
-    }
-  }, [rightCount, errorCount, secretWord, guessedLetters]);
+  // //Listen for end of game.
+  // useEffect(() => {
+  //   if (secretWord && (rightCount === secretWord.length || errorCount === 0)) {
+  //     setIsLetterClicked(true);
+  //   }
+  //   if (guessedLetters.length === 0) {
+  //     setIsLetterRight(false);
+  //     setIsLetterWrong(false);
+  //     setIsLetterClicked(false);
+  //   }
+  // }, [rightCount, errorCount, secretWord, guessedLetters]);
 
   const KeyBoardButton = styled(Button)(({ theme }) => ({
     padding: theme.spacing(1),
@@ -115,15 +125,15 @@ export const KeyboardLetterButton = (props: Props) => {
       }}
     >
       <KeyBoardButton
-        value={letter}
-        onClick={(e) => letterButtonGuessHandler(e)}
-        disabled={isLetterClicked}
+        value={keyboardLetter}
+        onClick={click}
+        disabled={guessed}
         sx={{
           minWidth: { xs: "35px", sm: "45px" },
           width: { xs: "35px", sm: "45px" },
         }}
       >
-        {isLetterRight && (
+        {right && (
           <CheckCircleIcon
             fontSize="small"
             sx={{
@@ -137,7 +147,7 @@ export const KeyboardLetterButton = (props: Props) => {
             }}
           />
         )}
-        {isLetterWrong && (
+        {wrong && (
           <CancelIcon
             fontSize="small"
             sx={{
@@ -151,7 +161,7 @@ export const KeyboardLetterButton = (props: Props) => {
             }}
           />
         )}
-        {letter}
+        {keyboardLetter}
       </KeyBoardButton>
     </Box>
   );

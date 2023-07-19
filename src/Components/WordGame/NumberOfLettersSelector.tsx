@@ -11,6 +11,10 @@ import { blue } from "@mui/material/colors";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 
+export interface Props {
+  numberOfLetters: any;
+  setNumberOfLetters: any;
+}
 function valuetext(value: number) {
   return `${value}`;
 }
@@ -42,8 +46,11 @@ const marks = [
   },
 ];
 
-export const NumberOfLettersSelector = () => {
-  const { numberOfLetters, setNumberOfLetters } = useGameContext();
+export const NumberOfLettersSelector = ({
+  numberOfLetters,
+  setNumberOfLetters,
+}: Props) => {
+  // const { numberOfLetters, setNumberOfLetters } = useGameContext();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
 

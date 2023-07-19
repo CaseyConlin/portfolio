@@ -1,21 +1,24 @@
 // Component for small field to provide a count of remaining errors before the
 // opposing team's rocket blasts off. State is updated based on context.
 
-import { useEffect, useState } from "react";
-import { useGameContext } from "../../WordGameContext/WordGameContext";
+// import { useEffect, useState } from "react";
+// import { useGameContext } from "../../WordGameContext/WordGameContext";
 import { motion } from "framer-motion";
 import Grid from "@mui/material/Unstable_Grid2";
 import Box from "@mui/material/Box";
 import { red } from "@mui/material/colors";
 import { Typography } from "@mui/material";
 
-export const ErrorCountViewer = () => {
-  const [errorNumber, setErrorNumber] = useState<number>();
-  const { errorCount } = useGameContext();
+export interface Props {
+  errorCount: number;
+}
+export const ErrorCountViewer = ({ errorCount }: Props) => {
+  // const [errorNumber, setErrorNumber] = useState<number>();
+  // const { errorCount } = useGameContext();
 
-  useEffect(() => {
-    setErrorNumber(errorCount);
-  }, [errorCount]);
+  // useEffect(() => {
+  //   setErrorNumber(errorCount);
+  // }, [errorCount]);
 
   return (
     <Grid
@@ -73,7 +76,7 @@ export const ErrorCountViewer = () => {
         }}
       >
         <motion.div
-          key={errorNumber}
+          key={errorCount}
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{
@@ -84,7 +87,7 @@ export const ErrorCountViewer = () => {
           }}
         >
           <Typography sx={{ fontSize: { xs: "1.5rem", sm: "1.75rem" } }}>
-            {errorNumber}
+            {errorCount}
           </Typography>
         </motion.div>
       </Box>

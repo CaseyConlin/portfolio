@@ -7,9 +7,17 @@ import Grid from "@mui/material/Unstable_Grid2";
 
 interface Props {
   isPlayerRocket: boolean;
+  secretWord: string[];
+  rightCount: number;
+  errorCount: number;
 }
 
-export const RocketContainer = (props: Props) => {
+export const RocketContainer = ({
+  isPlayerRocket,
+  secretWord,
+  rightCount,
+  errorCount,
+}: Props) => {
   return (
     <Grid
       container
@@ -18,14 +26,14 @@ export const RocketContainer = (props: Props) => {
       alignItems={{ lg: "center" }}
       borderRadius={2}
       order={{
-        xs: props.isPlayerRocket ? 0 : 1,
-        md: props.isPlayerRocket ? 1 : 0,
+        xs: isPlayerRocket ? 0 : 1,
+        md: isPlayerRocket ? 1 : 0,
       }}
       xs={5}
       md={4}
       sx={{ backgroundColor: "#ffffff30" }}
     >
-      <RocketBanner isPlayerRocket={props.isPlayerRocket} />
+      <RocketBanner isPlayerRocket={isPlayerRocket} />
       <Grid
         container
         flexDirection={"column"}
@@ -37,8 +45,13 @@ export const RocketContainer = (props: Props) => {
         px={{ xs: 0, lg: 2 }}
         py={{ xs: 2, md: 2 }}
       >
-        <Rocket isPlayerRocket={props.isPlayerRocket} />
-        <Planet isPlayerRocket={props.isPlayerRocket} />
+        <Rocket
+          isPlayerRocket={isPlayerRocket}
+          secretWord={secretWord}
+          rightCount={rightCount}
+          errorCount={errorCount}
+        />
+        <Planet isPlayerRocket={isPlayerRocket} />
       </Grid>
     </Grid>
   );
