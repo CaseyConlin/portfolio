@@ -39,14 +39,14 @@ export const WordGameCardDrawer = (props: Props) => {
         Gameplay
       </Typography>
       <Typography variant="body2" color="text.primary">
-        [radio squeal noise] Use your keyboard or the buttons above to guess the
-        letters in the secret word like Hangman. Every correct letter gets you a
-        little closer to building & launching your rocket, but any missed letter
-        will mean another part of the other team's rocket gets put in place and
-        they get closer to launching. Five missed letters, and we lose. Use the
-        control panel to change the number of letters for the secret word, and
-        hit the reset button for a new word. You got this! Over and out. [radio
-        squeal noise]
+        <i>[radio squeal noise]</i> Use your keyboard or the buttons above to
+        guess the letters in the secret word like Hangman. Every correct letter
+        gets you a little closer to building & launching your rocket, but any
+        missed letter will mean another part of the other team's rocket gets put
+        in place and they get closer to launching. Five missed letters, and we
+        lose. Use the control panel to change the number of letters for the
+        secret word, and hit the reset button for a new word. You got this! Over
+        and out. <i>[radio squeal noise]</i>
       </Typography>
       <Typography variant="h5" color="text.primary" pt={2}>
         Development
