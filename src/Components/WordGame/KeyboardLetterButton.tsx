@@ -8,16 +8,15 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 export interface Props {
   keyboardLetter: string;
   guessed: boolean;
-  right?: boolean;
-  wrong?: boolean;
+  status: string;
+
   click: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export const KeyboardLetterButton = ({
   keyboardLetter,
   guessed,
-  right,
-  wrong,
+  status,
   click,
 }: Props) => {
   const KeyBoardButton = styled(Button)(({ theme }) => ({
@@ -84,7 +83,7 @@ export const KeyboardLetterButton = ({
             fontSize: { xs: "1rem", sm: "1.5rem" },
           }}
         >
-          {right && (
+          {status === "right" && (
             <CheckCircleIcon
               fontSize="small"
               sx={{
@@ -98,7 +97,7 @@ export const KeyboardLetterButton = ({
               }}
             />
           )}
-          {wrong && (
+          {status === "wrong" && (
             <CancelIcon
               fontSize="small"
               sx={{

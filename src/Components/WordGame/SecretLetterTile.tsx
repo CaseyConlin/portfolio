@@ -8,15 +8,13 @@ export interface Props {
   secretLetter: string;
   index: number;
   show: boolean;
-  right?: boolean;
-  wrong?: boolean;
+  status: string;
 }
 export const SecretLetterTile = ({
   secretLetter,
   index,
   show,
-  right,
-  wrong,
+  status,
 }: Props) => {
   return (
     <Grid
@@ -34,10 +32,10 @@ export const SecretLetterTile = ({
       <Box
         sx={{
           backgroundColor: "#D3D3D3",
-          ...(right && {
+          ...(status === "right" && {
             backgroundColor: lightGreen[200],
           }),
-          ...(wrong && {
+          ...(status === "wrong" && {
             backgroundColor: deepOrange[200],
           }),
           width: { xs: "32px", md: "45px" },

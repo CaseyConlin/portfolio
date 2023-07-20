@@ -29,7 +29,6 @@ import Button from "@mui/material/Button";
 import VideogameAssetIcon from "@mui/icons-material/VideogameAsset";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import Grid from "@mui/material/Unstable_Grid2";
-
 import "../../App.css";
 import styles from "./WordGameContainer.module.css";
 
@@ -157,6 +156,27 @@ export const WordGame = () => {
     }
   };
 
+  const secretLetterStatusHandler = (letter: string) => {
+    let status = "default";
+    if (isGameOver) {
+      status = guessedLetters.includes(letter) ? "right" : "wrong";
+      return status;
+    }
+
+    return status;
+  };
+
+  const keyboardLetterStatusHandler = (letter: string) => {
+    let status = "default";
+    if (guessedLetters.includes(letter)) {
+      status = secretWord.includes(letter) ? "right" : "wrong";
+
+      return status;
+    }
+
+    return status;
+  };
+
   const onKeyDown = (event: KeyboardEvent) => {
     const newKey = event.key.toUpperCase();
     if (
@@ -208,8 +228,9 @@ export const WordGame = () => {
                       index={index}
                       key={letter + index}
                       show={guessedLetters.includes(letter) || isGameOver}
-                      right={isGameOver && guessedLetters.includes(letter)}
-                      wrong={isGameOver && !guessedLetters.includes(letter)}
+                      status={secretLetterStatusHandler(letter)}
+                      // right={isGameOver && guessedLetters.includes(letter)}
+                      // wrong={isGameOver && !guessedLetters.includes(letter)}
                     />
                   ))}
               </SecretWordWrapper>
@@ -226,14 +247,7 @@ export const WordGame = () => {
                       keyboardLetter={letter}
                       click={() => keyboardLetterHandler(letter)}
                       guessed={guessedLetters.includes(letter) || isGameOver}
-                      right={
-                        guessedLetters.includes(letter) &&
-                        secretWord.includes(letter)
-                      }
-                      wrong={
-                        guessedLetters.includes(letter) &&
-                        !secretWord.includes(letter)
-                      }
+                      status={keyboardLetterStatusHandler(letter)}
                     />
                   ))}
                 </KeyboardWrapper>
