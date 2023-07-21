@@ -9,17 +9,16 @@ import "intersection-observer";
 describe("<WordGame /> keyboard testing", () => {
   it("Shows on-screen keyboard.", async () => {
     render(<WordGame />);
-
     expect(screen.getByRole("button", { name: "J" }));
   });
 
   it("Shows disables keyboard button on click.", async () => {
     const user = userEvent.setup();
     render(<WordGame />);
-
     expect(screen.getByRole("button", { name: "J" }));
     await user.click(screen.getByRole("button", { name: "J" }));
-    expect(screen.getByRole("button", { name: "J" })).toBeDisabled();
+    const newButton = screen.getByRole("button", { name: "J" });
+    expect(newButton).toBeDisabled();
   });
 
   it("Shows cancel icon on incorrect letter guess.", async () => {
