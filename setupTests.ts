@@ -1,7 +1,5 @@
 import "@testing-library/jest-dom/extend-expect";
-import { afterAll, afterEach, beforeAll } from "vitest";
 
-import { setupServer } from "msw/node";
 import { rest } from "msw";
 import { fetch } from "cross-fetch";
 
