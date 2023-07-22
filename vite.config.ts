@@ -1,5 +1,6 @@
 /// <reference types="vitest" />
 import { defineConfig } from "vite";
+import { configDefaults } from "vitest/dist/config.js";
 import react from "@vitejs/plugin-react-swc";
 
 // https://vitejs.dev/config/
@@ -16,5 +17,6 @@ export default defineConfig({
     globals: true,
     environment: "jsdom",
     setupFiles: "/setupTests.ts",
+    exclude: [...configDefaults.exclude, "**/tests/**", "**/e2e/**"],
   },
 });

@@ -1,4 +1,5 @@
 import React from "react";
+import "@testing-library/jest-dom/extend-expect";
 import { WordGame } from "../src/Components/WordGame/WordGameContainer";
 import { it, describe, expect } from "vitest";
 import { render, screen, fireEvent, within } from "@testing-library/react";

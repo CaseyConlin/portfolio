@@ -1,4 +1,5 @@
 import React from "react";
+import "@testing-library/jest-dom/extend-expect";
 import { Feature } from "../src/Components/Feature/Feature";
 import { it, describe, expect, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";

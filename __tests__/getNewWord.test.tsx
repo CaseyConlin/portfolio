@@ -1,12 +1,10 @@
 import React from "react";
+import "@testing-library/jest-dom/extend-expect";
 import { WordGame } from "../src/Components/WordGame/WordGameContainer";
-
 import { it, describe, expect } from "vitest";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { restHandlers } from "../setupTests";
 import { setupServer } from "msw/node";
-
-import "intersection-observer";
 
 describe("<WordGame /> API testing", async () => {
   it("Shows a hint.", async () => {

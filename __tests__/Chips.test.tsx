@@ -1,4 +1,5 @@
 import React from "react";
+import "@testing-library/jest-dom/extend-expect";
 import { ChipsArray } from "../src/Components/Feature/Chips";
 import { it, describe, expect, beforeAll } from "vitest";
 import { render, screen } from "@testing-library/react";

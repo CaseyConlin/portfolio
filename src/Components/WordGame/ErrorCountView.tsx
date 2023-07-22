@@ -74,7 +74,10 @@ export const ErrorCountViewer = ({ errorCount }: Props) => {
             stiffness: 700 - errorCount * 100,
           }}
         >
-          <Typography sx={{ fontSize: { xs: "1.5rem", sm: "1.75rem" } }}>
+          <Typography
+            sx={{ fontSize: { xs: "1.5rem", sm: "1.75rem" } }}
+            data-testid={"ErrorCountView"}
+          >
             {errorCount}
           </Typography>
         </motion.div>

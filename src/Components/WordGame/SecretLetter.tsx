@@ -9,7 +9,7 @@ export interface Props {
 export const SecretLetter = ({ secretLetter, show }: Props) => {
   return (
     <Fade in={show}>
-      <span>{secretLetter}</span>
+      <span data-testid={"SecretLetter"}>{secretLetter}</span>
     </Fade>
   );
 };
