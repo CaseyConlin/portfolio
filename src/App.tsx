@@ -66,7 +66,7 @@ function App() {
           description="In this modern take on the classic word game Hangman, which is also at the top of this page, players try to find the secret word by guessing letters using the on-screen or their local keyboard. In my updated version, you race to build your rocket before an opposing team builds their own. Each correct letter gets you a little closer to completing and launching your rocket, but each miss adds another piece to the enemy rocket. Controls also allow the user to select how many letters should be in the secret word, and reset the game at any time. Like this website, the game is built using React and TypeScript. Initially built to take advantage of the useContext hook to manage state
           across several components, the game was refactored to use a component
           composition model to flatten the app and concentrate state management
-          and logic in a parent component. The words and hints come from API calls to the Words API. Components come from Material UI with additional styling and some exceptions. Animations are managed with the Framer Motion library."
+          and logic in a parent component. The words and hints come from API calls to the Words API. Components come from Material UI with additional styling and some exceptions. Animations are managed with the Framer Motion library. Components and functionality are tested with Vitest, Playwright, and Mock service Worker."
           cta="Let's play!"
           url="#liftoff"
           repo="https://github.com/CaseyConlin/portfolio/tree/main/src/WordGameContext"
