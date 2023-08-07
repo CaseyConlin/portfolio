@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [react(), splitVendorChunkPlugin()],
 
   define: {
-    __APP_ENV__: process.env.VITE_RAPID_API_KEY,
+    // __APP_ENV__: process.env.VITE_RAPID_API_KEY,
   },
   optimizeDeps: {
     include: ["@mui/icons-material"],
