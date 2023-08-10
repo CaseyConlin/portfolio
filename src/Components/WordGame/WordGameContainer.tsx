@@ -17,9 +17,11 @@ import { ResetButton } from "./ResetButton";
 import { NumberOfLettersSelector } from "./NumberOfLettersSelector";
 import { ErrorCountViewer } from "./ErrorCountView";
 import { WordGameCardDrawer } from "./WordGameCardDrawer";
+import { ScoreboardDrawer } from "./Scoreboard/ScoreboardDrawer";
 import { Hint } from "./Hint";
 
 import { getNewWord } from "../../Services/getNewWord";
+import { getScores } from "../../Services/scoreboard";
 import { winMessages, loseMessages } from "./alertMessages";
 
 import Card from "@mui/material/Card";
@@ -27,6 +29,7 @@ import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import VideogameAssetIcon from "@mui/icons-material/VideogameAsset";
+import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import Grid from "@mui/material/Unstable_Grid2";
 import "../../App.css";
@@ -55,6 +58,8 @@ export const WordGame = () => {
     "F",
     "F",
   ]);
+  const [scoreList, setScoreList] = useState<userScore[]>();
+  const [isScoresLoading, setIsScoresLoading] = useState(true);
 
   //Grab a word from the API once on page load.
   useEffect(() => {
@@ -131,9 +136,10 @@ export const WordGame = () => {
     });
   };
 
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isAboutDrawerOpen, setIsAboutDrawerOpen] = useState(false);
+  const [isScoreDrawerOpen, setIsScoreDrawerOpen] = useState(false);
 
-  const toggleDrawer =
+  const toggleAboutDrawer =
     (isOpen: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
       if (
         event.type === "keydown" &&
@@ -142,7 +148,29 @@ export const WordGame = () => {
       ) {
         return;
       }
-      setIsDrawerOpen(isOpen);
+      setIsAboutDrawerOpen(isOpen);
+    };
+  const toggleScoreDrawer =
+    (isOpen: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+      if (
+        event.type === "keydown" &&
+        ((event as React.KeyboardEvent).key === "Tab" ||
+          (event as React.KeyboardEvent).key === "Shift")
+      ) {
+        return;
+      }
+      getScores().then((response) => {
+        setIsScoresLoading(true);
+        console.log("hey");
+        console.log(response);
+        if (!(response instanceof Error)) {
+          setIsScoresLoading(false);
+          setScoreList(response);
+        } else {
+          return;
+        }
+      });
+      setIsScoreDrawerOpen(isOpen);
     };
 
   const keyboardLetterHandler = (letter: string) => {
@@ -229,8 +257,6 @@ export const WordGame = () => {
                       key={letter + index}
                       show={guessedLetters.includes(letter) || isGameOver}
                       status={secretLetterStatusHandler(letter)}
-                      // right={isGameOver && guessedLetters.includes(letter)}
-                      // wrong={isGameOver && !guessedLetters.includes(letter)}
                     />
                   ))}
               </SecretWordWrapper>
@@ -266,19 +292,35 @@ export const WordGame = () => {
                 />
               </ControlsContainer>
             </UserInterfaceContainer>
-            <CardActions onClick={() => setIsDrawerOpen(true)}>
+            <CardActions onClick={() => setIsScoreDrawerOpen(true)}>
+              <Button sx={{ color: "#000" }}>
+                <MilitaryTechIcon
+                  fontSize="large"
+                  sx={{ paddingRight: "10px" }}
+                />
+                <Typography>High Scores</Typography>
+                <KeyboardArrowRightIcon />
+              </Button>
+            </CardActions>
+            <CardActions onClick={() => setIsAboutDrawerOpen(true)}>
               <Button sx={{ color: "#000" }}>
                 <VideogameAssetIcon
                   fontSize="large"
                   sx={{ paddingRight: "10px" }}
                 />
-                <Typography> Game Info</Typography>
+                <Typography>Game Info</Typography>
                 <KeyboardArrowRightIcon />
               </Button>
             </CardActions>
+            <ScoreboardDrawer
+              toggleDrawer={toggleScoreDrawer}
+              loading={isScoresLoading}
+              isDrawerOpen={isScoreDrawerOpen}
+              {...(scoreList && { scoreList })}
+            />
             <WordGameCardDrawer
-              toggleDrawer={toggleDrawer}
-              isDrawerOpen={isDrawerOpen}
+              toggleDrawer={toggleAboutDrawer}
+              isDrawerOpen={isAboutDrawerOpen}
             />
           </Card>
         </WordGameCardContainer>
