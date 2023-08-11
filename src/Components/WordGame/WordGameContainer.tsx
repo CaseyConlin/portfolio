@@ -150,6 +150,20 @@ export const WordGame = () => {
       }
       setIsAboutDrawerOpen(isOpen);
     };
+  const scoreBoardDrawerHandler = () => {
+    getScores().then((response) => {
+      setIsScoresLoading(true);
+      console.log("hey");
+      console.log(response);
+      if (!(response instanceof Error)) {
+        setIsScoresLoading(false);
+        setScoreList(response);
+      } else {
+        return;
+      }
+    });
+    setIsScoreDrawerOpen(true);
+  };
   const toggleScoreDrawer =
     (isOpen: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
       if (
@@ -159,17 +173,7 @@ export const WordGame = () => {
       ) {
         return;
       }
-      getScores().then((response) => {
-        setIsScoresLoading(true);
-        console.log("hey");
-        console.log(response);
-        if (!(response instanceof Error)) {
-          setIsScoresLoading(false);
-          setScoreList(response);
-        } else {
-          return;
-        }
-      });
+
       setIsScoreDrawerOpen(isOpen);
     };
 
@@ -292,7 +296,7 @@ export const WordGame = () => {
                 />
               </ControlsContainer>
             </UserInterfaceContainer>
-            <CardActions onClick={() => setIsScoreDrawerOpen(true)}>
+            <CardActions onClick={scoreBoardDrawerHandler}>
               <Button sx={{ color: "#000" }}>
                 <MilitaryTechIcon
                   fontSize="large"

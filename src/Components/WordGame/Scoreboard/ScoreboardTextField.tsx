@@ -5,12 +5,19 @@ export const ScoreTextField = () => {
     <Box
       component="form"
       sx={{
-        "& > :not(style)": { m: 1, width: "25ch" },
+        "& > :not(style)": { m: 1, width: "8rem" },
       }}
       noValidate
       autoComplete="off"
     >
-      <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+      <TextField
+        sx={{
+          input: { textAlign: "center" },
+        }}
+        id="outlined-basic"
+        label="Enter Initials"
+        variant="outlined"
+      />
     </Box>
   );
 };
