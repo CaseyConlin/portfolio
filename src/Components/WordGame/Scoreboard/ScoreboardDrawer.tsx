@@ -1,15 +1,8 @@
-import { ScoreTextField } from "./ScoreboardTextField";
+import { ReactElement } from "react";
 import Drawer from "@mui/material/Drawer";
 import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import "../../../App.css";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import EmailIcon from "@mui/icons-material/Email";
-import IconButton from "@mui/material/IconButton";
-import { blue } from "@mui/material/colors";
-import { ScoreboardTable } from "./ScoreboardTable";
 
 interface Props {
   isDrawerOpen: boolean;
@@ -18,12 +11,14 @@ interface Props {
   toggleDrawer: (
     isOpen: boolean
   ) => (event: React.KeyboardEvent | React.MouseEvent) => void;
+  children: ReactElement | ReactElement[];
 }
 export const ScoreboardDrawer = ({
   isDrawerOpen,
   loading,
   toggleDrawer,
   scoreList,
+  children,
 }: Props) => {
   return (
     <Drawer
@@ -52,12 +47,8 @@ export const ScoreboardDrawer = ({
         </Box>{" "}
         High Scores
       </Typography>
-      <Typography variant="h5" color="text.primary" pt={2}>
-        Lameplay
-      </Typography>
-      <ScoreboardTable />
 
-      <ScoreTextField />
+      {children}
     </Drawer>
   );
 };

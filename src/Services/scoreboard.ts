@@ -9,7 +9,6 @@ export const getScores = async () => {
     if (!response.ok) {
       throw new Error("We're having trouble connecting to our scorebaord 🫥");
     }
-    console.log("hey");
     const data: userScore[] = await response.json();
     return data;
   } catch (error: unknown) {

@@ -3,11 +3,13 @@ import { useState, useEffect } from "react";
 import { RocketContainer } from "./RocketContainer";
 import { RocketWrapper } from "./RocketWrapper";
 import { WordGameCardContainer } from "./WordGameCardContainer";
-import { WordGameCardHeader } from "./WordGameCardHeader";
+
 import { SecretWordContainer } from "./SecretWordContainer";
 import { SecretWordWrapper } from "./SecretWordWrapper";
+import { Hint } from "./Hint";
 import { WordGameAlert } from "./WordGameAlert";
 import { SecretLetterTile } from "./SecretLetterTile";
+
 import { UserInterfaceContainer } from "./UserInterfaceContainer";
 import { KeyboardContainer } from "./KeyboardContainer";
 import { KeyboardWrapper } from "./KeyboardWrapper";
@@ -16,13 +18,19 @@ import { ControlsContainer } from "./ControlsContainer";
 import { ResetButton } from "./ResetButton";
 import { NumberOfLettersSelector } from "./NumberOfLettersSelector";
 import { ErrorCountViewer } from "./ErrorCountView";
+
 import { WordGameCardDrawer } from "./WordGameCardDrawer";
+import { WordGameCardHeader } from "./WordGameCardHeader";
+
 import { ScoreboardDrawer } from "./Scoreboard/ScoreboardDrawer";
-import { Hint } from "./Hint";
+import { ScoreboardTable } from "./Scoreboard/ScoreboardTable";
+import { ScoreTextField } from "./Scoreboard/ScoreboardTextField";
 
 import { getNewWord } from "../../Services/getNewWord";
 import { getScores } from "../../Services/scoreboard";
+
 import { winMessages, loseMessages } from "./alertMessages";
+import { headings } from "./Scoreboard/headings";
 
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -36,6 +44,8 @@ import "../../App.css";
 import styles from "./WordGameContainer.module.css";
 
 export const WordGame = () => {
+  const [isAboutDrawerOpen, setIsAboutDrawerOpen] = useState(false);
+  const [isScoreDrawerOpen, setIsScoreDrawerOpen] = useState(false);
   const [numberOfLetters, setNumberOfLetters] = useState<number | number[]>(7);
   const [errorCount, setErrorCount] = useState(5);
   const [hint, setHint] = useState("");
@@ -135,9 +145,6 @@ export const WordGame = () => {
         setAlertMessage({ message: response.apiError, severity: "error" });
     });
   };
-
-  const [isAboutDrawerOpen, setIsAboutDrawerOpen] = useState(false);
-  const [isScoreDrawerOpen, setIsScoreDrawerOpen] = useState(false);
 
   const toggleAboutDrawer =
     (isOpen: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -321,7 +328,13 @@ export const WordGame = () => {
               loading={isScoresLoading}
               isDrawerOpen={isScoreDrawerOpen}
               {...(scoreList && { scoreList })}
-            />
+            >
+              <ScoreTextField />
+              <ScoreboardTable
+                headings={headings}
+                scores={scoreList}
+              ></ScoreboardTable>
+            </ScoreboardDrawer>
             <WordGameCardDrawer
               toggleDrawer={toggleAboutDrawer}
               isDrawerOpen={isAboutDrawerOpen}

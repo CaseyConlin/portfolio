@@ -29,7 +29,7 @@ type userScore = {
   name: string;
   score: number;
   word: string;
-  gameDate: Date;
+  gameDate: string;
 };
 
 // type userScoresResponse = {
