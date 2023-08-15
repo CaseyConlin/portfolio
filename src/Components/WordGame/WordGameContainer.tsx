@@ -24,10 +24,12 @@ import { WordGameCardHeader } from "./WordGameCardHeader";
 
 import { ScoreboardDrawer } from "./Scoreboard/ScoreboardDrawer";
 import { ScoreboardTable } from "./Scoreboard/ScoreboardTable";
-import { ScoreTextField } from "./Scoreboard/ScoreboardTextField";
+import { NewScoreRow } from "./Scoreboard/NewScoreRow";
+// import { ScoreTextField } from "./Scoreboard/ScoreboardTextField";
 
 import { getNewWord } from "../../Services/getNewWord";
 import { getScores } from "../../Services/scoreboard";
+import { registerNewScore } from "../../Services/scoreboard";
 
 import { winMessages, loseMessages } from "./alertMessages";
 import { headings } from "./Scoreboard/headings";
@@ -42,6 +44,7 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import Grid from "@mui/material/Unstable_Grid2";
 import "../../App.css";
 import styles from "./WordGameContainer.module.css";
+import { NewScoreForm } from "./Scoreboard/NewScoreForm";
 
 export const WordGame = () => {
   const [isAboutDrawerOpen, setIsAboutDrawerOpen] = useState(false);
@@ -52,6 +55,16 @@ export const WordGame = () => {
   const [rightCount, setRightCount] = useState(0);
   const [guessedLetters, setGuessedLetters] = useState([""]);
   const [isGameOver, setIsGameOver] = useState(false);
+  const [newScore, setNewScore] = useState<userScore | undefined>({
+    name: "LIK",
+    score: 43,
+    word: "BIGWORD",
+    gameDate: new Date().toLocaleDateString("en-US", {
+      day: "numeric",
+      month: "numeric",
+      year: "numeric",
+    }),
+  });
   const [alertMessage, setAlertMessage] = useState<{
     message: string;
     severity: "success" | "error";
@@ -71,7 +84,18 @@ export const WordGame = () => {
   const [scoreList, setScoreList] = useState<userScore[]>();
   const [isScoresLoading, setIsScoresLoading] = useState(true);
 
+  // setNewScore({
+  //   name: "***",
+  //   score: 43,
+  //   word: "BIGWORD",
+  //   gameDate: new Date().toLocaleDateString("en-US", {
+  //     day: "numeric",
+  //     month: "numeric",
+  //     year: "numeric",
+  //   }),
+  // });
   //Grab a word from the API once on page load.
+
   useEffect(() => {
     getNewWord(numberOfLetters).then((response) => {
       if (response && response.word) {
@@ -160,8 +184,6 @@ export const WordGame = () => {
   const scoreBoardDrawerHandler = () => {
     getScores().then((response) => {
       setIsScoresLoading(true);
-      console.log("hey");
-      console.log(response);
       if (!(response instanceof Error)) {
         setIsScoresLoading(false);
         setScoreList(response);
@@ -203,6 +225,11 @@ export const WordGame = () => {
     }
 
     return status;
+  };
+
+  const handleNewScore = () => {
+    console.log("hey");
+    newScore && registerNewScore(newScore);
   };
 
   const keyboardLetterStatusHandler = (letter: string) => {
@@ -327,13 +354,15 @@ export const WordGame = () => {
               toggleDrawer={toggleScoreDrawer}
               loading={isScoresLoading}
               isDrawerOpen={isScoreDrawerOpen}
-              {...(scoreList && { scoreList })}
             >
-              <ScoreTextField />
-              <ScoreboardTable
-                headings={headings}
-                scores={scoreList}
-              ></ScoreboardTable>
+              {/* <ScoreTextField /> */}
+              <ScoreboardTable headings={headings} scores={scoreList}>
+                {newScore && (
+                  <NewScoreRow newScore={newScore}>
+                    <NewScoreForm registerScore={handleNewScore} />
+                  </NewScoreRow>
+                )}
+              </ScoreboardTable>
             </ScoreboardDrawer>
             <WordGameCardDrawer
               toggleDrawer={toggleAboutDrawer}

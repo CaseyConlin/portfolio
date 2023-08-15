@@ -30,5 +30,5 @@ const deleteData = async () => {
     console.log(error);
   }
 };
+deleteData();
 importData();
-// deleteData();

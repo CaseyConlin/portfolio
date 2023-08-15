@@ -2,6 +2,7 @@ import { ReactElement } from "react";
 import Drawer from "@mui/material/Drawer";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
 import "../../../App.css";
 
 interface Props {
@@ -15,9 +16,7 @@ interface Props {
 }
 export const ScoreboardDrawer = ({
   isDrawerOpen,
-  loading,
   toggleDrawer,
-  scoreList,
   children,
 }: Props) => {
   return (
@@ -33,19 +32,12 @@ export const ScoreboardDrawer = ({
         },
       }}
     >
-      <ul>
-        {loading && <p>Loading</p>}
-        {scoreList &&
-          scoreList.map((score, index) => {
-            return <li key={score.name + index}>{score.name}</li>;
-          })}
-      </ul>
-
       <Typography variant="h4" color="text.primary">
         <Box component="span" sx={{ fontFamily: "Nasa", fontSize: "2.5rem" }}>
           LIFT_FF
         </Box>{" "}
         High Scores
+        <MilitaryTechIcon fontSize="large" sx={{ paddingRight: "10px" }} />
       </Typography>
 
       {children}

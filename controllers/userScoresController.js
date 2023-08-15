@@ -12,6 +12,7 @@ userScoresController.getScores = async (req, res) => {
 
 userScoresController.postScores = async (req, res) => {
   const userScore = req.body;
+
   const newUserScore = new UserScore({
     name: userScore.name,
     score: userScore.score,
