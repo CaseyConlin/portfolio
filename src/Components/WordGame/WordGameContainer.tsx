@@ -56,6 +56,7 @@ export const WordGame = () => {
   const [guessedLetters, setGuessedLetters] = useState([""]);
   const [isGameOver, setIsGameOver] = useState(false);
   // const [newScore, setNewScore] = useState<userScore | undefined>();
+
   const [newScore, setNewScore] = useState<userScore | undefined>({
     name: "",
     score: 43,
@@ -203,7 +204,6 @@ export const WordGame = () => {
       ) {
         return;
       }
-
       setIsScoreDrawerOpen(isOpen);
     };
 
@@ -226,12 +226,18 @@ export const WordGame = () => {
     }
     return status;
   };
+
+  // event: React.ChangeEvent<HTMLInputElement>) => {
+  //   changeHandler(event.target.value)
   const scoreNameChangeHandler = (name: string) => {
     if (newScore) {
-      console.log(newScore.name);
       const newScoreValue = newScore;
       newScoreValue.name = name;
-      setNewScore(newScoreValue);
+
+      // if (name.length > 0) {
+      //   setIsNameValid(true);
+      // }
+      setNewScore({ ...newScoreValue });
     }
   };
   const handleNewScoreRegister = () => {
@@ -252,6 +258,7 @@ export const WordGame = () => {
   const onKeyDown = (event: KeyboardEvent) => {
     const newKey = event.key.toUpperCase();
     if (
+      !isScoreDrawerOpen &&
       newKey.length === 1 &&
       alpha.includes(newKey) &&
       !guessedLetters.includes(newKey)
@@ -368,7 +375,7 @@ export const WordGame = () => {
                     <NewScoreForm
                       registerScore={handleNewScoreRegister}
                       changeHandler={scoreNameChangeHandler}
-                      newScore={newScore}
+                      name={newScore.name}
                     />
                   </NewScoreRow>
                 )}

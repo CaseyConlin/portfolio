@@ -1,51 +1,51 @@
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import { IconButton } from "@mui/material";
-import { lightGreen } from "@mui/material/colors";
+import Button from "@mui/material/Button";
+import { lightGreen, grey } from "@mui/material/colors";
 
 interface Props {
   changeHandler: (name: string) => void;
   registerScore: () => void;
-  newScore: userScore;
+  name: string;
 }
 
-export const NewScoreForm = ({
-  registerScore,
-  changeHandler,
-  newScore,
-}: Props) => {
-  function handleSubmit(e: React.MouseEvent<HTMLFormElement>) {
+const ScoreTextField = styled(TextField)`
+  & input {
+    color: ${lightGreen["A400"]};
+    text-align: center;
+    text-transform: uppercase;
+  }
+  & label.Mui-focused {
+    color: ${lightGreen["A400"]};
+  }
+  & .MuiOutlinedInput-root {
+    & fieldset {
+      border-color: ${lightGreen["A400"]};
+    }
+    &:hover fieldset {
+      border-color: ${lightGreen["A400"]};
+    }
+    &.Mui-focused fieldset {
+      border-color: ${lightGreen["A400"]};
+    }
+  }
+`;
+
+export const NewScoreForm = ({ registerScore, changeHandler, name }: Props) => {
+  const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
     registerScore();
-  }
-
-  const green = lightGreen["A400"];
-  const ScoreTextField = styled(TextField)`
-    & label.Mui-focused {
-      color: #76ff03;
-    }
-    & .MuiOutlinedInput-root {
-      & fieldset {
-        border-color: #76ff03;
-      }
-      &:hover fieldset {
-        border-color: #76ff03;
-      }
-      &.Mui-focused fieldset {
-        border-color: #76ff03;
-      }
-    }
-  `;
+  };
 
   return (
     <Box
       component="form"
       sx={{
+        mb: 0,
+        pb: 0,
         "& > :not(style)": { m: 1 },
-        pl: "3rem",
-        color: lightGreen["A400"],
+        // pl: "3rem",
       }}
       noValidate
       autoComplete="off"
@@ -53,33 +53,14 @@ export const NewScoreForm = ({
     >
       <ScoreTextField
         sx={{
-          color: lightGreen["A400"],
           width: "5rem",
-
-          input: {
-            "& fieldset": {
-              borderColor: "white",
-            },
-            "&:hover fieldset": {
-              borderColor: "white",
-            },
-            "&.Mui-focused fieldset": {
-              borderColor: "yellow",
-            },
-            textAlign: "center",
-            textTransform: "uppercase",
-
-            color: lightGreen["A400"],
-            "&::placeholder": {
-              color: "inherit",
-            },
-          },
         }}
         required
         margin="none"
         size="small"
         label="Initials"
         variant="outlined"
+        value={name}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           changeHandler(event.target.value);
         }}
@@ -88,12 +69,27 @@ export const NewScoreForm = ({
           style: { color: "inherit" },
         }}
       ></ScoreTextField>
-      <IconButton
-        disabled={newScore.name.length === 0}
-        sx={{ mx: "0px", px: "0px" }}
+      <Button
+        disabled={name.length === 0}
+        type="submit"
+        sx={{
+          m: "0px",
+          p: "0px",
+          color: lightGreen["A400"],
+          background: grey[900],
+          border: `1px ${lightGreen["A400"]} solid`,
+          "&:hover": {
+            background: lightGreen["A400"],
+            color: grey[900],
+          },
+          "&:disabled": {
+            color: lightGreen[700],
+          },
+        }}
+        size="small"
       >
-        <CheckCircleIcon sx={{ mx: "0rem", px: "0rem" }} />
-      </IconButton>
+        Submit
+      </Button>
     </Box>
   );
 };
