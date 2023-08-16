@@ -13,7 +13,6 @@ import Paper from "@mui/material/Paper";
 export interface Props {
   headings: Heading[];
   scores: userScore[] | undefined;
-
   children?: ReactElement;
 }
 
@@ -42,15 +41,29 @@ export const ScoreboardTable = ({ headings, scores, children }: Props) => {
     rows && page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Paper>
-      <TableContainer component={Paper}>
+    <Paper
+      elevation={0}
+      sx={{ mx: "auto", backgroundColor: "inherit", color: "inherit" }}
+    >
+      <TableContainer
+        component={Paper}
+        sx={{
+          backgroundColor: "inherit",
+          color: "inherit",
+          fontSize: "inherit",
+          borderBottom: "none",
+          boxShadow: 0,
+        }}
+      >
         <Table
           sx={{
-            minWidth: 500,
+            backgroundColor: "inherit",
+            color: "inherit",
+            fontSize: "inherit",
           }}
+          style={{ width: "auto", tableLayout: "fixed" }}
           className="scores-table"
           aria-label="high scores table"
-          stickyHeader
         >
           <ScoreboardTableHead headings={headings} />
           {rows && (
@@ -62,22 +75,66 @@ export const ScoreboardTable = ({ headings, scores, children }: Props) => {
                   )
                 : rows
               ).map((score, index) => (
-                <TableRow key={score.name + index}>
+                <TableRow
+                  key={score.name + index}
+                  sx={{ textTransform: "uppercase" }}
+                >
                   <TableCell
                     component="th"
                     scope="row"
                     align="center"
-                    sx={{ textAlign: "center" }}
+                    style={{ width: "50px" }}
+                    sx={{
+                      textAlign: "center",
+                      color: "inherit",
+                      fontSize: "inherit",
+                      borderBottom: "none",
+                    }}
+                  >
+                    {index + 1}
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      textAlign: "center",
+                      color: "inherit",
+                      fontSize: "inherit",
+                      borderBottom: "none",
+                    }}
+                    align="center"
                   >
                     {score.name}
                   </TableCell>
-                  <TableCell style={{}} align="center">
+                  <TableCell
+                    sx={{
+                      textAlign: "center",
+                      color: "inherit",
+                      fontSize: "inherit",
+                      borderBottom: "none",
+                    }}
+                    align="center"
+                  >
                     {score.score}
                   </TableCell>
-                  <TableCell style={{}} align="center">
+                  <TableCell
+                    sx={{
+                      textAlign: "center",
+                      color: "inherit",
+                      fontSize: "inherit",
+                      borderBottom: "none",
+                    }}
+                    align="center"
+                  >
                     {score.word}
                   </TableCell>
-                  <TableCell style={{}} align="center">
+                  <TableCell
+                    sx={{
+                      textAlign: "center",
+                      color: "inherit",
+                      fontSize: "inherit",
+                      borderBottom: "none",
+                    }}
+                    align="center"
+                  >
                     {new Date(score.gameDate).toLocaleDateString("en-US", {
                       day: "numeric",
                       month: "numeric",
@@ -99,7 +156,7 @@ export const ScoreboardTable = ({ headings, scores, children }: Props) => {
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
-        sx={{ mb: 10 }}
+        sx={{ mb: 10, color: "inherit" }}
         count={rows ? rows.length : 0}
         rowsPerPage={rowsPerPage}
         page={page}

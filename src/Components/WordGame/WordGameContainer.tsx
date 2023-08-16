@@ -55,8 +55,9 @@ export const WordGame = () => {
   const [rightCount, setRightCount] = useState(0);
   const [guessedLetters, setGuessedLetters] = useState([""]);
   const [isGameOver, setIsGameOver] = useState(false);
+  // const [newScore, setNewScore] = useState<userScore | undefined>();
   const [newScore, setNewScore] = useState<userScore | undefined>({
-    name: "LIK",
+    name: "",
     score: 43,
     word: "BIGWORD",
     gameDate: new Date().toLocaleDateString("en-US", {
@@ -223,12 +224,17 @@ export const WordGame = () => {
       status = guessedLetters.includes(letter) ? "right" : "wrong";
       return status;
     }
-
     return status;
   };
-
-  const handleNewScore = () => {
-    console.log("hey");
+  const scoreNameChangeHandler = (name: string) => {
+    if (newScore) {
+      console.log(newScore.name);
+      const newScoreValue = newScore;
+      newScoreValue.name = name;
+      setNewScore(newScoreValue);
+    }
+  };
+  const handleNewScoreRegister = () => {
     newScore && registerNewScore(newScore);
   };
 
@@ -359,7 +365,11 @@ export const WordGame = () => {
               <ScoreboardTable headings={headings} scores={scoreList}>
                 {newScore && (
                   <NewScoreRow newScore={newScore}>
-                    <NewScoreForm registerScore={handleNewScore} />
+                    <NewScoreForm
+                      registerScore={handleNewScoreRegister}
+                      changeHandler={scoreNameChangeHandler}
+                      newScore={newScore}
+                    />
                   </NewScoreRow>
                 )}
               </ScoreboardTable>

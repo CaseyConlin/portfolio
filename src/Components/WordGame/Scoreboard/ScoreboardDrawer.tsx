@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
 import "../../../App.css";
+import { grey, lightGreen } from "@mui/material/colors";
 
 interface Props {
   isDrawerOpen: boolean;
@@ -29,15 +30,26 @@ export const ScoreboardDrawer = ({
           width: { xs: "65%", sm: "45%", lg: "40%" },
           p: { xs: 2, sm: 3 },
           pb: 4,
+          background: grey[900],
+          color: lightGreen["A400"],
+          fontSize: "1rem",
         },
       }}
     >
-      <Typography variant="h4" color="text.primary">
-        <Box component="span" sx={{ fontFamily: "Nasa", fontSize: "2.5rem" }}>
+      <Typography variant="h4" align="center" py={"20px"}>
+        <Box
+          component="span"
+          sx={{
+            fontFamily: "Nasa",
+            fontSize: "3.5rem",
+          }}
+        >
           LIFT_FF
         </Box>{" "}
+        <br />
+        <MilitaryTechIcon fontSize="large" sx={{ pr: "10px" }} />
         High Scores
-        <MilitaryTechIcon fontSize="large" sx={{ paddingRight: "10px" }} />
+        <MilitaryTechIcon fontSize="large" sx={{ pl: "8px" }} />
       </Typography>
 
       {children}
