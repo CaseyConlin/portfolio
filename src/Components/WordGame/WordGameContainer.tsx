@@ -74,6 +74,13 @@ export const WordGame = () => {
     message: "Alert",
     severity: "success",
   });
+
+  const scoreRegisterHandler = () => {
+    scoreBoardDrawerHandler();
+    //open secret drawer
+    // set focus to secret form field
+    // set score state for score, date, and word
+  };
   const [secretWord, setSecretWord] = useState([
     "L",
     "I",
@@ -227,16 +234,10 @@ export const WordGame = () => {
     return status;
   };
 
-  // event: React.ChangeEvent<HTMLInputElement>) => {
-  //   changeHandler(event.target.value)
   const scoreNameChangeHandler = (name: string) => {
     if (newScore) {
       const newScoreValue = newScore;
       newScoreValue.name = name;
-
-      // if (name.length > 0) {
-      //   setIsNameValid(true);
-      // }
       setNewScore({ ...newScoreValue });
     }
   };
@@ -297,7 +298,10 @@ export const WordGame = () => {
             <WordGameCardHeader />
 
             <SecretWordContainer>
-              <WordGameAlert alertMessage={alertMessage} />
+              <WordGameAlert
+                alertMessage={alertMessage}
+                scoreRegisterHandler={scoreRegisterHandler}
+              />
 
               <SecretWordWrapper>
                 {secretWord &&
@@ -368,18 +372,19 @@ export const WordGame = () => {
               loading={isScoresLoading}
               isDrawerOpen={isScoreDrawerOpen}
             >
+              {newScore ? (
+                <NewScoreRow newScore={newScore}>
+                  <NewScoreForm
+                    registerScore={handleNewScoreRegister}
+                    changeHandler={scoreNameChangeHandler}
+                    name={newScore.name}
+                  />
+                </NewScoreRow>
+              ) : (
+                <></>
+              )}
               {/* <ScoreTextField /> */}
-              <ScoreboardTable headings={headings} scores={scoreList}>
-                {newScore && (
-                  <NewScoreRow newScore={newScore}>
-                    <NewScoreForm
-                      registerScore={handleNewScoreRegister}
-                      changeHandler={scoreNameChangeHandler}
-                      name={newScore.name}
-                    />
-                  </NewScoreRow>
-                )}
-              </ScoreboardTable>
+              <ScoreboardTable headings={headings} scores={scoreList} />
             </ScoreboardDrawer>
             <WordGameCardDrawer
               toggleDrawer={toggleAboutDrawer}

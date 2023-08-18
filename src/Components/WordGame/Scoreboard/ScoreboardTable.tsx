@@ -12,8 +12,8 @@ import Paper from "@mui/material/Paper";
 
 export interface Props {
   headings: Heading[];
-  scores: userScore[] | undefined;
-  children?: ReactElement;
+  scores?: userScore[] | undefined;
+  children?: ReactElement | ReactElement[];
 }
 
 export const ScoreboardTable = ({ headings, scores, children }: Props) => {
@@ -66,6 +66,8 @@ export const ScoreboardTable = ({ headings, scores, children }: Props) => {
           aria-label="high scores table"
         >
           <ScoreboardTableHead headings={headings} />
+          {children}
+
           {rows && (
             <TableBody>
               {(rowsPerPage > 0
@@ -143,7 +145,6 @@ export const ScoreboardTable = ({ headings, scores, children }: Props) => {
                   </TableCell>
                 </TableRow>
               ))}
-              {children}
               {emptyRows > 0 && (
                 <TableRow style={{ height: 53 * emptyRows }}>
                   <TableCell colSpan={6} />
@@ -153,16 +154,18 @@ export const ScoreboardTable = ({ headings, scores, children }: Props) => {
           )}
         </Table>
       </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
-        component="div"
-        sx={{ mb: 10, color: "inherit" }}
-        count={rows ? rows.length : 0}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
+      {scores && (
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25]}
+          component="div"
+          sx={{ mb: 10, color: "inherit" }}
+          count={rows ? rows.length : 0}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      )}
     </Paper>
   );
 };

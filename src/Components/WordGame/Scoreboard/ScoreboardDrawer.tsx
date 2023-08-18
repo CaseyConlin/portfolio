@@ -13,7 +13,7 @@ interface Props {
   toggleDrawer: (
     isOpen: boolean
   ) => (event: React.KeyboardEvent | React.MouseEvent) => void;
-  children: ReactElement | ReactElement[];
+  children?: ReactElement | ReactElement[];
 }
 export const ScoreboardDrawer = ({
   isDrawerOpen,
