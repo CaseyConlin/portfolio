@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 
 import { ScoreboardTable } from "./ScoreboardTable";
 import { lightGreen, grey } from "@mui/material/colors";
+import { TableBody } from "@mui/material";
 
 interface Props {
   newScore: userScore;
@@ -37,51 +38,65 @@ export const NewScoreRow = ({ newScore, children }: Props) => {
         </Box>
       </Box>
       <ScoreboardTable headings={headings}>
-        <TableRow
-          sx={{
-            background: lightGreen["A400"],
-            color: grey[900],
-            borderBottomColor: lightGreen["A400"],
-            verticalAlign: "top",
-          }}
-        >
-          <TableCell
-            component="th"
-            scope="row"
-            align="center"
+        <TableBody>
+          <TableRow
             sx={{
-              textAlign: "center",
+              background: lightGreen["A400"],
               color: grey[900],
               borderBottomColor: lightGreen["A400"],
+              verticalAlign: "top",
             }}
           >
-            Rank
-          </TableCell>
-          <TableCell
-            style={{ color: grey[900], borderBottomColor: lightGreen["A400"] }}
-            align="center"
-          >
-            {children}
-          </TableCell>
-          <TableCell
-            style={{ color: grey[900], borderBottomColor: lightGreen["A400"] }}
-            align="center"
-          >
-            {newScore.score}
-          </TableCell>
-          <TableCell
-            style={{ color: grey[900], borderBottomColor: lightGreen["A400"] }}
-            align="center"
-          >
-            {newScore.word}
-          </TableCell>
-          <TableCell
-            style={{ color: grey[900], borderBottomColor: lightGreen["A400"] }}
-            align="center"
-          >
-            {newScore.gameDate}
-          </TableCell>
-        </TableRow>
+            <TableCell
+              component="th"
+              scope="row"
+              align="center"
+              sx={{
+                textAlign: "center",
+                color: grey[900],
+                borderBottomColor: lightGreen["A400"],
+              }}
+            >
+              Rank
+            </TableCell>
+            <TableCell
+              style={{
+                color: grey[900],
+                borderBottomColor: lightGreen["A400"],
+              }}
+              align="center"
+            >
+              {children}
+            </TableCell>
+            <TableCell
+              style={{
+                color: grey[900],
+                borderBottomColor: lightGreen["A400"],
+              }}
+              align="center"
+            >
+              {newScore.score}
+            </TableCell>
+            <TableCell
+              style={{
+                color: grey[900],
+                borderBottomColor: lightGreen["A400"],
+              }}
+              align="center"
+            >
+              {newScore.word}
+            </TableCell>
+            <TableCell
+              style={{
+                color: grey[900],
+                borderBottomColor: lightGreen["A400"],
+              }}
+              align="center"
+            >
+              {newScore.gameDate}
+            </TableCell>
+          </TableRow>
+        </TableBody>
       </ScoreboardTable>
     </Paper>
   );

@@ -25,6 +25,7 @@ export const getNewWord = async (letterCount: number | number[] = 6) => {
     return {
       word: data.word.toUpperCase(),
       hint: data.results && data.results[0].typeOf[0],
+      frequency: data.frequency,
     };
   } catch (error) {
     let message = "";

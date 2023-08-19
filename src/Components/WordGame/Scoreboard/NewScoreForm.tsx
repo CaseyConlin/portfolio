@@ -80,41 +80,43 @@ export const NewScoreForm = ({ registerScore, changeHandler, name }: Props) => {
         mt={1}
       >
         <Tooltip title="Submit">
-          <IconButton
-            disabled={name.length === 0}
-            type="submit"
-            sx={{
-              width: "25px",
-              height: "25px",
-              // background: grey[900],
-              // color: lightGreen["A400"],
-              // border: `${lightGreen["A400"]} 1px solid`,
-              border: `${grey[900]} 1px solid`,
-              background: lightGreen["A400"],
-              color: grey[900],
-
-              "&:hover": {
-                transform: "scale(1.1)",
-                transition: "all 0.3s ease",
+          <span>
+            <IconButton
+              disabled={name.length === 0}
+              type="submit"
+              sx={{
+                width: "25px",
+                height: "25px",
                 // background: grey[900],
                 // color: lightGreen["A400"],
                 // border: `${lightGreen["A400"]} 1px solid`,
+                border: `${grey[900]} 1px solid`,
+                background: lightGreen["A400"],
+                color: grey[900],
 
-                // border: `${grey[900]} 1px solid`,
-                // background: lightGreen["A400"],
-                // color: grey[900],
-              },
-              "&:disabled": {
-                // color: grey[500],
-                // backgroundColor: grey[900],
-                background: lightGreen[900],
-                color: lightGreen["A400"],
-                border: `${lightGreen["A400"]} 1px solid`,
-              },
-            }}
-          >
-            <RocketLaunchIcon sx={{ m: 0 }} fontSize="small" />
-          </IconButton>
+                "&:hover": {
+                  transform: "scale(1.1)",
+                  transition: "all 0.3s ease",
+                  // background: grey[900],
+                  // color: lightGreen["A400"],
+                  // border: `${lightGreen["A400"]} 1px solid`,
+
+                  // border: `${grey[900]} 1px solid`,
+                  // background: lightGreen["A400"],
+                  // color: grey[900],
+                },
+                "&:disabled": {
+                  // color: grey[500],
+                  // backgroundColor: grey[900],
+                  background: lightGreen[900],
+                  color: lightGreen["A400"],
+                  border: `${lightGreen["A400"]} 1px solid`,
+                },
+              }}
+            >
+              <RocketLaunchIcon sx={{ m: 0 }} fontSize="small" />
+            </IconButton>
+          </span>
         </Tooltip>
         <Tooltip title="Cancel" sx={{ background: "#000" }}>
           <IconButton

@@ -52,15 +52,15 @@ export const WordGame = () => {
   const [numberOfLetters, setNumberOfLetters] = useState<number | number[]>(7);
   const [errorCount, setErrorCount] = useState(5);
   const [hint, setHint] = useState("");
+  const [frequency, setFrequency] = useState(0);
   const [rightCount, setRightCount] = useState(0);
   const [guessedLetters, setGuessedLetters] = useState([""]);
   const [isGameOver, setIsGameOver] = useState(false);
-  // const [newScore, setNewScore] = useState<userScore | undefined>();
 
   const [newScore, setNewScore] = useState<userScore | undefined>({
     name: "",
-    score: 43,
-    word: "BIGWORD",
+    score: 0,
+    word: "",
     gameDate: new Date().toLocaleDateString("en-US", {
       day: "numeric",
       month: "numeric",
@@ -75,8 +75,46 @@ export const WordGame = () => {
     severity: "success",
   });
 
+  const scoreCalculator = () => {
+    let score = Math.ceil(secretWord.length * frequency * 1);
+
+    score += errorCount * 5;
+
+    secretWord.map((letter) => {
+      if (letter.match(/A|E|I|O|U|L|N|S|T|R/)) {
+        score += 1;
+      }
+      if (letter.match(/D|G/)) {
+        score += 2;
+      }
+      if (letter.match(/B|C|M|P/)) {
+        score += 3;
+      }
+      if (letter.match(/F|H|V|W|Y/)) {
+        score += 4;
+      }
+      if (letter.match(/K/)) {
+        score += 5;
+      }
+      if (letter.match(/J|X/)) {
+        score += 8;
+      }
+      if (letter.match(/Q|Z/)) {
+        score += 10;
+      }
+    });
+    new Set(secretWord).size !== secretWord.length ? score : (score += 10);
+
+    return score;
+  };
   const scoreRegisterHandler = () => {
     scoreBoardDrawerHandler();
+    setNewScore({
+      name: "",
+      score: scoreCalculator(),
+      word: secretWord.join(""),
+      gameDate: new Date().toLocaleDateString("en-US", {}),
+    });
     //open secret drawer
     // set focus to secret form field
     // set score state for score, date, and word
@@ -93,16 +131,6 @@ export const WordGame = () => {
   const [scoreList, setScoreList] = useState<userScore[]>();
   const [isScoresLoading, setIsScoresLoading] = useState(true);
 
-  // setNewScore({
-  //   name: "***",
-  //   score: 43,
-  //   word: "BIGWORD",
-  //   gameDate: new Date().toLocaleDateString("en-US", {
-  //     day: "numeric",
-  //     month: "numeric",
-  //     year: "numeric",
-  //   }),
-  // });
   //Grab a word from the API once on page load.
 
   useEffect(() => {
@@ -110,6 +138,7 @@ export const WordGame = () => {
       if (response && response.word) {
         setSecretWord(Array.from(response.word));
         setHint(response.hint);
+        setFrequency(response.frequency);
       }
       if (response && response.apiError)
         setAlertMessage({ message: response.apiError, severity: "error" });
@@ -173,6 +202,7 @@ export const WordGame = () => {
       if (response && response.word && response.hint) {
         setSecretWord(Array.from(response.word));
         setHint(response.hint);
+        setFrequency(response.frequency);
       }
       if (response && response.apiError)
         setAlertMessage({ message: response.apiError, severity: "error" });
