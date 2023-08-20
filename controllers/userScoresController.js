@@ -22,7 +22,7 @@ userScoresController.postScores = async (req, res) => {
   newUserScore.save(
     res
       .status(200)
-      .json({ message: `${userScore.name} score ${userScore.score} saved.` })
+      .json({ message: `${userScore.name} score ${userScore.score} saved!` })
   );
 };
 export default userScoresController;

@@ -19,7 +19,6 @@ export const getScores = async () => {
 };
 
 export const registerNewScore = async (newScore: userScore) => {
-  console.log(JSON.stringify(newScore));
   const res = await fetch("/scores/newscore", {
     method: "POST",
     headers: { "Content-type": "application/json" },

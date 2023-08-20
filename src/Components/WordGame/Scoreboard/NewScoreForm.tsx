@@ -11,6 +11,7 @@ interface Props {
   changeHandler: (name: string) => void;
   registerScore: () => void;
   name: string;
+  newScoreMessage: string | undefined;
 }
 
 const ScoreTextField = styled(TextField)`
@@ -35,7 +36,12 @@ const ScoreTextField = styled(TextField)`
   }
 `;
 
-export const NewScoreForm = ({ registerScore, changeHandler, name }: Props) => {
+export const NewScoreForm = ({
+  registerScore,
+  changeHandler,
+  name,
+  newScoreMessage,
+}: Props) => {
   const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
     registerScore();
@@ -58,6 +64,7 @@ export const NewScoreForm = ({ registerScore, changeHandler, name }: Props) => {
         sx={{
           width: "5rem",
         }}
+        disabled={newScoreMessage ? newScoreMessage.length > 1 : false}
         required
         margin="none"
         size="small"
@@ -82,7 +89,12 @@ export const NewScoreForm = ({ registerScore, changeHandler, name }: Props) => {
         <Tooltip title="Submit">
           <span>
             <IconButton
-              disabled={name.length === 0}
+              disabled={
+                name.length === 0 ||
+                (newScoreMessage && newScoreMessage.length > 1)
+                  ? true
+                  : false
+              }
               type="submit"
               sx={{
                 width: "25px",
@@ -120,6 +132,7 @@ export const NewScoreForm = ({ registerScore, changeHandler, name }: Props) => {
         </Tooltip>
         <Tooltip title="Cancel" sx={{ background: "#000" }}>
           <IconButton
+            disabled={newScoreMessage ? newScoreMessage.length > 1 : false}
             sx={{
               width: "25px",
               height: "25px",
@@ -142,8 +155,9 @@ export const NewScoreForm = ({ registerScore, changeHandler, name }: Props) => {
                 // color: grey[900],
               },
               "&:disabled": {
-                color: grey[500],
-                backgroundColor: grey[900],
+                background: lightGreen[900],
+                color: lightGreen["A400"],
+                border: `${lightGreen["A400"]} 1px solid`,
               },
             }}
           >

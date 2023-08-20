@@ -4,17 +4,18 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import { headings } from "./headings";
 import Box from "@mui/material/Box";
-
 import { ScoreboardTable } from "./ScoreboardTable";
 import { lightGreen, grey } from "@mui/material/colors";
 import { TableBody } from "@mui/material";
+import Zoom from "@mui/material/Zoom";
 
 interface Props {
   newScore: userScore;
+  newScoreMessage: string | undefined;
   children: ReactElement;
 }
 
-export const NewScoreRow = ({ newScore, children }: Props) => {
+export const NewScoreRow = ({ newScore, newScoreMessage, children }: Props) => {
   return (
     <Paper sx={{ py: 5, mx: "auto", background: lightGreen["A400"] }}>
       <Box>
@@ -98,6 +99,26 @@ export const NewScoreRow = ({ newScore, children }: Props) => {
           </TableRow>
         </TableBody>
       </ScoreboardTable>
+      {newScoreMessage && (
+        <Zoom in={newScoreMessage.length > 1}>
+          <Box
+            sx={{
+              mx: "auto",
+              my: 0,
+              background: lightGreen["A400"],
+              color: grey[900],
+              borderBottomColor: lightGreen["A400"],
+              fontSize: "1.25rem",
+              fontWeight: 700,
+              width: "auto",
+              textAlign: "center",
+              textTransform: "uppercase",
+            }}
+          >
+            {newScoreMessage}
+          </Box>
+        </Zoom>
+      )}
     </Paper>
   );
 };

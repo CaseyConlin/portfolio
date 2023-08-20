@@ -56,17 +56,9 @@ export const WordGame = () => {
   const [rightCount, setRightCount] = useState(0);
   const [guessedLetters, setGuessedLetters] = useState([""]);
   const [isGameOver, setIsGameOver] = useState(false);
-
-  const [newScore, setNewScore] = useState<userScore | undefined>({
-    name: "",
-    score: 0,
-    word: "",
-    gameDate: new Date().toLocaleDateString("en-US", {
-      day: "numeric",
-      month: "numeric",
-      year: "numeric",
-    }),
-  });
+  const [newScore, setNewScore] = useState<userScore | undefined>();
+  const [newScoreRegisterMessage, setNewScoreRegisterMessage] =
+    useState<string>();
   const [alertMessage, setAlertMessage] = useState<{
     message: string;
     severity: "success" | "error";
@@ -75,50 +67,6 @@ export const WordGame = () => {
     severity: "success",
   });
 
-  const scoreCalculator = () => {
-    let score = Math.ceil(secretWord.length * frequency * 1);
-
-    score += errorCount * 5;
-
-    secretWord.map((letter) => {
-      if (letter.match(/A|E|I|O|U|L|N|S|T|R/)) {
-        score += 1;
-      }
-      if (letter.match(/D|G/)) {
-        score += 2;
-      }
-      if (letter.match(/B|C|M|P/)) {
-        score += 3;
-      }
-      if (letter.match(/F|H|V|W|Y/)) {
-        score += 4;
-      }
-      if (letter.match(/K/)) {
-        score += 5;
-      }
-      if (letter.match(/J|X/)) {
-        score += 8;
-      }
-      if (letter.match(/Q|Z/)) {
-        score += 10;
-      }
-    });
-    new Set(secretWord).size !== secretWord.length ? score : (score += 10);
-
-    return score;
-  };
-  const scoreRegisterHandler = () => {
-    scoreBoardDrawerHandler();
-    setNewScore({
-      name: "",
-      score: scoreCalculator(),
-      word: secretWord.join(""),
-      gameDate: new Date().toLocaleDateString("en-US", {}),
-    });
-    //open secret drawer
-    // set focus to secret form field
-    // set score state for score, date, and word
-  };
   const [secretWord, setSecretWord] = useState([
     "L",
     "I",
@@ -199,6 +147,7 @@ export const WordGame = () => {
     setIsGameOver(false);
     setAlertMessage({ message: "Alert", severity: "success" });
     getNewWord(numberOfLetters).then((response) => {
+      console.log(response.word);
       if (response && response.word && response.hint) {
         setSecretWord(Array.from(response.word));
         setHint(response.hint);
@@ -220,6 +169,51 @@ export const WordGame = () => {
       }
       setIsAboutDrawerOpen(isOpen);
     };
+
+  const scoreCalculator = () => {
+    let score = Math.ceil(secretWord.length);
+
+    score = Math.ceil(secretWord.length * (((7 - frequency * 1) / 7) * 100));
+
+    score += errorCount * 5;
+
+    secretWord.map((letter) => {
+      if (letter.match(/A|E|I|O|U|L|N|S|T|R/)) {
+        score += 1;
+      }
+      if (letter.match(/D|G/)) {
+        score += 2;
+      }
+      if (letter.match(/B|C|M|P/)) {
+        score += 3;
+      }
+      if (letter.match(/F|H|V|W|Y/)) {
+        score += 4;
+      }
+      if (letter.match(/K/)) {
+        score += 5;
+      }
+      if (letter.match(/J|X/)) {
+        score += 8;
+      }
+      if (letter.match(/Q|Z/)) {
+        score += 10;
+      }
+    });
+    new Set(secretWord).size !== secretWord.length ? score : (score += 10);
+
+    return score;
+  };
+  const scoreRegisterHandler = () => {
+    scoreBoardDrawerHandler();
+    setNewScore({
+      name: newScore && newScore.name ? newScore.name : "",
+      score: scoreCalculator(),
+      word: secretWord.join(""),
+      gameDate: new Date().toLocaleDateString("en-US", {}),
+    });
+  };
+
   const scoreBoardDrawerHandler = () => {
     getScores().then((response) => {
       setIsScoresLoading(true);
@@ -272,7 +266,10 @@ export const WordGame = () => {
     }
   };
   const handleNewScoreRegister = () => {
-    newScore && registerNewScore(newScore);
+    newScore &&
+      registerNewScore(newScore).then((data) => {
+        setNewScoreRegisterMessage(data.message);
+      });
   };
 
   const keyboardLetterStatusHandler = (letter: string) => {
@@ -403,11 +400,15 @@ export const WordGame = () => {
               isDrawerOpen={isScoreDrawerOpen}
             >
               {newScore ? (
-                <NewScoreRow newScore={newScore}>
+                <NewScoreRow
+                  newScore={newScore}
+                  newScoreMessage={newScoreRegisterMessage}
+                >
                   <NewScoreForm
                     registerScore={handleNewScoreRegister}
                     changeHandler={scoreNameChangeHandler}
                     name={newScore.name}
+                    newScoreMessage={newScoreRegisterMessage}
                   />
                 </NewScoreRow>
               ) : (
