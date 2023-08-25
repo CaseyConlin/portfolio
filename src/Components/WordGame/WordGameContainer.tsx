@@ -35,7 +35,12 @@ import {
   getNewRank,
 } from "../../Services/scoreboard";
 
-import { winMessages, loseMessages } from "./alertMessages";
+import {
+  winMessages,
+  loseMessages,
+  setAlert,
+  scoreCalculator,
+} from "./utils/wordGameUtils";
 import { headings } from "./Scoreboard/headings";
 
 import Card from "@mui/material/Card";
@@ -83,15 +88,16 @@ export const WordGame = () => {
   const [scoreList, setScoreList] = useState<userScore[]>();
   const [isScoresLoading, setIsScoresLoading] = useState(true);
 
-  //Grab a word from the API once on page load.
-
+  //Grab a word and relevant word info from the API once on page load. The API
+  //can be a little inconsistent, but the getNewWord fetch function should catch
+  //errors and re-run the API call before returning data here.
   useEffect(() => {
     getNewWord(numberOfLetters).then((response) => {
       if (response && response.word && response.hint && response.frequency) {
+        setAlertMessage({ message: "Alert", severity: "success" });
         setSecretWord(Array.from(response.word));
         setHint(response.hint);
         setFrequency(response.frequency);
-        console.log(response + " reload");
       }
       if (response && response.apiError) {
         setAlertMessage({ message: response.apiError, severity: "error" });
@@ -99,21 +105,96 @@ export const WordGame = () => {
     });
   }, []);
 
-  //Listen for state changes that mean the player has won or lost.
+  //Reset the game to initial state.
+  const resetGameHandler = () => {
+    setErrorCount(5);
+    setRightCount(0);
+    setGuessedLetters([]);
+    setIsGameOver(false);
+    setNewScore(undefined);
+    setNewScoreRegisterMessage(undefined);
+    setAlertMessage({ message: "Alert", severity: "success" });
+    getNewWord(numberOfLetters).then((response) => {
+      if (response && response.word && response.hint && response.frequency) {
+        setSecretWord(Array.from(response.word));
+        setHint(response.hint);
+        setFrequency(response.frequency);
+      }
+      if (response && response.apiError)
+        setAlertMessage({ message: response.apiError, severity: "error" });
+    });
+  };
+
+  //Listen for state changes that mean the player has won or lost & set messages
+  //accordingly.
   useEffect(() => {
     if (errorCount === 0 || rightCount === secretWord.length) {
       setIsGameOver(true);
     }
     if (rightCount === secretWord.length) {
-      setAlertWin();
+      setAlert(winMessages, "success", setAlertMessage);
     }
     if (errorCount === 0) {
-      setAlertLose();
+      setAlert(loseMessages, "error", setAlertMessage);
     }
   }, [errorCount, rightCount]);
+
   const alpha = Array.from(Array(26)).map((_, i) =>
     String.fromCharCode(i + 65)
   );
+  //
+  //
+  //Reveal the letters in the secret word on game's end, and style them based on
+  //whether they were guessed correctly or not guessed during the game.
+  const secretLetterStatusHandler = (letter: string) => {
+    let status = "default";
+    if (isGameOver) {
+      status = guessedLetters.includes(letter) ? "right" : "wrong";
+      return status;
+    }
+    return status;
+  };
+  //
+  //
+  //On-screen and physical keyboard event handling.
+  //
+  // Handle on-screen keyboard events for each keyboard letter. This is also
+  //used to help with physical keyboard letter handling.
+  const keyboardLetterHandler = (letter: string) => {
+    setGuessedLetters([...guessedLetters, letter]);
+    if (secretWord.includes(letter)) {
+      const letterScore = (secretWord.filter((val) => val === letter) || [])
+        .length;
+      setRightCount(letterScore + rightCount);
+    } else {
+      setErrorCount(errorCount - 1);
+    }
+  };
+
+  //Update the onscreen keyboard buttons to provide feedback to the user.
+  //Letters have been guessed (clicked / keyed) are disabled, and show
+  //checkmarks or x's based on whether they're in the word or not.
+  const keyboardLetterStatusHandler = (letter: string) => {
+    let status = "default";
+    if (guessedLetters.includes(letter)) {
+      status = secretWord.includes(letter) ? "right" : "wrong";
+      return status;
+    }
+    return status;
+  };
+
+  // Handle the player's physical keyboard events.
+  const onKeyDown = (event: KeyboardEvent) => {
+    const newKey = event.key.toUpperCase();
+    if (
+      !isScoreDrawerOpen &&
+      newKey.length === 1 &&
+      alpha.includes(newKey) &&
+      !guessedLetters.includes(newKey)
+    ) {
+      return keyboardLetterHandler(newKey);
+    }
+  };
 
   // Listen for the player's physical keyboard events.
   useEffect(() => {
@@ -124,105 +205,18 @@ export const WordGame = () => {
     if (guessedLetters.length === 0) {
       document.addEventListener("keydown", onKeyDown);
     }
-
     return () => {
       document.removeEventListener("keydown", onKeyDown);
     };
   }, [secretWord, errorCount, rightCount, guessedLetters]);
+  //
+  //
+  //
 
-  const setAlertWin = () => {
-    setAlertMessage({
-      message:
-        winMessages[Math.floor(Math.random() * (winMessages.length - 0) + 0)],
-      severity: "success",
-    });
-  };
-
-  const setAlertLose = () => {
-    setAlertMessage({
-      message:
-        loseMessages[Math.floor(Math.random() * (loseMessages.length - 0) + 0)],
-      severity: "error",
-    });
-  };
-
-  const resetGameHandler = () => {
-    setErrorCount(5);
-    setRightCount(0);
-    setGuessedLetters([]);
-    setIsGameOver(false);
-    setAlertMessage({ message: "Alert", severity: "success" });
-    getNewWord(numberOfLetters).then((response) => {
-      if (response && response.word && response.hint && response.frequency) {
-        setSecretWord(Array.from(response.word));
-        setHint(response.hint);
-        setFrequency(response.frequency);
-        console.log(response + " reload");
-      }
-      if (response && response.apiError)
-        setAlertMessage({ message: response.apiError, severity: "error" });
-    });
-  };
-
-  const toggleAboutDrawer =
-    (isOpen: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
-      if (
-        event.type === "keydown" &&
-        ((event as React.KeyboardEvent).key === "Tab" ||
-          (event as React.KeyboardEvent).key === "Shift")
-      ) {
-        return;
-      }
-      setIsAboutDrawerOpen(isOpen);
-    };
-
-  const scoreCalculator = () => {
-    console.log(frequency + "calc");
-    let score = Math.ceil(secretWord.length * ((7 - frequency * 1) / 7) * 100);
-
-    score += errorCount * 5;
-
-    secretWord.map((letter) => {
-      console.log(letter);
-      if (letter.match(/A|E|I|O|U|L|N|S|T|R/)) {
-        score += 1;
-      }
-      if (letter.match(/D|G/)) {
-        score += 2;
-      }
-      if (letter.match(/B|C|M|P/)) {
-        score += 3;
-      }
-      if (letter.match(/F|H|V|W|Y/)) {
-        score += 4;
-      }
-      if (letter.match(/K/)) {
-        score += 5;
-      }
-      if (letter.match(/J|X/)) {
-        score += 8;
-      }
-      if (letter.match(/Q|Z/)) {
-        score += 10;
-      }
-    });
-    new Set(secretWord).size !== secretWord.length ? score : (score += 10);
-
-    return score;
-  };
-  const scoreRegisterHandler = async () => {
-    newScore && console.log(newScore.name);
-    console.log(secretWord);
-    scoreBoardDrawerHandler();
-    setNewScore({
-      name: newScore && newScore.name ? newScore.name : "",
-      score: scoreCalculator(),
-      word: secretWord.join(""),
-      gameDate: new Date().toLocaleDateString("en-US", {}),
-      rankForScore: await getNewRank(scoreCalculator()),
-    });
-  };
-
+  //Handling the score and scoreboard.
+  //
+  //Call the API to fetch and set the high scores, and open the Score Board
+  //Drawer.
   const scoreBoardDrawerHandler = () => {
     getScores().then((response) => {
       setIsScoresLoading(true);
@@ -235,6 +229,51 @@ export const WordGame = () => {
     });
     setIsScoreDrawerOpen(true);
   };
+
+  //Handle the High Score button from the Alert component. Open the Score Board
+  //Drawer, and set state for a New High Score.
+  const scoreRegisterHandler = async () => {
+    scoreBoardDrawerHandler();
+    setNewScore({
+      name: newScore && newScore.name ? newScore.name : "",
+      score: scoreCalculator(secretWord, frequency, errorCount),
+      word: secretWord.join(""),
+      gameDate: new Date().toLocaleDateString("en-US", {}),
+      rankForScore: await getNewRank(
+        scoreCalculator(secretWord, frequency, errorCount)
+      ),
+    });
+  };
+
+  //Controlled component for Name / Initials field in New Score Form. Update New
+  //Score state name along with field.
+  const scoreNameChangeHandler = (name: string) => {
+    if (newScore) {
+      const newScoreValue = newScore;
+      newScoreValue.name = name;
+      setNewScore({ ...newScoreValue });
+    }
+  };
+
+  // Send New Score info and name to API, and return the message from the API.
+  const handleNewScoreRegister = () => {
+    newScore &&
+      registerNewScore(newScore).then((data) => {
+        setNewScoreRegisterMessage(data.message);
+      });
+    setNewScore(undefined);
+    getScores().then((response) => {
+      setIsScoresLoading(true);
+      if (!(response instanceof Error)) {
+        setIsScoresLoading(false);
+        setScoreList(response);
+      } else {
+        return;
+      }
+    });
+  };
+
+  //Open and close Score Board Drawer.
   const toggleScoreDrawer =
     (isOpen: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
       if (
@@ -246,63 +285,20 @@ export const WordGame = () => {
       }
       setIsScoreDrawerOpen(isOpen);
     };
-
-  const keyboardLetterHandler = (letter: string) => {
-    setGuessedLetters([...guessedLetters, letter]);
-    if (secretWord.includes(letter)) {
-      const letterScore = (secretWord.filter((val) => val === letter) || [])
-        .length;
-      setRightCount(letterScore + rightCount);
-    } else {
-      setErrorCount(errorCount - 1);
-    }
-  };
-
-  const secretLetterStatusHandler = (letter: string) => {
-    let status = "default";
-    if (isGameOver) {
-      status = guessedLetters.includes(letter) ? "right" : "wrong";
-      return status;
-    }
-    return status;
-  };
-
-  const scoreNameChangeHandler = (name: string) => {
-    if (newScore) {
-      const newScoreValue = newScore;
-      newScoreValue.name = name;
-      setNewScore({ ...newScoreValue });
-    }
-  };
-  const handleNewScoreRegister = () => {
-    newScore &&
-      registerNewScore(newScore).then((data) => {
-        setNewScoreRegisterMessage(data.message);
-      });
-  };
-
-  const keyboardLetterStatusHandler = (letter: string) => {
-    let status = "default";
-    if (guessedLetters.includes(letter)) {
-      status = secretWord.includes(letter) ? "right" : "wrong";
-
-      return status;
-    }
-
-    return status;
-  };
-
-  const onKeyDown = (event: KeyboardEvent) => {
-    const newKey = event.key.toUpperCase();
-    if (
-      !isScoreDrawerOpen &&
-      newKey.length === 1 &&
-      alpha.includes(newKey) &&
-      !guessedLetters.includes(newKey)
-    ) {
-      return keyboardLetterHandler(newKey);
-    }
-  };
+  //
+  //
+  //Handle the about drawer
+  const toggleAboutDrawer =
+    (isOpen: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+      if (
+        event.type === "keydown" &&
+        ((event as React.KeyboardEvent).key === "Tab" ||
+          (event as React.KeyboardEvent).key === "Shift")
+      ) {
+        return;
+      }
+      setIsAboutDrawerOpen(isOpen);
+    };
 
   return (
     <div className={styles.starsContainer}>
