@@ -65,7 +65,7 @@ export const WordGameAlert = ({
           direction="up"
           in={alertMessage.severity === "success"}
           style={{
-            transitionDuration: "1000ms",
+            transitionDuration: "900ms",
             transitionDelay:
               alertMessage.severity === "success" ? "500ms" : "0ms",
           }}

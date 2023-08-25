@@ -6,6 +6,7 @@ UserScoresRouter.get("/test", (req, res) => {
   res.send("hello user score seeker");
 });
 UserScoresRouter.route("/list").get(userScoresController.getScores);
-UserScoresRouter.route("/newscore").post(userScoresController.postScores);
+UserScoresRouter.route("/getRank").post(userScoresController.getRank);
+UserScoresRouter.route("/newScore").post(userScoresController.postScores);
 
 export default UserScoresRouter;

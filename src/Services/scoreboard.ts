@@ -32,3 +32,18 @@ export const registerNewScore = async (newScore: userScore) => {
     return data;
   }
 };
+
+export const getNewRank = async (score: number) => {
+  const res = await fetch("/scores/getRank", {
+    method: "POST",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify({ score: score }),
+  });
+  if (res.status !== 200) {
+    const data = await res.json();
+    return Promise.reject(data.message);
+  } else {
+    const data = await res.json();
+    return data;
+  }
+};

@@ -131,38 +131,40 @@ export const NewScoreForm = ({
           </span>
         </Tooltip>
         <Tooltip title="Cancel" sx={{ background: "#000" }}>
-          <IconButton
-            disabled={newScoreMessage ? newScoreMessage.length > 1 : false}
-            sx={{
-              width: "25px",
-              height: "25px",
-              // background: grey[900],
-              // color: lightGreen["A400"],
-              // border: `${lightGreen["A400"]} 1px solid`,
-              border: `${grey[900]} 1px solid`,
-              background: lightGreen["A400"],
-              color: grey[900],
-
-              "&:hover": {
-                transform: "scale(1.1)",
-                transition: "all 0.3s ease",
+          <span>
+            <IconButton
+              disabled={newScoreMessage ? newScoreMessage.length > 1 : false}
+              sx={{
+                width: "25px",
+                height: "25px",
                 // background: grey[900],
                 // color: lightGreen["A400"],
                 // border: `${lightGreen["A400"]} 1px solid`,
+                border: `${grey[900]} 1px solid`,
+                background: lightGreen["A400"],
+                color: grey[900],
 
-                // border: `${grey[900]} 1px solid`,
-                // background: lightGreen["A400"],
-                // color: grey[900],
-              },
-              "&:disabled": {
-                background: lightGreen[900],
-                color: lightGreen["A400"],
-                border: `${lightGreen["A400"]} 1px solid`,
-              },
-            }}
-          >
-            <ClearIcon sx={{ m: 0 }} fontSize="small" />
-          </IconButton>
+                "&:hover": {
+                  transform: "scale(1.1)",
+                  transition: "all 0.3s ease",
+                  // background: grey[900],
+                  // color: lightGreen["A400"],
+                  // border: `${lightGreen["A400"]} 1px solid`,
+
+                  // border: `${grey[900]} 1px solid`,
+                  // background: lightGreen["A400"],
+                  // color: grey[900],
+                },
+                "&:disabled": {
+                  background: lightGreen[900],
+                  color: lightGreen["A400"],
+                  border: `${lightGreen["A400"]} 1px solid`,
+                },
+              }}
+            >
+              <ClearIcon sx={{ m: 0 }} fontSize="small" />
+            </IconButton>
+          </span>
         </Tooltip>
       </Box>
 

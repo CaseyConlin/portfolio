@@ -58,7 +58,7 @@ export const NewScoreRow = ({ newScore, newScoreMessage, children }: Props) => {
                 borderBottomColor: lightGreen["A400"],
               }}
             >
-              Rank
+              {newScore.rankForScore}
             </TableCell>
             <TableCell
               style={{

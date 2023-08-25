@@ -19,6 +19,7 @@ import { ResetButton } from "./ResetButton";
 import { NumberOfLettersSelector } from "./NumberOfLettersSelector";
 import { ErrorCountViewer } from "./ErrorCountView";
 
+import { DrawerButtonContainer } from "./DrawerButtonContainer";
 import { WordGameCardDrawer } from "./WordGameCardDrawer";
 import { WordGameCardHeader } from "./WordGameCardHeader";
 
@@ -28,8 +29,11 @@ import { NewScoreRow } from "./Scoreboard/NewScoreRow";
 // import { ScoreTextField } from "./Scoreboard/ScoreboardTextField";
 
 import { getNewWord } from "../../Services/getNewWord";
-import { getScores } from "../../Services/scoreboard";
-import { registerNewScore } from "../../Services/scoreboard";
+import {
+  getScores,
+  registerNewScore,
+  getNewRank,
+} from "../../Services/scoreboard";
 
 import { winMessages, loseMessages } from "./alertMessages";
 import { headings } from "./Scoreboard/headings";
@@ -83,13 +87,15 @@ export const WordGame = () => {
 
   useEffect(() => {
     getNewWord(numberOfLetters).then((response) => {
-      if (response && response.word) {
+      if (response && response.word && response.hint && response.frequency) {
         setSecretWord(Array.from(response.word));
         setHint(response.hint);
         setFrequency(response.frequency);
+        console.log(response + " reload");
       }
-      if (response && response.apiError)
+      if (response && response.apiError) {
         setAlertMessage({ message: response.apiError, severity: "error" });
+      }
     });
   }, []);
 
@@ -147,11 +153,11 @@ export const WordGame = () => {
     setIsGameOver(false);
     setAlertMessage({ message: "Alert", severity: "success" });
     getNewWord(numberOfLetters).then((response) => {
-      console.log(response.word);
-      if (response && response.word && response.hint) {
+      if (response && response.word && response.hint && response.frequency) {
         setSecretWord(Array.from(response.word));
         setHint(response.hint);
         setFrequency(response.frequency);
+        console.log(response + " reload");
       }
       if (response && response.apiError)
         setAlertMessage({ message: response.apiError, severity: "error" });
@@ -171,13 +177,13 @@ export const WordGame = () => {
     };
 
   const scoreCalculator = () => {
-    let score = Math.ceil(secretWord.length);
-
-    score = Math.ceil(secretWord.length * (((7 - frequency * 1) / 7) * 100));
+    console.log(frequency + "calc");
+    let score = Math.ceil(secretWord.length * ((7 - frequency * 1) / 7) * 100);
 
     score += errorCount * 5;
 
     secretWord.map((letter) => {
+      console.log(letter);
       if (letter.match(/A|E|I|O|U|L|N|S|T|R/)) {
         score += 1;
       }
@@ -204,13 +210,16 @@ export const WordGame = () => {
 
     return score;
   };
-  const scoreRegisterHandler = () => {
+  const scoreRegisterHandler = async () => {
+    newScore && console.log(newScore.name);
+    console.log(secretWord);
     scoreBoardDrawerHandler();
     setNewScore({
       name: newScore && newScore.name ? newScore.name : "",
       score: scoreCalculator(),
       word: secretWord.join(""),
       gameDate: new Date().toLocaleDateString("en-US", {}),
+      rankForScore: await getNewRank(scoreCalculator()),
     });
   };
 
@@ -374,53 +383,55 @@ export const WordGame = () => {
                 />
               </ControlsContainer>
             </UserInterfaceContainer>
-            <CardActions onClick={scoreBoardDrawerHandler}>
-              <Button sx={{ color: "#000" }}>
-                <MilitaryTechIcon
-                  fontSize="large"
-                  sx={{ paddingRight: "10px" }}
-                />
-                <Typography>High Scores</Typography>
-                <KeyboardArrowRightIcon />
-              </Button>
-            </CardActions>
-            <CardActions onClick={() => setIsAboutDrawerOpen(true)}>
-              <Button sx={{ color: "#000" }}>
-                <VideogameAssetIcon
-                  fontSize="large"
-                  sx={{ paddingRight: "10px" }}
-                />
-                <Typography>Game Info</Typography>
-                <KeyboardArrowRightIcon />
-              </Button>
-            </CardActions>
-            <ScoreboardDrawer
-              toggleDrawer={toggleScoreDrawer}
-              loading={isScoresLoading}
-              isDrawerOpen={isScoreDrawerOpen}
-            >
-              {newScore ? (
-                <NewScoreRow
-                  newScore={newScore}
-                  newScoreMessage={newScoreRegisterMessage}
-                >
-                  <NewScoreForm
-                    registerScore={handleNewScoreRegister}
-                    changeHandler={scoreNameChangeHandler}
-                    name={newScore.name}
-                    newScoreMessage={newScoreRegisterMessage}
+            <DrawerButtonContainer>
+              <CardActions onClick={scoreBoardDrawerHandler}>
+                <Button sx={{ color: "#000" }}>
+                  <MilitaryTechIcon
+                    fontSize="large"
+                    sx={{ paddingRight: "10px" }}
                   />
-                </NewScoreRow>
-              ) : (
-                <></>
-              )}
-              {/* <ScoreTextField /> */}
-              <ScoreboardTable headings={headings} scores={scoreList} />
-            </ScoreboardDrawer>
-            <WordGameCardDrawer
-              toggleDrawer={toggleAboutDrawer}
-              isDrawerOpen={isAboutDrawerOpen}
-            />
+                  <Typography>High Scores</Typography>
+                  <KeyboardArrowRightIcon />
+                </Button>
+              </CardActions>
+              <CardActions onClick={() => setIsAboutDrawerOpen(true)}>
+                <Button sx={{ color: "#000" }}>
+                  <VideogameAssetIcon
+                    fontSize="large"
+                    sx={{ paddingRight: "10px" }}
+                  />
+                  <Typography>Game Info</Typography>
+                  <KeyboardArrowRightIcon />
+                </Button>
+              </CardActions>
+              <ScoreboardDrawer
+                toggleDrawer={toggleScoreDrawer}
+                loading={isScoresLoading}
+                isDrawerOpen={isScoreDrawerOpen}
+              >
+                {newScore ? (
+                  <NewScoreRow
+                    newScore={newScore}
+                    newScoreMessage={newScoreRegisterMessage}
+                  >
+                    <NewScoreForm
+                      registerScore={handleNewScoreRegister}
+                      changeHandler={scoreNameChangeHandler}
+                      name={newScore.name}
+                      newScoreMessage={newScoreRegisterMessage}
+                    />
+                  </NewScoreRow>
+                ) : (
+                  <></>
+                )}
+                {/* <ScoreTextField /> */}
+                <ScoreboardTable headings={headings} scores={scoreList} />
+              </ScoreboardDrawer>
+              <WordGameCardDrawer
+                toggleDrawer={toggleAboutDrawer}
+                isDrawerOpen={isAboutDrawerOpen}
+              />
+            </DrawerButtonContainer>
           </Card>
         </WordGameCardContainer>
       </Grid>

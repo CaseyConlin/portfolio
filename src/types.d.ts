@@ -30,6 +30,7 @@ type userScore = {
   score: number;
   word: string;
   gameDate: string;
+  rankForScore: number;
 };
 
 // type userScoresResponse = {
