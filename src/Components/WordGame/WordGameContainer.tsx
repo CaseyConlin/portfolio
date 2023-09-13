@@ -258,19 +258,22 @@ export const WordGame = () => {
   // Send New Score info and name to API, and return the message from the API.
   const handleNewScoreRegister = () => {
     newScore &&
-      registerNewScore(newScore).then((data) => {
-        setNewScoreRegisterMessage(data.message);
-      });
-    setNewScore(undefined);
-    getScores().then((response) => {
-      setIsScoresLoading(true);
-      if (!(response instanceof Error)) {
-        setIsScoresLoading(false);
-        setScoreList(response);
-      } else {
-        return;
-      }
-    });
+      registerNewScore(newScore)
+        .then((data) => {
+          setNewScoreRegisterMessage(data.message);
+          setScoreList(undefined);
+        })
+        .then(() => {
+          getScores().then((response) => {
+            setIsScoresLoading(true);
+            if (!(response instanceof Error)) {
+              setIsScoresLoading(false);
+              setScoreList(response);
+            } else {
+              return;
+            }
+          });
+        });
   };
 
   //Open and close Score Board Drawer.

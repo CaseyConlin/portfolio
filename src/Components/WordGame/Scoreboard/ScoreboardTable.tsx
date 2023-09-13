@@ -33,7 +33,7 @@ export const ScoreboardTable = ({ headings, scores, children }: Props) => {
   };
 
   // Avoid a layout jump when reaching the last page with empty rows.
-  //   const rows = scores && scores.sort((a, b) => (a.score > b.score ? -1 : 1));
+
   const rows =
     scores && scores.sort((a, b) => (a.rankForScore > b.rankForScore ? 1 : -1));
 

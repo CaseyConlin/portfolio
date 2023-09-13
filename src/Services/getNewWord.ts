@@ -27,15 +27,15 @@ export const getNewWord = async (
     }
 
     const data = await response.json();
-    console.log(data.results[0].typeOf[0] + " type");
-    console.log(data.frequency + " freq");
-    console.log(data.word + " word");
+    // console.log(data.results[0].typeOf[0] + " type");
+    // console.log(data.frequency + " freq");
+    // console.log(data.word + " word");
 
     if (
       data.results[0].typeOf[0] === undefined ||
       data.frequency === undefined
     ) {
-      console.log("rerunning " + retries);
+      // console.log("rerunning " + retries);
       if (retries > 0) {
         return getNewWord(letters, retries - 1);
       }
