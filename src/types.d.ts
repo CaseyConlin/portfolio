@@ -24,3 +24,15 @@ type TechItems = {
     | "MySQL"
   )[];
 };
+
+type userScore = {
+  name: string;
+  score: number;
+  word: string;
+  gameDate: string;
+  rankForScore: number;
+};
+
+// type userScoresResponse = {
+//   userScore[] | Error;
+// };
