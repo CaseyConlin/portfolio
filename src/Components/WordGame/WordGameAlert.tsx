@@ -61,25 +61,27 @@ export const WordGameAlert = ({
         exit="exit"
       >
         {alertMessage.message}{" "}
-        <Slide
-          direction="up"
-          in={alertMessage.severity === "success"}
-          style={{
-            transitionDuration: "900ms",
-            transitionDelay:
-              alertMessage.severity === "success" ? "500ms" : "0ms",
-          }}
-        >
-          <Fab
-            variant="extended"
-            color="info"
-            size="small"
-            onClick={scoreRegisterHandler}
-            sx={{ ml: 1, fontWeight: 600 }}
+        {alertMessage.severity === "success" && (
+          <Slide
+            direction="up"
+            in={alertMessage.severity === "success"}
+            style={{
+              transitionDuration: "900ms",
+              transitionDelay:
+                alertMessage.severity === "success" ? "500ms" : "0ms",
+            }}
           >
-            High Score!
-          </Fab>
-        </Slide>
+            <Fab
+              variant="extended"
+              color="info"
+              size="small"
+              onClick={scoreRegisterHandler}
+              sx={{ ml: 1, fontWeight: 600 }}
+            >
+              High Score!
+            </Fab>
+          </Slide>
+        )}
       </AlertMotion>
     </Box>
   );
