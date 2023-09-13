@@ -52,18 +52,22 @@ export const WordGameCardDrawer = (props: Props) => {
         Development
       </Typography>
       <Typography variant="body2" color="text.primary">
-        Like this website the game is built using React and TypeScript.
-        Initially built to take advantage of the useContext hook to manage state
-        across several components, the game was refactored to use a component
-        composition model to flatten the app and concentrate state management
-        and logic in a parent component. The words and hints come from API calls
-        to{" "}
+        Like this website the game is built using React and TypeScript, along
+        with some full stack API work to manage scores. Initially built to take
+        advantage of the useContext hook to manage state across several
+        components, the game was refactored to use a component composition model
+        to flatten the app and concentrate state management and logic in a
+        parent component. The words and hints come from API calls to{" "}
         <a href="www.wordsapi.com" target="_blank">
           Words API
         </a>
         . Many UI components come from the Material UI library with some
-        exceptions. Animations are managed with the Framer Motion library. You
-        can check out the{" "}
+        exceptions. Animations are managed with the Framer Motion library.
+        Components and functionality are tested with Vitest, Playwright, and
+        Mock Service Worker. The high score component uses an API powered by
+        Express that connects to a MongoDB database with some help from
+        Mongoose. Deployment is managed with Docker on Fly.io. You can check out
+        the{" "}
         <a href="https://github.com/CaseyConlin/portfolio" target="_blank">
           repo here
         </a>
