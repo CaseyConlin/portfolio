@@ -5,6 +5,8 @@ import { connectDB } from "./config/db.js";
 import UserScoresRouter from "./routes/userScoresRouter.js";
 
 const app = express();
+ViteExpress.config({ mode: "production" });
+
 app.use(
   bodyParser.urlencoded({
     extended: true,
