@@ -92,10 +92,18 @@ export const WordGameCardDrawer = (props: Props) => {
         . If you have any questions, or just want to connect, please feel free
         to reach out! Thanks for visiting the website!
       </Typography>
-      <Typography variant="h5" color="text.primary" pt={2}>
-        Contact
-      </Typography>
-      <Stack direction="row" p={0} spacing={0} color={red[600]}>
+      <Stack
+        direction="row"
+        flexWrap="wrap"
+        alignItems="center"
+        pt={2}
+        spacing={0}
+        color={red[600]}
+      >
+        <Typography variant="h5" color="text.primary" pt={0}>
+          Contact
+        </Typography>
+
         <IconButton
           color="inherit"
           href="https://www.linkedin.com/in/caseyconlin/"
