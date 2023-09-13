@@ -22,6 +22,7 @@ type TechItems = {
     | "Figma"
     | "DigitalOcean"
     | "MySQL"
+    | "Docker"
   )[];
 };
 

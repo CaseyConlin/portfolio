@@ -24,6 +24,8 @@ import { CssIcon } from "./icons/CssIcon";
 import { JestIcon } from "./icons/JestIcon";
 import { FigmaIcon } from "./icons/FigmaIcon";
 import { DigitalOceanIcon } from "./icons/DigitalOceanIcon";
+import { DockerIcon } from "./icons/DockerIcon";
+
 import red from "@mui/material/colors/red";
 
 const ListItem = styled("li")(({ theme }) => ({
@@ -53,6 +55,7 @@ const chipData = [
   { name: "Jest", icon: <JestIcon /> },
   { name: "Figma", icon: <FigmaIcon /> },
   { name: "DigitalOcean", icon: <DigitalOceanIcon /> },
+  { name: "Docker", icon: <DockerIcon /> },
 ];
 
 export const ChipsArray = (techItems: TechItems) => {

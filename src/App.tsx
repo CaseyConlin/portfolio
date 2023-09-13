@@ -62,11 +62,11 @@ function App() {
           }}
         />
         <Feature
-          title="Lift_ff, a React-based Game for Word Nerds and Space Enthusiasts"
+          title="Lift_ff, a Full Stack React-based Game for Word Nerds and Space Enthusiasts"
           description="In this modern take on the classic word game Hangman, which is also at the top of this page, players try to find the secret word by guessing letters using the on-screen or their local keyboard. In my updated version, you race to build your rocket before an opposing team builds their own. Each correct letter gets you a little closer to completing and launching your rocket, but each miss adds another piece to the enemy rocket. Controls also allow the user to select how many letters should be in the secret word, and reset the game at any time. Like this website, the game is built using React and TypeScript. Initially built to take advantage of the useContext hook to manage state
           across several components, the game was refactored to use a component
           composition model to flatten the app and concentrate state management
-          and logic in a parent component. The words and hints come from API calls to the Words API. Components come from Material UI with additional styling and some exceptions. Animations are managed with the Framer Motion library. Components and functionality are tested with Vitest, Playwright, and Mock service Worker."
+          and logic in a parent component. The words and hints come from API calls to the Words API. Components come from Material UI with additional styling and some exceptions. Animations are managed with the Framer Motion library. Components and functionality are tested with Vitest, Playwright, and Mock Service Worker. The high score component uses an API powered by Express that connects to a MongoDB database with some help from Mongoose. Deployment is managed with Docker on Fly.io"
           cta="Let's play!"
           url="#liftoff"
           repo="https://github.com/CaseyConlin/portfolio/tree/main/src/WordGameContext"
@@ -78,6 +78,10 @@ function App() {
               "TypeScript",
               "Framer Motion",
               "Material UI",
+              "Node.js",
+              "Express.js",
+              "MongoDB",
+              "Docker",
             ],
           }}
         />
@@ -143,18 +147,6 @@ function App() {
         />
 
         <Feature
-          title="Weather App"
-          url="https://weather-app-crc.netlify.app/"
-          description="The app displays forecast data for today and seven days out in a responsive layout using Open Weather Map API. The first call to the API converts ZIP code values to latitude and longitude values, which are used to query the API for the weather data for that location."
-          cta="Check your weather!"
-          videoSource="https://embed-ssl.wistia.com/deliveries/1af439602edd11d54560fa9ac88d695be0df6532/file.mp4"
-          repo="https://github.com/CaseyConlin/react-weather-app"
-          techItems={{
-            techItems: ["React", "CSS", "JavaScript", "API"],
-          }}
-        />
-        <Feature
-          isImageRight={true}
           title="A Modern Calendar That Exposes Event Data to Meet Google's Structured Data Schema"
           description="The Stone Ridge Library’s calendar features a mobile-first design and layout with desktop views and interfaces to facilitate staff tasks related to searching for and registering library users for events. A plugin built in PHP and JavaScript uses MySQL queries to the database to serve information for each event client-side formatted in JSON to match Google’s structured data schema. The site allows users to easily search for events by keyword, date, and audience, and provides event information presented according to Google’s structured data schema to support SEO discovery of events. Users searching areas and events in areas are presented with the library’s events thanks to this structured data. Users register for online and in-person events on the calendar and receive reminder emails, and library staff receive information about registration by email and up-to-date info is available on the WordPress backend of the website."
           cta="See it live!"
