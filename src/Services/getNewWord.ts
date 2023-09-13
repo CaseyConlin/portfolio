@@ -14,7 +14,7 @@ export const getNewWord = async (
     retry: 3,
     method: "GET",
     headers: {
-      "X-RapidAPI-Key": import.meta.env.VITE_RAPID_API_KEY,
+      "X-RapidAPI-Key": "33d4d025b5mshe7ec01b8681a024p1d410bjsnae9d2b24f1e4",
       "X-RapidAPI-Host": "wordsapiv1.p.rapidapi.com",
     },
   };
