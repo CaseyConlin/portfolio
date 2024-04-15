@@ -12,7 +12,7 @@ import { Stack } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { red } from "@mui/material/colors/";
 
-export interface Props {
+export interface FeatureProps {
   decorative?: string;
   title: string;
   description: string;
@@ -32,7 +32,7 @@ export const Feature = ({
   isImageRight,
   videoSource,
   techItems,
-}: Props) => {
+}: FeatureProps) => {
   const videoEl = useRef(null);
 
   return (
@@ -124,6 +124,7 @@ export const Feature = ({
                 sx={{
                   width: { xs: "100%", sm: "75%", md: "100%" },
                   mx: "auto",
+                  borderRadius: "4px",
                 }}
                 autoPlay
                 playsInline

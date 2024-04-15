@@ -37,8 +37,7 @@ export const MasonryContactCard = ({ height }: Props) => {
     >
       <CardContent>
         <Typography id="about" fontWeight={900} variant="h4">
-          <SendIcon />
-          Contact
+          <SendIcon /> Contact
         </Typography>
         <Typography variant="subtitle1" color="text.primary" component="p">
           Let's connect!{" "}

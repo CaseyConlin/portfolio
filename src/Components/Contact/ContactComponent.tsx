@@ -39,19 +39,19 @@ export const ContactCard = () => {
               component="p"
               fontSize="1.25rem"
             >
-              Working web development full time is a career augmentation for me,
-              but I love writing code and solving problems. I've been working
-              developing websites on the side for the last 10 years, and
-              building things on the web was always a big part of my day job
-              working with libraries and nonprofits. I've worked in and managed
-              remote and in-person teams to create really positive environments
-              where we can support each in tackling large workloads and have fun
-              while we do it. In addition to my own web development business,{" "}
-              <a href="https://www.parkcrestdesign.com/" target="_blank">
-                Parkcrest Design
-              </a>
-              , I worked previously in a marketing agency managing clients and
-              projects and developing websites.
+              Whether it’s a new API on the back-end or a new toolbar on the
+              front-end, as a developer working up and down the stack I build
+              and maintain web applications and interfaces that help businesses
+              and organizations provide value to their users and meet their
+              goals. In addition to my development and coding experience, I’m a
+              team leader and I create positive, empathetic work environments
+              where teams have the information and support they need to get
+              excited about their roles and do their best work, and I break down
+              and manage projects in ways that allow us to meet our goals in
+              fast-paced settings whether hybrid or remote. I’m also an
+              inveterate fixer-of-things, never afraid to lend a hand to a team
+              or teammate in need or go outside my job description and roll up
+              my sleeves to sort out whatever needs to get done.
             </Typography>
           </Grid>
           <Grid container xs={12} md={6}>
