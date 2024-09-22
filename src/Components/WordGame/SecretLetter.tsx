@@ -1,14 +1,22 @@
 // Small component to display the hidden letter in its box if the player guesses it.
+import { useSelector } from "react-redux";
 
+import { RootState } from "../../store";
 import Fade from "@mui/material/Fade";
 
 export interface Props {
   secretLetter: string;
-  show: boolean;
 }
-export const SecretLetter = ({ secretLetter, show }: Props) => {
+export const SecretLetter = ({ secretLetter }: Props) => {
+  const guessedLetters = useSelector(
+    (state: RootState) => state.wordGame.guessedLetters
+  );
+  const isGameOver = useSelector(
+    (state: RootState) => state.wordGame.isGameOver
+  );
+
   return (
-    <Fade in={show}>
+    <Fade in={guessedLetters.includes(secretLetter) || isGameOver}>
       <span>{secretLetter}</span>
     </Fade>
   );

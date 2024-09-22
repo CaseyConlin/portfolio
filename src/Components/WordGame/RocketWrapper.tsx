@@ -7,17 +7,9 @@ import Grid from "@mui/material/Unstable_Grid2";
 
 interface Props {
   isPlayerRocket: boolean;
-  secretWord: string[];
-  rightCount: number;
-  errorCount: number;
 }
 
-export const RocketWrapper = ({
-  isPlayerRocket,
-  secretWord,
-  rightCount,
-  errorCount,
-}: Props) => {
+export const RocketWrapper = ({ isPlayerRocket }: Props) => {
   return (
     <Grid
       container
@@ -45,12 +37,7 @@ export const RocketWrapper = ({
         px={{ xs: 0, lg: 2 }}
         py={{ xs: 2, md: 2 }}
       >
-        <Rocket
-          isPlayerRocket={isPlayerRocket}
-          secretWord={secretWord}
-          rightCount={rightCount}
-          errorCount={errorCount}
-        />
+        <Rocket isPlayerRocket={isPlayerRocket} />
         <Planet isPlayerRocket={isPlayerRocket} />
       </Grid>
     </Grid>

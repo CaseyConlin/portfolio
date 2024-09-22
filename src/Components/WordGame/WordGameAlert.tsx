@@ -1,10 +1,10 @@
+import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
 import Slide from "@mui/material/Slide";
-
-// import Button from "@mui/material/Button";
+import { RootState } from "../../store";
 
 const alertAnimationVariant = {
   initial: {
@@ -31,13 +31,13 @@ const alertAnimationVariant = {
 };
 
 export interface Props {
-  alertMessage: { message: string; severity: "success" | "error" };
-  scoreRegisterHandler: () => void;
+  scoreBoardDrawerHandler: () => void;
 }
-export const WordGameAlert = ({
-  alertMessage,
-  scoreRegisterHandler,
-}: Props) => {
+export const WordGameAlert = ({ scoreBoardDrawerHandler }: Props) => {
+  const alertMessage = useSelector(
+    (state: RootState) => state.wordGame.alertMessage
+  );
+
   const AlertMotion = motion(Alert);
 
   return (
@@ -75,7 +75,7 @@ export const WordGameAlert = ({
               variant="extended"
               color="info"
               size="small"
-              onClick={scoreRegisterHandler}
+              onClick={scoreBoardDrawerHandler}
               sx={{ ml: 1, fontWeight: 600 }}
             >
               High Score!

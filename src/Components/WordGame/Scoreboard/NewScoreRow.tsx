@@ -1,4 +1,7 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "../../../store";
+import { initScore } from "../../../features/wordGame/wordGameSlice";
 import Paper from "@mui/material/Paper";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
@@ -10,12 +13,31 @@ import { TableBody } from "@mui/material";
 import Zoom from "@mui/material/Zoom";
 
 interface Props {
-  newScore: userScore;
-  newScoreMessage: string | undefined;
   children: ReactElement;
 }
 
-export const NewScoreRow = ({ newScore, newScoreMessage, children }: Props) => {
+export const NewScoreRow = ({ children }: Props) => {
+  const newScore = useSelector((state: RootState) => state.wordGame.newScore);
+  const rightCount = useSelector(
+    (state: RootState) => state.wordGame.rightCount
+  );
+  const secretWord = useSelector(
+    (state: RootState) => state.wordGame.secretWord
+  );
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(initScore());
+  }, [dispatch]);
+
+  const newScoreMessage = useSelector(
+    (state: RootState) =>
+      state.wordGame.newScore && state.wordGame.newScoreMessage
+  );
+
+  if (rightCount < secretWord.length) return null;
+
   return (
     <Paper sx={{ py: 5, mx: "auto", background: lightGreen["A400"] }}>
       <Box>
@@ -39,65 +61,67 @@ export const NewScoreRow = ({ newScore, newScoreMessage, children }: Props) => {
         </Box>
       </Box>
       <ScoreboardTable headings={headings}>
-        <TableBody>
-          <TableRow
-            sx={{
-              background: lightGreen["A400"],
-              color: grey[900],
-              borderBottomColor: lightGreen["A400"],
-              verticalAlign: "top",
-            }}
-          >
-            <TableCell
-              component="th"
-              scope="row"
-              align="center"
+        {newScore && (
+          <TableBody>
+            <TableRow
               sx={{
-                textAlign: "center",
+                background: lightGreen["A400"],
                 color: grey[900],
                 borderBottomColor: lightGreen["A400"],
+                verticalAlign: "top",
               }}
             >
-              {newScore.rankForScore}
-            </TableCell>
-            <TableCell
-              style={{
-                color: grey[900],
-                borderBottomColor: lightGreen["A400"],
-              }}
-              align="center"
-            >
-              {children}
-            </TableCell>
-            <TableCell
-              style={{
-                color: grey[900],
-                borderBottomColor: lightGreen["A400"],
-              }}
-              align="center"
-            >
-              {newScore.score}
-            </TableCell>
-            <TableCell
-              style={{
-                color: grey[900],
-                borderBottomColor: lightGreen["A400"],
-              }}
-              align="center"
-            >
-              {newScore.word}
-            </TableCell>
-            <TableCell
-              style={{
-                color: grey[900],
-                borderBottomColor: lightGreen["A400"],
-              }}
-              align="center"
-            >
-              {newScore.gameDate}
-            </TableCell>
-          </TableRow>
-        </TableBody>
+              <TableCell
+                component="th"
+                scope="row"
+                align="center"
+                sx={{
+                  textAlign: "center",
+                  color: grey[900],
+                  borderBottomColor: lightGreen["A400"],
+                }}
+              >
+                {newScore.rankForScore}
+              </TableCell>
+              <TableCell
+                style={{
+                  color: grey[900],
+                  borderBottomColor: lightGreen["A400"],
+                }}
+                align="center"
+              >
+                {children}
+              </TableCell>
+              <TableCell
+                style={{
+                  color: grey[900],
+                  borderBottomColor: lightGreen["A400"],
+                }}
+                align="center"
+              >
+                {newScore.score}
+              </TableCell>
+              <TableCell
+                style={{
+                  color: grey[900],
+                  borderBottomColor: lightGreen["A400"],
+                }}
+                align="center"
+              >
+                {newScore.word}
+              </TableCell>
+              <TableCell
+                style={{
+                  color: grey[900],
+                  borderBottomColor: lightGreen["A400"],
+                }}
+                align="center"
+              >
+                {newScore.gameDate}
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        )}
       </ScoreboardTable>
       {newScoreMessage && (
         <Zoom in={newScoreMessage.length > 1}>

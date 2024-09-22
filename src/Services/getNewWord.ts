@@ -1,13 +1,32 @@
-interface NewWord {
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+export type NewWord = {
   word: string;
   hint: string;
   frequency: number;
-}
+};
+
+// Define a service using a base URL and expected endpoints
+export const getNewWordApi = createApi({
+  reducerPath: "newWordApi",
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://wordsapiv1.p.rapidapi.com/words/",
+  }),
+  endpoints: (builder) => ({
+    getNewWordByCount: builder.query<NewWord, string>({
+      query: (letterCount = "6") =>
+        `?letterPattern=%5E%5Ba-z%5D%2B%24&letters=${letterCount}&limit=1&hasDetails=typeOf&random=true`,
+    }),
+  }),
+});
+
+// Export hooks for usage in functional components, which are
+// auto-generated based on the defined endpoints
+export const { useGetNewWordByCountQuery } = getNewWordApi;
 
 export const getNewWord = async (
   letterCount: number | number[] = 6,
   retries = 10
-): Promise<NewWord | any> => {
+): Promise<NewWord | { message: string }> => {
   const letters = letterCount;
   const url = `https://wordsapiv1.p.rapidapi.com/words/?letterPattern=%5E%5Ba-z%5D%2B%24&letters=${letterCount}&limit=1&hasDetails=typeOf&random=true`;
   const options = {
@@ -21,21 +40,16 @@ export const getNewWord = async (
 
   try {
     const response = await fetch(url, options);
-
-    if (response.status === 429 || response.status === 401) {
+    if (!response.ok) {
       throw new Error("We're having trouble connecting to our word list 🫥");
     }
 
     const data = await response.json();
-    // console.log(data.results[0].typeOf[0] + " type");
-    // console.log(data.frequency + " freq");
-    // console.log(data.word + " word");
 
     if (
       data.results[0].typeOf[0] === undefined ||
       data.frequency === undefined
     ) {
-      // console.log("rerunning " + retries);
       if (retries > 0) {
         return getNewWord(letters, retries - 1);
       }
@@ -50,9 +64,9 @@ export const getNewWord = async (
     let message = "";
     if (error instanceof Error) message = error.message;
     if (message.includes("Failed to fetch")) {
-      return { apiError: "Bad Internet Connection" };
+      return { message: "Bad Internet Connection" };
     } else {
-      return { apiError: message };
+      return { message: message };
     }
   }
 };

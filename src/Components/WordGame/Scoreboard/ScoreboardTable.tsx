@@ -35,7 +35,9 @@ export const ScoreboardTable = ({ headings, scores, children }: Props) => {
   // Avoid a layout jump when reaching the last page with empty rows.
 
   const rows =
-    scores && scores.sort((a, b) => (a.rankForScore > b.rankForScore ? 1 : -1));
+    scores && Array.isArray(scores)
+      ? scores.sort((a, b) => (a.rankForScore > b.rankForScore ? 1 : -1))
+      : "";
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -77,7 +79,7 @@ export const ScoreboardTable = ({ headings, scores, children }: Props) => {
                     page * rowsPerPage + rowsPerPage
                   )
                 : rows
-              ).map((score, index) => (
+              ).map((score: userScore, index: number) => (
                 <TableRow
                   key={score.name + index}
                   sx={{ textTransform: "uppercase" }}

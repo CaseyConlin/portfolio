@@ -1,29 +1,33 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { red } from "@mui/material/colors";
 import { blue } from "@mui/material/colors";
 import { amber } from "@mui/material/colors";
 import { motion } from "framer-motion";
 import styles from "./WordGameContainer.module.css";
+import { RootState } from "../../store";
 
 interface Props {
   isPlayerRocket: boolean;
-  secretWord: string[];
-  rightCount: number;
-  errorCount: number;
 }
 
-export const Rocket = ({
-  isPlayerRocket,
-  secretWord,
-  rightCount,
-  errorCount,
-}: Props) => {
+export const Rocket = ({ isPlayerRocket }: Props) => {
   const [isOpenRightFin, setOpenRightFin] = useState(false);
   const [isOpenLeftFin, setOpenLeftFin] = useState(false);
   const [isOpenNose, setOpenNose] = useState(false);
   const [isOpenWindow, setOpenWindow] = useState(false);
   const [isOpenFire, setOpenFire] = useState(false);
   const [haveLiftOff, setHaveLiftOff] = useState(false);
+
+  const secretWord = useSelector(
+    (state: RootState) => state.wordGame.secretWord
+  );
+  const rightCount = useSelector(
+    (state: RootState) => state.wordGame.rightCount
+  );
+  const errorCount = useSelector(
+    (state: RootState) => state.wordGame.errorCount
+  );
 
   const count =
     secretWord && isPlayerRocket

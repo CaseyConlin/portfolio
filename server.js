@@ -5,7 +5,13 @@ import { connectDB } from "./config/db.js";
 import UserScoresRouter from "./routes/userScoresRouter.js";
 
 const app = express();
-ViteExpress.config({ mode: "production" });
+// ViteExpress.config({ mode: "production" });
+
+ViteExpress.config({
+  inlineViteConfig: {
+    base: "/",
+  },
+});
 
 app.use(
   bodyParser.urlencoded({
@@ -14,7 +20,7 @@ app.use(
 );
 app.use(bodyParser.json());
 
-app.get("/message", (_, res) => res.send("Hello from express!"));
+// app.get("/message", (_, res) => res.send("Hello from express!"));
 // app.get("/userscores", (_, res) => res.send("hello"));
 app.use("/scores", UserScoresRouter);
 

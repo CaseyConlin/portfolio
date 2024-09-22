@@ -6,6 +6,7 @@ export const getScores = async () => {
 
   try {
     const response = await fetch(url, options);
+
     if (!response.ok) {
       throw new Error("We're having trouble connecting to our scorebaord 🫥");
     }
@@ -13,7 +14,7 @@ export const getScores = async () => {
     return data;
   } catch (error: unknown) {
     if (error instanceof Error) {
-      return error;
+      return error.message;
     }
   }
 };

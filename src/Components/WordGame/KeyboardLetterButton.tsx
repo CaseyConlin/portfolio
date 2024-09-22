@@ -1,3 +1,6 @@
+import { useSelector, useDispatch } from "react-redux";
+import { keyboardLetterHandler } from "../../features/wordGame/wordGameSlice";
+import { RootState } from "../../store";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Unstable_Grid2";
 import Button from "@mui/material/Button";
@@ -7,18 +10,26 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 export interface Props {
   keyboardLetter: string;
-  guessed: boolean;
-  status: string;
-
-  click: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-export const KeyboardLetterButton = ({
-  keyboardLetter,
-  guessed,
-  status,
-  click,
-}: Props) => {
+export const KeyboardLetterButton = ({ keyboardLetter }: Props) => {
+  const dispatch = useDispatch();
+
+  const secretWord = useSelector(
+    (state: RootState) => state.wordGame.secretWord
+  );
+  const guessedLetters = useSelector(
+    (state: RootState) => state.wordGame.guessedLetters
+  );
+  const isGameOver = useSelector(
+    (state: RootState) => state.wordGame.isGameOver
+  );
+
+  let status = "default";
+  if (guessedLetters.includes(keyboardLetter)) {
+    status = secretWord.includes(keyboardLetter) ? "right" : "wrong";
+  }
+
   const KeyBoardButton = styled(Button)(({ theme }) => ({
     padding: theme.spacing(1),
     border: "1px solid #000",
@@ -75,8 +86,10 @@ export const KeyboardLetterButton = ({
       >
         <KeyBoardButton
           value={keyboardLetter}
-          onClick={click}
-          disabled={guessed}
+          onClick={() => {
+            dispatch(keyboardLetterHandler(keyboardLetter));
+          }}
+          disabled={guessedLetters.includes(keyboardLetter) || isGameOver}
           sx={{
             minWidth: { xs: "32px", sm: "45px" },
             width: { xs: "32px", sm: "45px" },

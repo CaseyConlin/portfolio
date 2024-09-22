@@ -1,3 +1,7 @@
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../store";
+import { handleSetLetters } from "../../features/wordGame/wordGameSlice";
+
 import Slider from "@mui/material/Slider";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -6,10 +10,6 @@ import { blue } from "@mui/material/colors";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 
-export interface Props {
-  numberOfLetters: number | number[];
-  setNumberOfLetters: (number: number | number[]) => void;
-}
 function valuetext(value: number) {
   return `${value}`;
 }
@@ -41,18 +41,20 @@ const marks = [
   },
 ];
 
-export const NumberOfLettersSelector = ({
-  numberOfLetters,
-  setNumberOfLetters,
-}: Props) => {
+export const NumberOfLettersSelector = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
+
+  const dispatch = useDispatch();
+  const numberOfLetters = useSelector(
+    (state: RootState) => state.wordGame.numberOfLetters
+  );
 
   const handleChangeCommited = (
     event: React.SyntheticEvent | Event,
     newValue: number | number[]
   ) => {
-    event && setNumberOfLetters(newValue);
+    event && dispatch(handleSetLetters(newValue));
   };
 
   const NumberOfLettersSlider = styled(Slider)(() => ({

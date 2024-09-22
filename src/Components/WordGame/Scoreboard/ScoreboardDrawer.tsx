@@ -8,8 +8,6 @@ import { grey, lightGreen } from "@mui/material/colors";
 
 interface Props {
   isDrawerOpen: boolean;
-  loading: boolean;
-  scoreList?: userScore[] | undefined;
   toggleDrawer: (
     isOpen: boolean
   ) => (event: React.KeyboardEvent | React.MouseEvent) => void;

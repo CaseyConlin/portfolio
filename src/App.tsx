@@ -1,4 +1,6 @@
 import { ThemeProvider } from "@mui/material/styles";
+import { Provider } from "react-redux";
+import { store } from "./store";
 import theme from "./theme";
 import { SectionHeading } from "./Components/SectionHeading";
 import { WordGame } from "./Components/WordGame/WordGameContainer";
@@ -14,7 +16,9 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <Navbar />
-        <WordGame />
+        <Provider store={store}>
+          <WordGame />
+        </Provider>
         <SectionHeading headingText="About Me" id="about" marginOffset={-2.5} />
         <ContactCard />
 
@@ -27,6 +31,7 @@ function App() {
           sites.map((site, i) => {
             return (
               <Feature
+                key={site.title}
                 title={site.title}
                 description={site.description}
                 cta={site.cta}

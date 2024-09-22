@@ -1,3 +1,5 @@
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 import Grid from "@mui/material/Unstable_Grid2";
 import Box from "@mui/system/Box";
 import { SecretLetter } from "./SecretLetter";
@@ -7,22 +9,25 @@ import { deepOrange } from "@mui/material/colors";
 export interface Props {
   secretLetter: string;
   index: number;
-  show: boolean;
-  status: string;
 }
-export const SecretLetterTile = ({
-  secretLetter,
-  index,
-  show,
-  status,
-}: Props) => {
+export const SecretLetterTile = ({ secretLetter, index }: Props) => {
+  const guessedLetters = useSelector(
+    (state: RootState) => state.wordGame.guessedLetters
+  );
+  const isGameOver = useSelector(
+    (state: RootState) => state.wordGame.isGameOver
+  );
+
+  let status = "default";
+  if (isGameOver) {
+    status = guessedLetters.includes(secretLetter) ? "right" : "wrong";
+  }
   return (
     <Grid
       container
       sx={{
         justifyContent: "center",
         alignContent: "center",
-
         aspectRatio: 1 / 1,
       }}
       xs={1}
@@ -58,7 +63,7 @@ export const SecretLetterTile = ({
         }}
         key={secretLetter + index * 2}
       >
-        <SecretLetter secretLetter={secretLetter} show={show} />
+        <SecretLetter secretLetter={secretLetter} />
       </Box>
     </Grid>
   );

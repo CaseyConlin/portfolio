@@ -1,16 +1,25 @@
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "../../store";
 import { motion } from "framer-motion";
 import Grid from "@mui/material/Unstable_Grid2";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { red } from "@mui/material/colors";
 import { styled } from "@mui/material/styles";
+import {
+  fetchNewWordByLetterCount,
+  resetGameHandler,
+} from "../../features/wordGame/wordGameSlice";
 
-export interface Props {
-  isResetNeeded: boolean;
-  resetGame: React.MouseEventHandler<HTMLButtonElement>;
-}
+export const ResetButton = () => {
+  const isGameOver = useSelector(
+    (state: RootState) => state.wordGame.isGameOver
+  );
+  const numberOfLetters = useSelector(
+    (state: RootState) => state.wordGame.numberOfLetters
+  );
+  const dispatch = useDispatch<AppDispatch>();
 
-export const ResetButton = ({ resetGame, isResetNeeded }: Props) => {
   const ResetButton = styled(Button)({
     padding: "0",
     display: "grid",
@@ -103,7 +112,7 @@ export const ResetButton = ({ resetGame, isResetNeeded }: Props) => {
       >
         <MotionResetButton
           animate={
-            isResetNeeded && {
+            isGameOver && {
               boxShadow: ["0px 0px 1px red", "0px 0px 20px red"],
               backgroundColor: ["#b71c1c", "#ff5252"],
             }
@@ -113,7 +122,10 @@ export const ResetButton = ({ resetGame, isResetNeeded }: Props) => {
             repeatType: "reverse",
             duration: 1.5,
           }}
-          onClick={resetGame}
+          onClick={() => {
+            dispatch(resetGameHandler());
+            dispatch(fetchNewWordByLetterCount(numberOfLetters));
+          }}
         >
           Reset
         </MotionResetButton>

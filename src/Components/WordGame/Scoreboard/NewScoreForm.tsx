@@ -1,4 +1,11 @@
 import { styled } from "@mui/material/styles";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "../../../store";
+import {
+  postNewScore,
+  setPlayerName,
+  fetchScores,
+} from "../../../features/wordGame/wordGameSlice";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { lightGreen, grey } from "@mui/material/colors";
@@ -6,13 +13,6 @@ import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 import IconButton from "@mui/material/IconButton";
 import ClearIcon from "@mui/icons-material/Clear";
 import Tooltip from "@mui/material/Tooltip";
-
-interface Props {
-  changeHandler: (name: string) => void;
-  registerScore: () => void;
-  name: string;
-  newScoreMessage: string | undefined;
-}
 
 const ScoreTextField = styled(TextField)`
   & input {
@@ -36,15 +36,23 @@ const ScoreTextField = styled(TextField)`
   }
 `;
 
-export const NewScoreForm = ({
-  registerScore,
-  changeHandler,
-  name,
-  newScoreMessage,
-}: Props) => {
-  const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
+export const NewScoreForm = () => {
+  const newScore = useSelector((state: RootState) => state.wordGame.newScore);
+  const newScoreMessage = useSelector(
+    (state: RootState) => state.wordGame.newScoreMessage
+  );
+
+  const name = useSelector(
+    (state: RootState) =>
+      state.wordGame.newScore && state.wordGame.newScore.name
+  );
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleSubmit = async (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
-    registerScore();
+    newScore &&
+      (await dispatch(postNewScore()).then(() => dispatch(fetchScores())));
   };
 
   return (
@@ -53,8 +61,6 @@ export const NewScoreForm = ({
       sx={{
         mb: 0,
         pb: 0,
-        // "& > :not(style)": { m: 1 },
-        // pl: "3rem",
       }}
       noValidate
       autoComplete="off"
@@ -73,122 +79,95 @@ export const NewScoreForm = ({
         autoFocus
         value={name}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          changeHandler(event.target.value);
+          dispatch(setPlayerName(event.target.value));
         }}
         inputProps={{ maxLength: 3 }}
         InputLabelProps={{
           style: { color: "inherit" },
         }}
       ></ScoreTextField>
-      <Box
-        component={"div"}
-        display={"flex"}
-        justifyContent={"space-around"}
-        mt={1}
-      >
-        <Tooltip title="Submit">
-          <span>
-            <IconButton
-              disabled={
-                name.length === 0 ||
-                (newScoreMessage && newScoreMessage.length > 1)
-                  ? true
-                  : false
-              }
-              type="submit"
-              sx={{
-                width: "25px",
-                height: "25px",
-                // background: grey[900],
-                // color: lightGreen["A400"],
-                // border: `${lightGreen["A400"]} 1px solid`,
-                border: `${grey[900]} 1px solid`,
-                background: lightGreen["A400"],
-                color: grey[900],
-
-                "&:hover": {
-                  transform: "scale(1.1)",
-                  transition: "all 0.3s ease",
+      {!newScoreMessage && (
+        <Box
+          component={"div"}
+          display={"flex"}
+          justifyContent={"space-around"}
+          mt={1}
+        >
+          <Tooltip title="Submit">
+            <span>
+              <IconButton
+                disabled={
+                  !newScore ||
+                  !name ||
+                  name === "" ||
+                  (newScoreMessage && newScoreMessage.length > 1)
+                    ? true
+                    : false
+                }
+                type="submit"
+                sx={{
+                  width: "25px",
+                  height: "25px",
                   // background: grey[900],
                   // color: lightGreen["A400"],
                   // border: `${lightGreen["A400"]} 1px solid`,
+                  border: `${grey[900]} 1px solid`,
+                  background: lightGreen["A400"],
+                  color: grey[900],
 
-                  // border: `${grey[900]} 1px solid`,
-                  // background: lightGreen["A400"],
-                  // color: grey[900],
-                },
-                "&:disabled": {
-                  // color: grey[500],
-                  // backgroundColor: grey[900],
-                  background: lightGreen[900],
-                  color: lightGreen["A400"],
-                  border: `${lightGreen["A400"]} 1px solid`,
-                },
-              }}
-            >
-              <RocketLaunchIcon sx={{ m: 0 }} fontSize="small" />
-            </IconButton>
-          </span>
-        </Tooltip>
-        <Tooltip title="Cancel" sx={{ background: "#000" }}>
-          <span>
-            <IconButton
-              disabled={newScoreMessage ? newScoreMessage.length > 1 : false}
-              sx={{
-                width: "25px",
-                height: "25px",
-                // background: grey[900],
-                // color: lightGreen["A400"],
-                // border: `${lightGreen["A400"]} 1px solid`,
-                border: `${grey[900]} 1px solid`,
-                background: lightGreen["A400"],
-                color: grey[900],
+                  "&:hover": {
+                    transform: "scale(1.1)",
+                    transition: "all 0.3s ease",
+                  },
+                  "&:disabled": {
+                    background: lightGreen[900],
+                    color: lightGreen["A400"],
+                    border: `${lightGreen["A400"]} 1px solid`,
+                  },
+                }}
+              >
+                <RocketLaunchIcon sx={{ m: 0 }} fontSize="small" />
+              </IconButton>
+            </span>
+          </Tooltip>
+          <Tooltip title="Cancel" sx={{ background: "#000" }}>
+            <span>
+              <IconButton
+                disabled={
+                  !newScore ||
+                  !name ||
+                  name === "" ||
+                  (newScoreMessage && newScoreMessage.length > 1)
+                    ? true
+                    : false
+                }
+                onClick={() => {
+                  dispatch(setPlayerName(""));
+                }}
+                sx={{
+                  width: "25px",
+                  height: "25px",
+                  border: `${grey[900]} 1px solid`,
+                  background: lightGreen["A400"],
+                  color: grey[900],
 
-                "&:hover": {
-                  transform: "scale(1.1)",
-                  transition: "all 0.3s ease",
-                  // background: grey[900],
-                  // color: lightGreen["A400"],
-                  // border: `${lightGreen["A400"]} 1px solid`,
-
-                  // border: `${grey[900]} 1px solid`,
-                  // background: lightGreen["A400"],
-                  // color: grey[900],
-                },
-                "&:disabled": {
-                  background: lightGreen[900],
-                  color: lightGreen["A400"],
-                  border: `${lightGreen["A400"]} 1px solid`,
-                },
-              }}
-            >
-              <ClearIcon sx={{ m: 0 }} fontSize="small" />
-            </IconButton>
-          </span>
-        </Tooltip>
-      </Box>
-
-      {/* <Button
-        disabled={name.length === 0}
-        type="submit"
-        sx={{
-          m: "0px",
-          p: "0px",
-          color: grey[900],
-          background: lightGreen["A400"],
-          border: `1px ${grey[900]} solid`,
-          "&:hover": {
-            background: grey[900],
-            color: lightGreen["A400"],
-          },
-          "&:disabled": {
-            color: grey[900],
-          },
-        }}
-        size="small"
-      >
-        Submit
-      </Button> */}
+                  "&:hover": {
+                    transform: "scale(1.1)",
+                    transition: "all 0.3s ease",
+                  },
+                  "&:disabled": {
+                    background: lightGreen[900],
+                    color: lightGreen["A400"],
+                    border: `${lightGreen["A400"]} 1px solid`,
+                  },
+                }}
+              >
+                <ClearIcon sx={{ m: 0 }} fontSize="small" />
+              </IconButton>
+            </span>
+          </Tooltip>
+        </Box>
+      )}
     </Box>
   );
 };

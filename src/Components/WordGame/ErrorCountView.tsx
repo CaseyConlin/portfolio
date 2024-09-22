@@ -1,13 +1,16 @@
+import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import Grid from "@mui/material/Unstable_Grid2";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
+import { RootState } from "../../store";
 
-export interface Props {
-  errorCount: number;
-}
-export const ErrorCountViewer = ({ errorCount }: Props) => {
+export const ErrorCountViewer = () => {
+  const errorCount = useSelector(
+    (state: RootState) => state.wordGame.errorCount
+  );
+
   return (
     <Grid
       p={{ xs: 0, sm: 1 }}
